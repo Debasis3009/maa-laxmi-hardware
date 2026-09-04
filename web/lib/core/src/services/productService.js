@@ -81,6 +81,7 @@ function createProductService(db, { auditService, inventoryService, priceService
     );
     return rows.map((r) => {
       const p = _parseProduct(r);
+      p.variants = listVariants(p.id);
       p.stock = inventoryService.getStockStatus(p.id);
       return p;
     });

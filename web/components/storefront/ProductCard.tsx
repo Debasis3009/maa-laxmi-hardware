@@ -16,26 +16,33 @@ export default function ProductCard({
   onWhatsApp: () => void;
   onAddToCart: () => void;
 }) {
-  const priceLabel = product.has_variants
-    ? `From ₹${Math.min(...product.variants.map((v) => v.selling_price)).toFixed(0)}`
-    : `₹${product.selling_price.toFixed(0)}`;
+  const variants = product?.variants || [];
+  const minVariantPrice = variants.length > 0
+    ? Math.min(...variants.map((v) => v.selling_price || 0))
+    : 0;
+
+  const priceLabel = product?.has_variants && variants.length > 0
+    ? `From ₹${minVariantPrice.toFixed(0)}`
+    : `₹${(Number(product?.selling_price) || 0).toFixed(0)}`;
+
+  const stockStatus = product?.stock?.status || 'IN_STOCK';
 
   return (
     <div className="flex flex-col border-[1.5px] border-line bg-white">
       <button type="button" onClick={onOpen} className="flex flex-1 flex-col p-4 text-left">
         <div className="mb-2 flex items-start justify-between gap-2">
-          <h3 className="font-display text-lg font-semibold leading-tight">{product.name}</h3>
+          <h3 className="font-display text-lg font-semibold leading-tight">{product?.name || 'Item'}</h3>
         </div>
-        <p className="font-data text-xs text-steel-grey">SKU {product.sku}</p>
-        {product.short_description && (
+        <p className="font-data text-xs text-steel-grey">SKU {product?.sku || 'N/A'}</p>
+        {product?.short_description && (
           <p className="mt-2 line-clamp-2 text-sm text-charcoal/80">{product.short_description}</p>
         )}
         <div className="mt-3 flex items-center justify-between">
           <span className="font-data text-lg font-semibold">
             {priceLabel}
-            {!product.has_variants && unit && <span className="text-sm text-steel-grey"> / {unit.abbreviation}</span>}
+            {!product?.has_variants && unit && <span className="text-sm text-steel-grey"> / {unit.abbreviation}</span>}
           </span>
-          <StockBadge status={product.stock.status} />
+          <StockBadge status={stockStatus} />
         </div>
       </button>
       <div className="grid grid-cols-2 border-t-[1.5px] border-line text-sm font-medium">
@@ -49,10 +56,10 @@ export default function ProductCard({
         <button
           type="button"
           onClick={onAddToCart}
-          disabled={product.stock.status === 'OUT_OF_STOCK' && !product.quotation_enabled}
+          disabled={stockStatus === 'OUT_OF_STOCK' && !product?.quotation_enabled}
           className="px-3 py-2.5 text-rust hover:bg-rust/5 disabled:cursor-not-allowed disabled:text-steel-grey disabled:hover:bg-transparent"
         >
-          {product.stock.status === 'OUT_OF_STOCK' ? 'Request quote' : 'Add to cart'}
+          {stockStatus === 'OUT_OF_STOCK' ? 'Request quote' : 'Add to cart'}
         </button>
       </div>
     </div>
