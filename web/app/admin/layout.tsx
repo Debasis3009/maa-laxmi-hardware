@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { getSession, logoutAdmin } from '@/lib/session';
+import { getSession } from '@/lib/session';
+import { logoutAdmin } from '@/app/actions/auth';
 
 const NAV = [
   { href: '/admin', label: 'Dashboard' },

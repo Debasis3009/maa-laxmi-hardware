@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { loginWithCredentials } from '@/lib/session';
+import { loginWithCredentials } from '@/app/actions/auth';
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
