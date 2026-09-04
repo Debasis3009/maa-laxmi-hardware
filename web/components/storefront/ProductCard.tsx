@@ -7,13 +7,12 @@ export default function ProductCard({
   product,
   unit,
   onOpen,
-  onWhatsApp,
   onAddToCart,
 }: {
   product: Product;
   unit: Unit | undefined;
   onOpen: () => void;
-  onWhatsApp: () => void;
+  onWhatsApp?: () => void;
   onAddToCart: () => void;
 }) {
   const variants = product?.variants || [];
@@ -26,55 +25,61 @@ export default function ProductCard({
     : `₹${(Number(product?.selling_price) || 0).toFixed(0)}`;
 
   const stockStatus = product?.stock?.status || 'IN_STOCK';
+  const isOutOfStock = stockStatus === 'OUT_OF_STOCK';
 
   return (
-    <div className="group flex h-full flex-col justify-between rounded-md border border-line bg-white shadow-xs transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+    <div className="group relative flex h-full flex-col justify-between rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md">
+      {/* Clickable Card Body */}
       <button
         type="button"
         onClick={onOpen}
-        className="flex flex-1 flex-col p-3 sm:p-4 text-left focus:outline-none"
+        className="flex flex-1 flex-col text-left focus:outline-none"
       >
-        <div className="mb-1 flex w-full items-start justify-between gap-1">
+        <div className="mb-2 flex w-full items-start justify-between gap-1">
           <StockBadge status={stockStatus} />
-          <span className="font-data text-[10px] sm:text-xs text-steel-grey shrink-0">{product?.sku || ''}</span>
+          <span className="font-data text-[10px] sm:text-xs text-slate-400 shrink-0">
+            {product?.sku || ''}
+          </span>
         </div>
 
-        <h3 className="mt-1.5 font-display text-base sm:text-lg font-semibold leading-snug text-charcoal group-hover:text-rust transition-colors line-clamp-2">
+        <h3 className="font-display text-sm sm:text-base font-bold leading-snug text-slate-800 group-hover:text-[#083358] transition-colors line-clamp-2">
           {product?.name || 'Item'}
         </h3>
 
         {product?.short_description && (
-          <p className="mt-1 line-clamp-2 text-xs text-charcoal/70">
+          <p className="mt-1 line-clamp-2 text-xs text-slate-500">
             {product.short_description}
           </p>
         )}
+      </button>
 
-        <div className="mt-auto pt-3">
-          <span className="font-data text-base sm:text-xl font-bold text-charcoal">
+      {/* Footer: Counter Price & Quick Cart Button */}
+      <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-2.5">
+        <div>
+          <span className="font-data text-base sm:text-lg font-black text-slate-900">
             {priceLabel}
           </span>
           {!product?.has_variants && unit && (
-            <span className="text-xs text-steel-grey"> /{unit.abbreviation}</span>
+            <span className="text-[11px] font-semibold text-slate-500"> /{unit.abbreviation}</span>
           )}
         </div>
-      </button>
 
-      {/* Action Buttons */}
-      <div className="grid grid-cols-2 border-t border-line text-xs font-semibold">
         <button
           type="button"
-          onClick={onWhatsApp}
-          className="flex items-center justify-center gap-1 border-r border-line py-2.5 text-steel-green hover:bg-steel-green/10 active:scale-95 transition-all"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (product?.has_variants) {
+              onOpen();
+            } else {
+              onAddToCart();
+            }
+          }}
+          disabled={isOutOfStock && !product?.quotation_enabled}
+          aria-label="Add to Cart"
+          className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r from-[#083358] to-[#0d4b82] text-white shadow-sm hover:opacity-90 active:scale-90 transition-all disabled:cursor-not-allowed disabled:bg-slate-300 disabled:opacity-40"
+          title={isOutOfStock ? 'Request Quote' : 'Add to Cart'}
         >
-          <span>WhatsApp</span>
-        </button>
-        <button
-          type="button"
-          onClick={onAddToCart}
-          disabled={stockStatus === 'OUT_OF_STOCK' && !product?.quotation_enabled}
-          className="flex items-center justify-center gap-1 py-2.5 text-rust hover:bg-rust/10 active:scale-95 transition-all disabled:cursor-not-allowed disabled:text-steel-grey disabled:hover:bg-transparent"
-        >
-          <span>{stockStatus === 'OUT_OF_STOCK' ? 'Quote' : 'Add'}</span>
+          <span className="text-base leading-none">🛒</span>
         </button>
       </div>
     </div>
