@@ -4,10 +4,11 @@ import type { Product, CategoryNode, Unit } from '@/lib/types';
 
 export default function HomePage() {
   const app = getApp();
-  const products = app.productService.listProducts({ isActive: true, limit: 500 }) as unknown as Product[];
-  const categories = app.catalogService.listCategoryTree({ activeOnly: true }) as unknown as CategoryNode[];
-  const units = app.catalogService.listUnits() as unknown as Unit[];
-  const settings = app.settingsService.getAll();
+  const products = JSON.parse(JSON.stringify(app.productService.listProducts({ isActive: true, limit: 500 }))) as unknown as Product[];
+  const categories = JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }))) as unknown as CategoryNode[];
+  const units = JSON.parse(JSON.stringify(app.catalogService.listUnits())) as unknown as Unit[];
+  const settings = JSON.parse(JSON.stringify(app.settingsService.getAll()));
+
 
   return (
     <div>
