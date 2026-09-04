@@ -23,8 +23,8 @@ function createDb(filename = ':memory:') {
     .get();
   if (!alreadyInitialized) {
     const schema = fs.readFileSync(
-      path.join(__dirname, '..', '..', 'schema', 'schema.sqlite.sql'),
-      'utf8'
+   path.join(process.cwd(), 'schema', 'schema.sqlite.sql')
+
     );
     db.exec(schema);
   }
