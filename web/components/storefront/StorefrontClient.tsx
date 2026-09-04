@@ -83,40 +83,69 @@ export default function StorefrontClient({
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6">
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <SearchBar
-          products={products}
-          value={search}
-          onChange={setSearch}
-          onPick={(p) => setOpenProduct(p)}
-        />
-        <button
-          type="button"
-          onClick={() => setCartOpen(true)}
-          className="self-start rounded-sm border-[1.5px] border-line bg-white px-4 py-2 text-sm font-medium hover:border-rust/60 sm:self-auto"
-        >
-          Cart {cart.length > 0 && <span className="ml-1 rounded-full bg-rust px-1.5 py-0.5 text-xs text-paper">{cart.length}</span>}
-        </button>
-      </div>
-
-      <div className="mb-6">
-        <CategoryChips categories={flatCategories.filter((c) => !c.parent_id)} activeId={activeCategory} onSelect={setActiveCategory} />
-      </div>
-
-      {visibleProducts.length === 0 ? (
-        <p className="py-16 text-center text-steel-grey">No products match your search. Try a different name or SKU.</p>
-      ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visibleProducts.map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              unit={unitById.get(p.unit_id)}
-              onOpen={() => setOpenProduct(p)}
-              onWhatsApp={() => whatsAppForProduct(p, null, 1)}
-              onAddToCart={() => addToCart(p, null, 1)}
+    <div className="mx-auto max-w-6xl px-3 sm:px-6 py-6">
+      {/* Sticky Action Bar */}
+      <div className="sticky top-0 z-20 -mx-3 sm:mx-0 mb-5 bg-[#F7F6F3]/95 backdrop-blur-md px-3 sm:px-0 py-2 border-b sm:border-b-0 border-line/50 transition-all">
+        <div className="flex items-center gap-2 sm:gap-4 justify-between">
+          <div className="flex-1">
+            <SearchBar
+              products={products}
+              value={search}
+              onChange={setSearch}
+              onPick={(p) => setOpenProduct(p)}
             />
+          </div>
+          <button
+            type="button"
+            onClick={() => setCartOpen(true)}
+            className="flex items-center gap-1.5 shrink-0 rounded-md border border-line bg-white px-3.5 py-2 text-sm font-semibold shadow-xs hover:border-rust transition-all active:scale-95"
+          >
+            <span>Cart</span>
+            {cart.length > 0 && (
+              <span className="rounded-full bg-rust px-1.5 py-0.5 text-xs font-bold text-paper animate-pulse">
+                {cart.length}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Scrollable Categories on Mobile */}
+        <div className="mt-3 overflow-x-auto no-scrollbar">
+          <CategoryChips
+            categories={flatCategories.filter((c) => !c.parent_id)}
+            activeId={activeCategory}
+            onSelect={setActiveCategory}
+          />
+        </div>
+      </div>
+
+      {/* Product Catalog Grid: 2 cols on mobile, 3 cols on tablet, 4 cols on desktop */}
+      {visibleProducts.length === 0 ? (
+        <div className="py-20 text-center">
+          <p className="font-display text-lg text-steel-grey">No products found matching &ldquo;{search}&rdquo;</p>
+          <button
+            onClick={() => { setSearch(''); setActiveCategory(null); }}
+            className="mt-3 text-sm font-medium text-rust hover:underline"
+          >
+            Clear all filters
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
+          {visibleProducts.map((p, idx) => (
+            <div
+              key={p.id}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${Math.min(idx * 35, 350)}ms` }}
+            >
+              <ProductCard
+                product={p}
+                unit={unitById.get(p.unit_id)}
+                onOpen={() => setOpenProduct(p)}
+                onWhatsApp={() => whatsAppForProduct(p, null, 1)}
+                onAddToCart={() => addToCart(p, null, 1)}
+              />
+            </div>
           ))}
         </div>
       )}

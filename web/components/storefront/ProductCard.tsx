@@ -28,38 +28,53 @@ export default function ProductCard({
   const stockStatus = product?.stock?.status || 'IN_STOCK';
 
   return (
-    <div className="flex flex-col border-[1.5px] border-line bg-white">
-      <button type="button" onClick={onOpen} className="flex flex-1 flex-col p-4 text-left">
-        <div className="mb-2 flex items-start justify-between gap-2">
-          <h3 className="font-display text-lg font-semibold leading-tight">{product?.name || 'Item'}</h3>
-        </div>
-        <p className="font-data text-xs text-steel-grey">SKU {product?.sku || 'N/A'}</p>
-        {product?.short_description && (
-          <p className="mt-2 line-clamp-2 text-sm text-charcoal/80">{product.short_description}</p>
-        )}
-        <div className="mt-3 flex items-center justify-between">
-          <span className="font-data text-lg font-semibold">
-            {priceLabel}
-            {!product?.has_variants && unit && <span className="text-sm text-steel-grey"> / {unit.abbreviation}</span>}
-          </span>
+    <div className="group flex h-full flex-col justify-between rounded-md border border-line bg-white shadow-xs transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+      <button
+        type="button"
+        onClick={onOpen}
+        className="flex flex-1 flex-col p-3 sm:p-4 text-left focus:outline-none"
+      >
+        <div className="mb-1 flex w-full items-start justify-between gap-1">
           <StockBadge status={stockStatus} />
+          <span className="font-data text-[10px] sm:text-xs text-steel-grey shrink-0">{product?.sku || ''}</span>
+        </div>
+
+        <h3 className="mt-1.5 font-display text-base sm:text-lg font-semibold leading-snug text-charcoal group-hover:text-rust transition-colors line-clamp-2">
+          {product?.name || 'Item'}
+        </h3>
+
+        {product?.short_description && (
+          <p className="mt-1 line-clamp-2 text-xs text-charcoal/70">
+            {product.short_description}
+          </p>
+        )}
+
+        <div className="mt-auto pt-3">
+          <span className="font-data text-base sm:text-xl font-bold text-charcoal">
+            {priceLabel}
+          </span>
+          {!product?.has_variants && unit && (
+            <span className="text-xs text-steel-grey"> /{unit.abbreviation}</span>
+          )}
         </div>
       </button>
-      <div className="grid grid-cols-2 border-t-[1.5px] border-line text-sm font-medium">
+
+      {/* Action Buttons */}
+      <div className="grid grid-cols-2 border-t border-line text-xs font-semibold">
         <button
           type="button"
           onClick={onWhatsApp}
-          className="border-r-[1.5px] border-line px-3 py-2.5 text-steel-green hover:bg-steel-green/5"
+          className="flex items-center justify-center gap-1 border-r border-line py-2.5 text-steel-green hover:bg-steel-green/10 active:scale-95 transition-all"
         >
-          WhatsApp order
+          <span>WhatsApp</span>
         </button>
         <button
           type="button"
           onClick={onAddToCart}
           disabled={stockStatus === 'OUT_OF_STOCK' && !product?.quotation_enabled}
-          className="px-3 py-2.5 text-rust hover:bg-rust/5 disabled:cursor-not-allowed disabled:text-steel-grey disabled:hover:bg-transparent"
+          className="flex items-center justify-center gap-1 py-2.5 text-rust hover:bg-rust/10 active:scale-95 transition-all disabled:cursor-not-allowed disabled:text-steel-grey disabled:hover:bg-transparent"
         >
-          {stockStatus === 'OUT_OF_STOCK' ? 'Request quote' : 'Add to cart'}
+          <span>{stockStatus === 'OUT_OF_STOCK' ? 'Quote' : 'Add'}</span>
         </button>
       </div>
     </div>

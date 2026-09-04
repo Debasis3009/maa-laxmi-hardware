@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --font-display: var(--barlow-condensed);
   --font-body: var(--source-sans);
@@ -11,9 +15,44 @@
 body {
   background-color: #F7F6F3;
   color: #23201B;
+  overflow-x: hidden;
 }
 
-/* Visible keyboard focus everywhere — no outline-none without a replacement. */
+/* Fluid Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 2.5s infinite ease-in-out;
+}
+
+/* Touch-optimized horizontal scrollbar concealment */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Visible keyboard focus */
 :focus-visible {
   outline: 2px solid #C6641A;
   outline-offset: 2px;

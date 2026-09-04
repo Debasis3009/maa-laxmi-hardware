@@ -1,4 +1,3 @@
-
 import { getApp } from '@/lib/db';
 import StorefrontClient from '@/components/storefront/StorefrontClient';
 import type { Product, CategoryNode, Unit } from '@/lib/types';
@@ -15,19 +14,41 @@ export default function HomePage() {
   const whatsappNumber = settings?.whatsapp_number || '919932667908';
 
   return (
-    <div>
-      <section className="border-b-[1.5px] border-line bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-10">
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] sm:text-5xl">
-            {businessName}
-          </h1>
-          <p className="mt-3 max-w-xl text-charcoal/80">
-            Quality hardware, building materials, paints, sanitary and electrical products —
-            in stock at our Nakrakonda counter, ready for pickup or WhatsApp order.
-          </p>
+    <div className="min-h-screen">
+      {/* Modern Hero Section */}
+      <section className="relative overflow-hidden border-b border-line bg-gradient-to-b from-white via-white to-amber-50/20 py-8 md:py-14">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="animate-fade-in-up">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-rust/20 bg-rust/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rust">
+              <span className="h-2 w-2 rounded-full bg-rust animate-ping" />
+              Counter Open &bull; Instant Delivery
+            </span>
+
+            <h1 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-charcoal">
+              {businessName}
+            </h1>
+
+            <p className="mt-2 sm:mt-3 max-w-2xl text-sm sm:text-base text-charcoal/80 leading-relaxed">
+              Building materials, sanitary fittings, paints, and electrical supplies. Direct retail counter in Nakrakonda or instant booking via WhatsApp.
+            </p>
+
+            {/* Quick Trust Highlights */}
+            <div className="mt-5 flex flex-wrap items-center gap-3 text-xs sm:text-sm font-medium text-steel-grey">
+              <span className="flex items-center gap-1.5 rounded-md bg-white border border-line px-2.5 py-1 shadow-xs">
+                📍 Nakrakonda Counter
+              </span>
+              <span className="flex items-center gap-1.5 rounded-md bg-white border border-line px-2.5 py-1 shadow-xs">
+                💬 WhatsApp Billing
+              </span>
+              <span className="flex items-center gap-1.5 rounded-md bg-white border border-line px-2.5 py-1 shadow-xs">
+                ⚡ Ready Stock
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* Main Catalog View */}
       <StorefrontClient
         products={products || []}
         categories={categories || []}
@@ -38,4 +59,3 @@ export default function HomePage() {
     </div>
   );
 }
-
