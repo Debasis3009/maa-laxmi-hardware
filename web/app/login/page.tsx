@@ -1,40 +1,83 @@
-import { redirect } from 'next/navigation';
-import { setSessionRole, getSession } from '@/lib/session';
+'use client';
+
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { loginWithCredentials } from '@/lib/session';
 
 export default function LoginPage() {
-  const { role } = getSession();
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
-  async function loginAsAdmin() {
-    'use server';
-    await setSessionRole('ADMIN');
-    redirect('/admin');
-  }
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-  async function loginAsCustomer() {
-    'use server';
-    await setSessionRole('CUSTOMER');
-    redirect('/');
+    startTransition(async () => {
+      const result = await loginWithCredentials(formData);
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        router.push('/admin');
+        router.refresh();
+      }
+    });
   }
 
   return (
     <div className="mx-auto max-w-sm px-4 py-16">
-      <h1 className="font-display text-3xl font-semibold">Staff sign-in</h1>
-      <p className="mt-2 text-sm text-charcoal/70">
-        Phase 2 demo session switch — current session: <strong>{role}</strong>. Real password/OTP
-        login replaces this before going live (see README, &ldquo;What&rsquo;s mocked&rdquo;).
-      </p>
+      <div className="border-[1.5px] border-line bg-white p-6 shadow-sm">
+        <h1 className="font-display text-2xl font-semibold text-charcoal">Admin Login</h1>
+        <p className="mt-1 text-xs text-charcoal/70">
+          Enter credentials to access Maa Laxmi Hardware dashboard.
+        </p>
 
-      <form action={loginAsAdmin} className="mt-6">
-        <button type="submit" className="w-full rounded-sm bg-rust px-4 py-2.5 text-sm font-medium text-paper hover:bg-rust-dark">
-          Continue as Admin (Sarat Dey)
-        </button>
-      </form>
+        {error && (
+          <div className="mt-4 rounded border border-rust/40 bg-rust/10 p-2.5 text-xs text-rust">
+            {error}
+          </div>
+        )}
 
-      <form action={loginAsCustomer} className="mt-3">
-        <button type="submit" className="w-full rounded-sm border-[1.5px] border-line px-4 py-2.5 text-sm font-medium hover:border-rust/60">
-          Continue as Customer
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-wider text-charcoal/80">
+              User ID
+            </label>
+            <input
+              type="text"
+              name="username"
+              required
+              autoComplete="username"
+              placeholder="Enter User ID"
+              className="mt-1.5 w-full border-[1.5px] border-line px-3 py-2 text-sm outline-none focus:border-rust"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-wider text-charcoal/80">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              required
+              autoComplete="current-password"
+              placeholder="Enter Password"
+              className="mt-1.5 w-full border-[1.5px] border-line px-3 py-2 text-sm outline-none focus:border-rust"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isPending}
+            className="w-full rounded-sm bg-rust py-2.5 text-sm font-medium text-paper hover:bg-rust-dark disabled:opacity-50"
+          >
+            {isPending ? 'Authenticating...' : 'Sign In'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

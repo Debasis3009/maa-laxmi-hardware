@@ -2,16 +2,6 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { getApp, getOwnerId } from './db';
 
-// ----------------------------------------------------------------------------
-// Phase 2 uses a deliberately simple, cookie-based mock session so the
-// storefront and admin UI can be built and demoed end to end. It reads real
-// user rows from the Phase 1 `users`/`roles` tables (via userService), so
-// swapping this for real authentication (password login, OTP, etc.) later
-// means replacing `setRole`/`getSession` — every downstream permission check
-// (`requireAdmin`) already goes through userService.hasPermission and needs
-// no changes.
-// ----------------------------------------------------------------------------
-
 const COOKIE_NAME = 'mlh_session_role';
 export type SessionRole = 'ADMIN' | 'CUSTOMER';
 
@@ -25,16 +15,43 @@ export function getSession(): { role: SessionRole; user: ReturnType<ReturnType<t
   return { role: 'CUSTOMER', user: null };
 }
 
-/** Server Action: switch the mock session role. Real credential check is
- * intentionally out of scope for Phase 2 — see README "What's mocked". */
-export async function setSessionRole(role: SessionRole) {
+export async function loginWithCredentials(formData: FormData): Promise<{ error?: string }> {
   'use server';
-  cookies().set(COOKIE_NAME, role, { httpOnly: true, sameSite: 'lax', path: '/' });
+  const username = (formData.get('username') as string)?.trim();
+  const password = (formData.get('password') as string)?.trim();
+
+  const expectedUser = process.env.ADMIN_USERNAME || 'admin';
+  const expectedPass = process.env.ADMIN_PASSWORD || 'MaaLaxmi@2026';
+
+  if (!username || !password) {
+    return { error: 'Please enter both User ID and Password.' };
+  }
+
+  if (username !== expectedUser || password !== expectedPass) {
+    return { error: 'Invalid User ID or Password.' };
+  }
+
+  cookies().set(COOKIE_NAME, 'ADMIN', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+  });
+
+  return {};
 }
 
-/** Throws if the current session is not an admin. Call at the top of every
- * admin Server Action, not just in UI — Server Actions are callable
- * endpoints and must not rely on the page having hidden the button. */
+export async function logoutAdmin() {
+  'use server';
+  cookies().set(COOKIE_NAME, 'CUSTOMER', {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 0,
+  });
+}
+
 export function requireAdmin() {
   const { role, user } = getSession();
   if (role !== 'ADMIN' || !user) {
