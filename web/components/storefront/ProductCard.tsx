@@ -58,6 +58,7 @@ export default function ProductCard({
           <span className="font-data text-base sm:text-lg font-black text-slate-900">
             {priceLabel}
           </span>
+          {!product?.has_variants && unit?.abbreviation && (
             <span className="text-[11px] font-semibold text-slate-500"> /{unit.abbreviation}</span>
           )}
         </div>
@@ -90,6 +91,7 @@ export default function ProductCard({
                 onAddToCart();
               }
             }}
+            disabled={isOutOfStock && !product?.quotation_enabled}
             aria-label="Add to Cart"
             title={isOutOfStock ? 'Request Quote' : 'Add to Cart'}
             className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r from-[#083358] to-[#0d4b82] text-white shadow-xs hover:opacity-90 active:scale-90 transition-all disabled:cursor-not-allowed disabled:bg-slate-300 disabled:opacity-40"
