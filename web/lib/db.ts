@@ -35,7 +35,8 @@ function boot(): { app: CoreApp; ownerId: string } {
     );
   }
 
-  const dbFile = path.join(process.cwd(), 'data', 'dev.sqlite');
+   const dbDir = process.env.VERCEL ? '/tmp' : path.join(process.cwd(), 'data');
+  const dbFile = path.join(dbDir, 'dev.sqlite');
   fs.mkdirSync(path.dirname(dbFile), { recursive: true });
   const app = createApp(process.env.NODE_ENV === 'test' ? ':memory:' : dbFile);
   app.bootstrap();
