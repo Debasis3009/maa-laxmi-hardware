@@ -18,7 +18,7 @@ export default function AdminProductsPage() {
         <div>
           <h1 className="font-display text-2xl sm:text-3xl font-bold text-slate-900">Products & Inventory</h1>
           <p className="mt-0.5 text-xs text-slate-500">
-            Swipe sideways on phone to view all columns. Tap prices or stock to edit inline.
+            Swipe table sideways to view all columns. Tap price or stock counts to edit inline.
           </p>
         </div>
         <AddProductModal categories={categories} units={units} />

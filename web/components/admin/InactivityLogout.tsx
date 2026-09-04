@@ -8,7 +8,7 @@ export default function InactivityLogout({ timeoutMs = 5 * 60 * 1000 }: { timeou
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    async function handleLogout() {
+    async function triggerAutoLogout() {
       try {
         await fetch('/api/auth/logout', { method: 'POST' });
       } catch {}
@@ -18,16 +18,16 @@ export default function InactivityLogout({ timeoutMs = 5 * 60 * 1000 }: { timeou
 
     function resetTimer() {
       if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(handleLogout, timeoutMs);
+      timerRef.current = setTimeout(triggerAutoLogout, timeoutMs);
     }
 
     const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'];
-    events.forEach((evt) => window.addEventListener(evt, resetTimer, { passive: true }));
+    events.forEach((e) => window.addEventListener(e, resetTimer, { passive: true }));
     resetTimer();
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      events.forEach((evt) => window.removeEventListener(evt, resetTimer));
+      events.forEach((e) => window.removeEventListener(e, resetTimer));
     };
   }, [router, timeoutMs]);
 

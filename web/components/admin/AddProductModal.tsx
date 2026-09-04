@@ -47,7 +47,7 @@ export default function AddProductModal({
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
                 <h3 className="font-display text-xl font-bold text-slate-900">Add Counter Product</h3>
-                <p className="text-xs text-slate-500">Add an item to the storefront catalog.</p>
+                <p className="text-xs text-slate-500">New item will appear immediately in your counter catalog.</p>
               </div>
               <button
                 type="button"
@@ -132,7 +132,7 @@ export default function AddProductModal({
                 <input
                   name="imageUrl"
                   type="url"
-                  placeholder="https://example.com/item.jpg"
+                  placeholder="https://images.unsplash.com/photo-..."
                   value={previewImg}
                   onChange={(e) => setPreviewImg(e.target.value)}
                   className="mt-1 w-full rounded-lg border border-slate-300 p-2.5 text-xs outline-none"
@@ -140,7 +140,7 @@ export default function AddProductModal({
                 {previewImg && (
                   <div className="mt-2 flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 p-2">
                     <img src={previewImg} alt="Preview" className="h-12 w-12 rounded object-cover" />
-                    <span className="text-[11px] text-slate-500">Image preview</span>
+                    <span className="text-[11px] text-slate-500">Image preview valid</span>
                   </div>
                 )}
               </div>

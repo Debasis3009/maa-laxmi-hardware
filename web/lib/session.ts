@@ -31,7 +31,7 @@ export async function loginWithCredentials(formData: FormData): Promise<{ error?
     return { error: 'Invalid User ID or Password.' };
   }
 
-  // Set session cookie to expire in 5 minutes (300s)
+  // 5-minute inactivity session limit
   cookies().set(COOKIE_NAME, 'ADMIN', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
