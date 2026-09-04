@@ -22,8 +22,11 @@ function createDb(filename = ':memory:') {
     .prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'roles'`)
     .get();
   if (!alreadyInitialized) {
-    const schema = fs.readFileSync(
-   path.join(process.cwd(), 'schema', 'schema.sqlite.sql')
+      const schema = fs.readFileSync(
+      path.join(process.cwd(), 'schema', 'schema.sqlite.sql'),
+      'utf8'
+    );
+
 
     );
     db.exec(schema);
