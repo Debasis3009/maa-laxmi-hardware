@@ -15,32 +15,37 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Modern Hero Section */}
-      <section className="relative overflow-hidden border-b border-line bg-gradient-to-b from-white via-white to-amber-50/20 py-8 md:py-14">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="animate-fade-in-up">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-rust/20 bg-rust/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-rust">
-              <span className="h-2 w-2 rounded-full bg-rust animate-ping" />
-              Counter Open &bull; Instant Delivery
+      {/* Brand Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#083358] via-[#0b487c] to-[#041c33] py-9 sm:py-14 text-white shadow-md">
+        <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="animate-fade-in-up space-y-2.5">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-cyan-500/15 px-3 py-1 text-xs font-semibold text-cyan-200 backdrop-blur-sm shadow-xs">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              Direct Counter Ready &bull; Fast Delivery
             </span>
 
-            <h1 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-charcoal">
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white">
               {businessName}
             </h1>
 
-            <p className="mt-2 sm:mt-3 max-w-2xl text-sm sm:text-base text-charcoal/80 leading-relaxed">
-              Building materials, sanitary fittings, paints, and electrical supplies. Direct retail counter in Nakrakonda or instant booking via WhatsApp.
+            <p className="font-display text-sm sm:text-base font-bold uppercase tracking-widest text-amber-300">
+              The Best Choice For Your Dream Home
             </p>
 
-            {/* Quick Trust Highlights */}
-            <div className="mt-5 flex flex-wrap items-center gap-3 text-xs sm:text-sm font-medium text-steel-grey">
-              <span className="flex items-center gap-1.5 rounded-md bg-white border border-line px-2.5 py-1 shadow-xs">
+            <p className="max-w-2xl text-xs sm:text-sm text-slate-200 leading-relaxed pt-1">
+              Cement, TMT bars, Asian/Berger paints, sanitary pipes, and electrical supplies. Verified counter stock at Nakrakonda with instant WhatsApp bookings.
+            </p>
+
+            {/* Badges */}
+            <div className="flex flex-wrap items-center gap-2 pt-3 text-xs font-semibold">
+              <span className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-white">
                 📍 Nakrakonda Counter
               </span>
-              <span className="flex items-center gap-1.5 rounded-md bg-white border border-line px-2.5 py-1 shadow-xs">
-                💬 WhatsApp Billing
+              <span className="flex items-center gap-1 rounded-full bg-emerald-500 text-white px-3 py-1 shadow-xs">
+                💬 WhatsApp Order Active
               </span>
-              <span className="flex items-center gap-1.5 rounded-md bg-white border border-line px-2.5 py-1 shadow-xs">
+              <span className="flex items-center gap-1 rounded-full bg-amber-400 text-slate-950 px-3 py-1 shadow-xs">
                 ⚡ Ready Stock
               </span>
             </div>
@@ -48,7 +53,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Main Catalog View */}
+      {/* Catalog */}
       <StorefrontClient
         products={products || []}
         categories={categories || []}
