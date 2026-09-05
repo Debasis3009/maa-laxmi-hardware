@@ -700,8 +700,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Lead-free Class 1 UPVC pipe for heavy-duty domestic drinking water distribution.",
-    "imageUrl": "/products/PLM-PIP-UPVC-100.svg",
-    "image_url": "/products/PLM-PIP-UPVC-100.svg"
+    "imageUrl": "/products/PLM-PIP-UPVC-100.png",
+    "image_url": "/products/PLM-PIP-UPVC-100.png"
   },
   {
     "sku": "PLM-PIP-SWR-110",
@@ -733,8 +733,8 @@
     "unit": "Piece",
     "stock": 150,
     "description": "Heavy duty pressure-rated 90-degree bend for hot and cold CPVC pipe joints.",
-    "imageUrl": "/products/PLM-FIT-CPVC-ELB90.svg",
-    "image_url": "/products/PLM-FIT-CPVC-ELB90.svg"
+    "imageUrl": "/products/PLM-FIT-CPVC-ELB90.png",
+    "image_url": "/products/PLM-FIT-CPVC-ELB90.png"
   },
   {
     "sku": "PLM-FIT-CPVC-TEE",
@@ -744,8 +744,8 @@
     "unit": "Piece",
     "stock": 120,
     "description": "3-way T-junction fitting to split water lines into separate plumbing fixtures.",
-    "imageUrl": "/products/PLM-FIT-CPVC-TEE.svg",
-    "image_url": "/products/PLM-FIT-CPVC-TEE.svg"
+    "imageUrl": "/products/PLM-FIT-CPVC-TEE.png",
+    "image_url": "/products/PLM-FIT-CPVC-TEE.png"
   },
   {
     "sku": "PLM-FIT-CPVC-UNI",
@@ -755,8 +755,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Quick-disconnect threaded union fitting for motor pumps and main pipeline servicing.",
-    "imageUrl": "/products/PLM-FIT-CPVC-UNI.svg",
-    "image_url": "/products/PLM-FIT-CPVC-UNI.svg"
+    "imageUrl": "/products/PLM-FIT-CPVC-UNI.png",
+    "image_url": "/products/PLM-FIT-CPVC-UNI.png"
   },
   {
     "sku": "PLM-FIT-UPVC-RED",
@@ -788,8 +788,8 @@
     "unit": "Piece",
     "stock": 80,
     "description": "Brass-insert female threaded adaptor to mount taps, bib cocks, and shower arms.",
-    "imageUrl": "/products/PLM-FIT-FTA-BRS.svg",
-    "image_url": "/products/PLM-FIT-FTA-BRS.svg"
+    "imageUrl": "/products/PLM-FIT-FTA-BRS.png",
+    "image_url": "/products/PLM-FIT-FTA-BRS.png"
   },
   {
     "sku": "PLM-VLV-BL-100",
