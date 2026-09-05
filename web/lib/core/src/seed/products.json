@@ -83,9 +83,9 @@
     "unit": "Quintal",
     "price": 5100,
     "stock": 35,
-    "imageUrl": "/products/TMT-ELE-QST.svg",
+    "imageUrl": "/products/TMT-ELE-QST.jpeg",
     "description": "Quenched & Self-Tempered (QST) construction rods for residential projects.",
-    "image_url": "/products/TMT-ELE-QST.svg"
+    "image_url": "/products/TMT-ELE-QST.jpeg"
   },
   {
     "sku": "TMT-DUR-STE",
@@ -127,9 +127,9 @@
     "unit": "kg",
     "price": 70,
     "stock": 250,
-    "imageUrl": "/products/FAS-NAIL-RND.svg",
+    "imageUrl": "/products/FAS-NAIL-RND.png",
     "description": "Standard round head iron nails for woodwork, shuttering, and carpentry.",
-    "image_url": "/products/FAS-NAIL-RND.svg"
+    "image_url": "/products/FAS-NAIL-RND.png"
   },
   {
     "sku": "FAS-ROOF-SCR",
@@ -138,9 +138,9 @@
     "unit": "Box",
     "price": 140,
     "stock": 80,
-    "imageUrl": "/products/FAS-ROOF-SCR.svg",
+    "imageUrl": "/products/FAS-ROOF-SCR.jpg",
     "description": "Corrugated roofing nails with washers, star screws, and PVC royal plugs (Gitti).",
-    "image_url": "/products/FAS-ROOF-SCR.svg"
+    "image_url": "/products/FAS-ROOF-SCR.jpg"
   },
   {
     "sku": "CHM-FIX-LWPL",
@@ -480,8 +480,8 @@
     "unit": "Bucket",
     "stock": 15,
     "description": "Low-odor, anti-bacterial interior paint with bright white finish.",
-    "imageUrl": "/products/PNT-EML-JSW-HL.svg",
-    "image_url": "/products/PNT-EML-JSW-HL.svg"
+    "imageUrl": "/products/PNT-EML-JSW-HL.jpg",
+    "image_url": "/products/PNT-EML-JSW-HL.jpg"
   },
   {
     "sku": "PNT-EXT-AP-APX",
@@ -524,8 +524,8 @@
     "unit": "Bucket",
     "stock": 15,
     "description": "Elastomeric thick waterproofing membrane for roofs and exterior walls.",
-    "imageUrl": "/products/PNT-WPF-DF-DMP.svg",
-    "image_url": "/products/PNT-WPF-DF-DMP.svg"
+    "imageUrl": "/products/PNT-WPF-DF-DMP.webp",
+    "image_url": "/products/PNT-WPF-DF-DMP.webp"
   },
   {
     "sku": "PNT-WPF-BO-ADR",
