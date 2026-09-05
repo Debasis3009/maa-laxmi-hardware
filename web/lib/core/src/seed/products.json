@@ -6,9 +6,9 @@
     "unit": "Bag (50kg)",
     "price": 380,
     "stock": 100,
-    "imageUrl": "https://lntsufin.com/storage/mediafiles/catalog/live/16447-268/original/16447-268_image_0.jpg",
+    "imageUrl": "/products/CEM-ULT-PPC.jpg",
     "description": "UltraTech PPC premium slag/fly-ash blended cement for durable concrete construction.",
-    "image_url": "https://lntsufin.com/storage/mediafiles/catalog/live/16447-268/original/16447-268_image_0.jpg"
+    "image_url": "/products/CEM-ULT-PPC.jpg"
   },
   {
     "sku": "CEM-ULT-SUP",
@@ -17,9 +17,9 @@
     "unit": "Bag (50kg)",
     "price": 410,
     "stock": 80,
-    "imageUrl": "https://www.ultratechcement.com/content/ultratechcement/in/en/home/for-homebuilders/products/overview/ultratech-super/_jcr_content/root/container/container_copy/container_copy/teaser.coreimg.png/1707274353526/cement-card-banner.png",
+    "imageUrl": "/products/CEM-ULT-SUP.jpg",
     "description": "Engineered with micro-fine particles for extra strength and smooth finishing.",
-    "image_url": "https://www.ultratechcement.com/content/ultratechcement/in/en/home/for-homebuilders/products/overview/ultratech-super/_jcr_content/root/container/container_copy/container_copy/teaser.coreimg.png/1707274353526/cement-card-banner.png"
+    "image_url": "/products/CEM-ULT-SUP.jpg"
   },
   {
     "sku": "CEM-ULT-WTH",
@@ -28,9 +28,9 @@
     "unit": "Bag (50kg)",
     "price": 430,
     "stock": 60,
-    "imageUrl": "https://tiimg.tistatic.com/fp/1/007/492/protection-from-dampness-ppc-grade-weather-plus-cement-50kg-pack--754.jpg",
+    "imageUrl": "/products/CEM-ULT-WTH.jpg",
     "description": "Water-repellent cement designed to resist dampness and weather damage.",
-    "image_url": "https://tiimg.tistatic.com/fp/1/007/492/protection-from-dampness-ppc-grade-weather-plus-cement-50kg-pack--754.jpg"
+    "image_url": "/products/CEM-ULT-WTH.jpg"
   },
   {
     "sku": "CEM-LAF-CON",
@@ -50,9 +50,9 @@
     "unit": "Quintal",
     "price": 5400,
     "stock": 50,
-    "imageUrl": "https://cpimg.tistatic.com/09002647/b/4/Steel-TMT-Bars.jpg",
+    "imageUrl": "/products/TMT-CAP-600.jpg",
     "description": "Earthquake-resistant 600 EQR grade steel rebars. Available in 5.5mm to 32mm.",
-    "image_url": "https://cpimg.tistatic.com/09002647/b/4/Steel-TMT-Bars.jpg"
+    "image_url": "/products/TMT-CAP-600.jpg"
   },
   {
     "sku": "TMT-TAT-550",
@@ -61,9 +61,9 @@
     "unit": "Quintal",
     "price": 6200,
     "stock": 40,
-    "imageUrl": "https://steeloncall.com/media/post/image/t/a/tata_tiscon.jpg",
+    "imageUrl": "/products/TMT-TAT-550.jpg",
     "description": "GreenPro certified super ductile TMT bars for house construction (5.5mm - 32mm).",
-    "image_url": "https://steeloncall.com/media/post/image/t/a/tata_tiscon.jpg"
+    "image_url": "/products/TMT-TAT-550.jpg"
   },
   {
     "sku": "TMT-SHY-500",
@@ -101,7 +101,7 @@
   {
     "sku": "WIR-BND-2022",
     "name": "Binding Wire (Black Annealed 20/22G)",
-    "category": "Hardware & Fasteners",
+    "category": "Building Materials",
     "unit": "kg",
     "price": 75,
     "stock": 200,
@@ -112,18 +112,18 @@
   {
     "sku": "WIR-GI-COIL",
     "name": "GI Galvanized Iron Wire",
-    "category": "Hardware & Fasteners",
+    "category": "Building Materials",
     "unit": "kg",
     "price": 85,
     "stock": 150,
-    "imageUrl": "https://img3.exportersindia.com/product_images/bc-full/2024/9/13883057/gi-wire-1726479291-7604617.jpeg",
+    "imageUrl": "/products/WIR-GI-COIL.jpg",
     "description": "Zinc-coated rust-resistant GI wire for construction, fencing, and tying.",
-    "image_url": "https://img3.exportersindia.com/product_images/bc-full/2024/9/13883057/gi-wire-1726479291-7604617.jpeg"
+    "image_url": "/products/WIR-GI-COIL.jpg"
   },
   {
     "sku": "FAS-NAIL-RND",
     "name": "Iron Wire Nails (Round 1\"-4\")",
-    "category": "Hardware & Fasteners",
+    "category": "Building Materials",
     "unit": "kg",
     "price": 70,
     "stock": 250,
@@ -134,7 +134,7 @@
   {
     "sku": "FAS-ROOF-SCR",
     "name": "Roofing Nails & Wood Screws Set",
-    "category": "Hardware & Fasteners",
+    "category": "Building Materials",
     "unit": "Box",
     "price": 140,
     "stock": 80,
@@ -145,101 +145,101 @@
   {
     "sku": "CHM-FIX-LWPL",
     "name": "Dr. Fixit LW+ Waterproofing Liquid",
-    "category": "Construction Chemicals",
+    "category": "Hardware & Tools",
     "unit": "Litre",
     "price": 165,
     "stock": 90,
-    "imageUrl": "https://drfixit-stg.s3.ap-south-1.amazonaws.com/assets/images/products/xhdpi/16191739476082a23b4efc6.webp",
+    "imageUrl": "/products/CHM-FIX-LWPL.jpg",
     "description": "Integral liquid waterproofing compound for concrete casting and plastering.",
-    "image_url": "https://drfixit-stg.s3.ap-south-1.amazonaws.com/assets/images/products/xhdpi/16191739476082a23b4efc6.webp"
+    "image_url": "/products/CHM-FIX-LWPL.jpg"
   },
   {
     "sku": "CHM-FIX-URP",
     "name": "Dr. Fixit Pidicrete URP / Sika Latex",
-    "category": "Construction Chemicals",
+    "category": "Hardware & Tools",
     "unit": "kg",
     "price": 380,
     "stock": 40,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/CHM-FIX-URP.jpg",
     "description": "SBR polymer bonding agent for crack repairs and old-to-new concrete joints.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/CHM-FIX-URP.jpg"
   },
   {
     "sku": "CHM-WAL-PUTT",
     "name": "White Cement Wall Putty",
-    "category": "Construction Chemicals",
+    "category": "Paints & Primers",
     "unit": "Bag (40kg)",
     "price": 850,
     "stock": 50,
-    "imageUrl": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/CHM-WAL-PUTT.jpg",
     "description": "Ultra smooth water-resistant wall putty for interior and exterior base plaster.",
-    "image_url": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/CHM-WAL-PUTT.jpg"
   },
   {
     "sku": "TLS-FLR-6060",
     "name": "Double Charge Vitrified Tiles (2x2 ft)",
-    "category": "Tiles & Sanitary",
+    "category": "Building Materials",
     "unit": "Box",
     "price": 620,
     "stock": 70,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-FLR-6060.jpg",
     "description": "600x600 mm glossy and satin floor tiles for bedrooms and living spaces.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-FLR-6060.jpg"
   },
   {
     "sku": "TLS-FLR-6012",
     "name": "Large Slab Floor Tiles (2x4 ft)",
-    "category": "Tiles & Sanitary",
+    "category": "Building Materials",
     "unit": "Box",
     "price": 1250,
     "stock": 40,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-FLR-6012.jpg",
     "description": "600x1200 mm high-gloss seamless tiles for luxury living rooms and halls.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-FLR-6012.jpg"
   },
   {
     "sku": "TLS-WAL-3045",
     "name": "Digital Bathroom & Kitchen Wall Tiles",
-    "category": "Tiles & Sanitary",
+    "category": "Building Materials",
     "unit": "Box",
     "price": 340,
     "stock": 85,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-WAL-3045.jpg",
     "description": "300x450 mm (1x1.5 ft) ceramic glazed wall tiles with matching anti-skid mats.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-WAL-3045.jpg"
   },
   {
     "sku": "TLS-ADH-TYP1",
     "name": "Roff Tile Adhesive (Type 1)",
-    "category": "Construction Chemicals",
+    "category": "Hardware & Tools",
     "unit": "Bag (20kg)",
     "price": 310,
     "stock": 60,
-    "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-ADH-TYP1.png",
     "description": "High strength polymer modified cementitious tile adhesive for floors and walls.",
-    "image_url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-ADH-TYP1.png"
   },
   {
     "sku": "TLS-GRT-JOINT",
     "name": "Epoxy & Polymer Tile Grout",
-    "category": "Construction Chemicals",
+    "category": "Hardware & Tools",
     "unit": "Pkt (1kg)",
     "price": 95,
     "stock": 100,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-GRT-JOINT.jpg",
     "description": "Waterproof joint filler available in White, Ivory, Grey, and Black.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-GRT-JOINT.jpg"
   },
   {
     "sku": "TLS-BLD-BOSC",
     "name": "Diamond 4\" Tile Cutting Blade",
-    "category": "Hardware & Tools",
+    "category": "Building Materials",
     "unit": "Piece",
     "price": 220,
     "stock": 50,
-    "imageUrl": "https://supply-ontime.com/cdn/shop/files/makita-diamond-blades-b-69565-c3_1000_700x700.jpg?v=1755785098",
+    "imageUrl": "/products/TLS-BLD-BOSC.webp",
     "description": "4-inch turbo diamond rim blade for smooth and chip-free marble and tile cutting.",
-    "image_url": "https://supply-ontime.com/cdn/shop/files/makita-diamond-blades-b-69565-c3_1000_700x700.jpg?v=1755785098"
+    "image_url": "/products/TLS-BLD-BOSC.webp"
   },
   {
     "sku": "TLS-FIT-SPAC",
@@ -259,9 +259,9 @@
     "unit": "Piece",
     "price": 170,
     "stock": 35,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-MAL-RUBB.webp",
     "description": "Non-marring rubber head hammer for leveling tiles without cracking surfaces.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-MAL-RUBB.webp"
   },
   {
     "sku": "TOOL-HAM-CLAW",
@@ -270,9 +270,9 @@
     "unit": "Piece",
     "price": 280,
     "stock": 45,
-    "imageUrl": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TOOL-HAM-CLAW.png",
     "description": "Drop-forged carbon steel head with curved claw for easy nail pulling.",
-    "image_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TOOL-HAM-CLAW.png"
   },
   {
     "sku": "TOOL-MAS-TROW",
@@ -292,14 +292,14 @@
     "unit": "Piece",
     "price": 160,
     "stock": 75,
-    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TOOL-TAP-MEAS.jpg",
     "description": "Impact-resistant ABS case with metric and imperial measurement markings.",
-    "image_url": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TOOL-TAP-MEAS.jpg"
   },
   {
     "sku": "MAT-TAR-POLY",
     "name": "Heavy Duty Tarpaulin (Tripal)",
-    "category": "Containers & Covers",
+    "category": "Hardware & Tools",
     "unit": "Piece",
     "price": 650,
     "stock": 30,
@@ -310,7 +310,7 @@
   {
     "sku": "SFT-GLV-PROT",
     "name": "Safety Hand Gloves & Helmet",
-    "category": "Safety Gear",
+    "category": "Hardware & Tools",
     "unit": "Pair / Pc",
     "price": 60,
     "stock": 100,
@@ -321,13 +321,13 @@
   {
     "sku": "CLN-BRM-NATR",
     "name": "Heavy Duty Coconut & Floor Broom",
-    "category": "Cleaning Supplies",
+    "category": "Hardware & Tools",
     "unit": "Piece",
     "price": 80,
     "stock": 80,
-    "imageUrl": "https://images.unsplash.com/photo-1585670270677-3ac279e8cd86?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/CLN-BRM-NATR.jpg",
     "description": "Traditional rigid coconut stick broom and soft floor brooms for construction cleanup.",
-    "image_url": "https://images.unsplash.com/photo-1585670270677-3ac279e8cd86?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/CLN-BRM-NATR.jpg"
   },
   {
     "sku": "PNT-PRM-AP-TRU",
@@ -381,8 +381,8 @@
     "unit": "Bucket",
     "stock": 18,
     "description": "Superior anti-fungal exterior primer designed for tropical weather.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-BG-WTC.jpg",
+    "image_url": "/products/PNT-PRM-BG-WTC.jpg"
   },
   {
     "sku": "PNT-PRM-BO-STY",
@@ -392,8 +392,8 @@
     "unit": "Bucket",
     "stock": 12,
     "description": "High-binding exterior primer that fortifies surface durability.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-BO-STY.webp",
+    "image_url": "/products/PNT-PRM-BO-STY.webp"
   },
   {
     "sku": "PNT-PRM-AP-ROX",
@@ -403,8 +403,8 @@
     "unit": "Litre",
     "stock": 40,
     "description": "Solvent-based rust-inhibitive primer for iron grills and steel gates.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-AP-ROX.jpg",
+    "image_url": "/products/PNT-PRM-AP-ROX.jpg"
   },
   {
     "sku": "PNT-PRM-AP-WOD",
@@ -414,8 +414,8 @@
     "unit": "Litre",
     "stock": 30,
     "description": "Seals raw wood pores and protects wooden doors and frames.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-AP-WOD.jpg",
+    "image_url": "/products/PNT-PRM-AP-WOD.jpg"
   },
   {
     "sku": "PNT-PRM-NR-GEN",
@@ -425,8 +425,8 @@
     "unit": "Litre",
     "stock": 25,
     "description": "Moisture-resistant solvent-based primer for soft and hard woods.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-NR-GEN.jpg",
+    "image_url": "/products/PNT-PRM-NR-GEN.jpg"
   },
   {
     "sku": "PNT-PRM-SL-SYN",
@@ -458,8 +458,8 @@
     "unit": "Bucket",
     "stock": 35,
     "description": "Classic economical, washable interior distemper finish.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-DST-AP-SYN.jpg",
+    "image_url": "/products/PNT-DST-AP-SYN.jpg"
   },
   {
     "sku": "PNT-EML-BG-EC",
@@ -469,8 +469,8 @@
     "unit": "Bucket",
     "stock": 15,
     "description": "Cross-linking polymer emulsion offering stain wipe-ability.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-EML-BG-EC.jpg",
+    "image_url": "/products/PNT-EML-BG-EC.jpg"
   },
   {
     "sku": "PNT-EML-JSW-HL",
@@ -491,8 +491,8 @@
     "unit": "Bucket",
     "stock": 12,
     "description": "Advanced exterior protection with anti-dirt and weather-proof shield.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-EXT-AP-APX.png",
+    "image_url": "/products/PNT-EXT-AP-APX.png"
   },
   {
     "sku": "PNT-EXT-AP-ACE",
@@ -502,8 +502,8 @@
     "unit": "Bucket",
     "stock": 25,
     "description": "Water-based exterior wall finish providing color retention.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-EXT-AP-ACE.jpg",
+    "image_url": "/products/PNT-EXT-AP-ACE.jpg"
   },
   {
     "sku": "PNT-EXT-BG-WLL",
@@ -513,8 +513,8 @@
     "unit": "Bucket",
     "stock": 10,
     "description": "Heavy-duty PU & silicon-reinforced exterior wall coating.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-EXT-BG-WLL.jpg",
+    "image_url": "/products/PNT-EXT-BG-WLL.jpg"
   },
   {
     "sku": "PNT-WPF-DF-DMP",
@@ -535,8 +535,8 @@
     "unit": "Bucket",
     "stock": 10,
     "description": "Crack-bridging, heat-reflective waterproofing barrier.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-WPF-BO-ADR.webp",
+    "image_url": "/products/PNT-WPF-BO-ADR.webp"
   },
   {
     "sku": "PNT-ENM-AP-APC",
@@ -546,8 +546,8 @@
     "unit": "Litre",
     "stock": 40,
     "description": "Mirror-like gloss finish for wooden doors and metal gates.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-ENM-AP-APC.jpg",
+    "image_url": "/products/PNT-ENM-AP-APC.jpg"
   },
   {
     "sku": "PNT-ENM-BG-LUX",
@@ -557,8 +557,8 @@
     "unit": "Litre",
     "stock": 35,
     "description": "Tough alkyd enamel resisting yellowing and scratches.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-ENM-BG-LUX.jpg",
+    "image_url": "/products/PNT-ENM-BG-LUX.jpg"
   },
   {
     "sku": "ADH-FEV-SH-1KG",
@@ -568,8 +568,8 @@
     "unit": "Piece",
     "stock": 50,
     "description": "Heavy-duty synthetic resin glue for woodworking and laminating plywood.",
-    "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ADH-FEV-SH-1KG.jpg",
+    "image_url": "/products/ADH-FEV-SH-1KG.jpg"
   },
   {
     "sku": "ADH-FEV-MAR-1KG",
@@ -579,8 +579,8 @@
     "unit": "Piece",
     "stock": 40,
     "description": "Waterproof adhesive with Aqua Repel Technology for kitchens and bathrooms.",
-    "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ADH-FEV-MAR-1KG.jpg",
+    "image_url": "/products/ADH-FEV-MAR-1KG.jpg"
   },
   {
     "sku": "ADH-FEV-SPX-1KG",
@@ -623,13 +623,13 @@
     "unit": "Bag",
     "stock": 40,
     "description": "Pure white limestone masonry base for floor inlays and decorative coatings.",
-    "imageUrl": "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CEM-WHT-JK-25.jpg",
+    "image_url": "/products/CEM-WHT-JK-25.jpg"
   },
   {
     "sku": "PUT-WAL-AP-TRU",
     "name": "Asian Paints TruCare Wall Putty (20kg)",
-    "category": "Building Materials",
+    "category": "Paints & Primers",
     "price": 720,
     "unit": "Bag",
     "stock": 50,
@@ -689,8 +689,8 @@
     "unit": "Piece",
     "stock": 50,
     "description": "SDR 11 chlorinated polyvinyl chloride pipe for hot and cold potable water supply lines.",
-    "imageUrl": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-PIP-CPVC-075.jpg",
+    "image_url": "/products/PLM-PIP-CPVC-075.jpg"
   },
   {
     "sku": "PLM-PIP-UPVC-100",
@@ -711,8 +711,8 @@
     "unit": "Piece",
     "stock": 40,
     "description": "Soil, waste, and vent (DWV) rainwater drainage pipe with ring-fit joint.",
-    "imageUrl": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-PIP-SWR-110.jpg",
+    "image_url": "/products/PLM-PIP-SWR-110.jpg"
   },
   {
     "sku": "PLM-PIP-GI-050",
@@ -722,8 +722,8 @@
     "unit": "Piece",
     "stock": 25,
     "description": "Class B threaded hot-dip galvanized iron pipe for durable external main lines.",
-    "imageUrl": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-PIP-GI-050.jpg",
+    "image_url": "/products/PLM-PIP-GI-050.jpg"
   },
   {
     "sku": "PLM-FIT-CPVC-ELB90",
@@ -766,8 +766,8 @@
     "unit": "Piece",
     "stock": 100,
     "description": "Precision molded reducer bushing to join pipes of unequal nominal diameters.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-FIT-UPVC-RED.webp",
+    "image_url": "/products/PLM-FIT-UPVC-RED.webp"
   },
   {
     "sku": "PLM-FIT-CPVC-CAP",
@@ -777,8 +777,8 @@
     "unit": "Piece",
     "stock": 150,
     "description": "Solvent weld end closure cap to permanently or temporarily seal pipe terminals.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-FIT-CPVC-CAP.png",
+    "image_url": "/products/PLM-FIT-CPVC-CAP.png"
   },
   {
     "sku": "PLM-FIT-FTA-BRS",
@@ -799,8 +799,8 @@
     "unit": "Piece",
     "stock": 45,
     "description": "Full-bore smooth handle quarter-turn shutoff control valve for rooftop tanks.",
-    "imageUrl": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-VLV-BL-100.jpg",
+    "image_url": "/products/PLM-VLV-BL-100.jpg"
   },
   {
     "sku": "PLM-VLV-NRV-075",
@@ -810,8 +810,8 @@
     "unit": "Piece",
     "stock": 30,
     "description": "Directional spring check valve to stop water backflow into pump suction pipes.",
-    "imageUrl": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-VLV-NRV-075.jpg",
+    "image_url": "/products/PLM-VLV-NRV-075.jpg"
   },
   {
     "sku": "PLM-VLV-CON-STP",
@@ -876,8 +876,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Solid forged brass wall tap with high-gloss chrome mirror finish and aerated foam flow.",
-    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-TAP-BIB-050.jpg",
+    "image_url": "/products/CPF-TAP-BIB-050.jpg"
   },
   {
     "sku": "CPF-TAP-PIL-050",
@@ -909,8 +909,8 @@
     "unit": "Set",
     "stock": 35,
     "description": "Wide shower head with anti-clog silicone nozzles and solid wall mounting shower arm.",
-    "imageUrl": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-SHW-RAIN-OVR.jpg",
+    "image_url": "/products/CPF-SHW-RAIN-OVR.jpg"
   },
   {
     "sku": "CPF-TRP-BOT-BRP",
