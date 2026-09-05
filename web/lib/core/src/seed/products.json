@@ -72,9 +72,9 @@
     "unit": "Quintal",
     "price": 5500,
     "stock": 45,
-    "imageUrl": "/products/TMT-SHY-500.svg",
+    "imageUrl": "/products/TMT-SHY-500.jpg",
     "description": "Primary steel high-yield TMT bars with superior bendability and corrosion resistance.",
-    "image_url": "/products/TMT-SHY-500.svg"
+    "image_url": "/products/TMT-SHY-500.jpg"
   },
   {
     "sku": "TMT-ELE-QST",
@@ -94,9 +94,9 @@
     "unit": "Quintal",
     "price": 4950,
     "stock": 30,
-    "imageUrl": "/products/TMT-DUR-STE.svg",
+    "imageUrl": "/products/TMT-DUR-STE.jpg",
     "description": "Reliable commercial grade structural TMT rebar for columns and roof casting.",
-    "image_url": "/products/TMT-DUR-STE.svg"
+    "image_url": "/products/TMT-DUR-STE.jpg"
   },
   {
     "sku": "WIR-BND-2022",
@@ -105,9 +105,9 @@
     "unit": "kg",
     "price": 75,
     "stock": 200,
-    "imageUrl": "/products/WIR-BND-2022.svg",
+    "imageUrl": "/products/WIR-BND-2022.jpg",
     "description": "Soft and flexible 20 & 22 gauge black annealed tying wire for bar bending.",
-    "image_url": "/products/WIR-BND-2022.svg"
+    "image_url": "/products/WIR-BND-2022.jpg"
   },
   {
     "sku": "WIR-GI-COIL",
@@ -248,9 +248,9 @@
     "unit": "Pkt (100 pcs)",
     "price": 120,
     "stock": 60,
-    "imageUrl": "/products/TLS-FIT-SPAC.svg",
+    "imageUrl": "/products/TLS-FIT-SPAC.jpg",
     "description": "Plastic cross spacers (2mm, 3mm, 4mm) and reusable leveling wedges.",
-    "image_url": "/products/TLS-FIT-SPAC.svg"
+    "image_url": "/products/TLS-FIT-SPAC.jpg"
   },
   {
     "sku": "TLS-MAL-RUBB",
@@ -281,9 +281,9 @@
     "unit": "Piece",
     "price": 140,
     "stock": 60,
-    "imageUrl": "/products/TOOL-MAS-TROW.svg",
+    "imageUrl": "/products/TOOL-MAS-TROW.jpg",
     "description": "Durable flexible blade with wooden handle for brickwork, plaster, and mortar.",
-    "image_url": "/products/TOOL-MAS-TROW.svg"
+    "image_url": "/products/TOOL-MAS-TROW.jpg"
   },
   {
     "sku": "TOOL-TAP-MEAS",
@@ -303,9 +303,9 @@
     "unit": "Piece",
     "price": 650,
     "stock": 30,
-    "imageUrl": "/products/MAT-TAR-POLY.svg",
+    "imageUrl": "/products/MAT-TAR-POLY.jpg",
     "description": "120-200 GSM waterproof woven polyethylene sheet for concrete curing and rain protection.",
-    "image_url": "/products/MAT-TAR-POLY.svg"
+    "image_url": "/products/MAT-TAR-POLY.jpg"
   },
   {
     "sku": "SFT-GLV-PROT",
@@ -314,9 +314,9 @@
     "unit": "Pair / Pc",
     "price": 60,
     "stock": 100,
-    "imageUrl": "/products/SFT-GLV-PROT.svg",
+    "imageUrl": "/products/SFT-GLV-PROT.webp",
     "description": "Rubber coated builder gloves for handling cement, along with site safety gear.",
-    "image_url": "/products/SFT-GLV-PROT.svg"
+    "image_url": "/products/SFT-GLV-PROT.webp"
   },
   {
     "sku": "CLN-BRM-NATR",
@@ -447,8 +447,8 @@
     "unit": "Bucket",
     "stock": 20,
     "description": "Smooth matte interior emulsion giving great coverage over distempers.",
-    "imageUrl": "/products/PNT-EML-AP-TRC.svg",
-    "image_url": "/products/PNT-EML-AP-TRC.svg"
+    "imageUrl": "/products/PNT-EML-AP-TRC.jpg",
+    "image_url": "/products/PNT-EML-AP-TRC.jpg"
   },
   {
     "sku": "PNT-DST-AP-SYN",
@@ -590,8 +590,8 @@
     "unit": "Piece",
     "stock": 30,
     "description": "Fast-setting adhesive cutting clamping time down to 2 hours.",
-    "imageUrl": "/products/ADH-FEV-SPX-1KG.svg",
-    "image_url": "/products/ADH-FEV-SPX-1KG.svg"
+    "imageUrl": "/products/ADH-FEV-SPX-1KG.jpg",
+    "image_url": "/products/ADH-FEV-SPX-1KG.jpg"
   },
   {
     "sku": "ADH-FEV-HTX-1KG",
