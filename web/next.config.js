@@ -3,7 +3,6 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['node:sqlite'],
   },
-  outputFileTracingIncludes: {
     '/**': ['./schema/**/*'],
   },
 };
