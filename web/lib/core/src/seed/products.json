@@ -1,0 +1,302 @@
+[
+  {
+    "sku": "CEM-ULT-PPC",
+    "name": "UltraTech PPC Cement",
+    "category": "Building Materials",
+    "unit": "Bag (50kg)",
+    "price": 380,
+    "stock": 100,
+    "imageUrl": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80",
+    "description": "UltraTech PPC premium slag/fly-ash blended cement for durable concrete construction."
+  },
+  {
+    "sku": "CEM-ULT-SUP",
+    "name": "UltraTech Super Cement",
+    "category": "Building Materials",
+    "unit": "Bag (50kg)",
+    "price": 410,
+    "stock": 80,
+    "imageUrl": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80",
+    "description": "Engineered with micro-fine particles for extra strength and smooth finishing."
+  },
+  {
+    "sku": "CEM-ULT-WTH",
+    "name": "UltraTech Weather Plus Cement",
+    "category": "Building Materials",
+    "unit": "Bag (50kg)",
+    "price": 430,
+    "stock": 60,
+    "imageUrl": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80",
+    "description": "Water-repellent cement designed to resist dampness and weather damage."
+  },
+  {
+    "sku": "CEM-LAF-CON",
+    "name": "Lafarge Concreto Cement",
+    "category": "Building Materials",
+    "unit": "Bag (50kg)",
+    "price": 425,
+    "stock": 75,
+    "imageUrl": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&q=80",
+    "description": "High performance concrete cement offering rapid setting and high early strength."
+  },
+  {
+    "sku": "TMT-CAP-600",
+    "name": "Captain 600 EQR TMT Bar",
+    "category": "Building Materials",
+    "unit": "Quintal",
+    "price": 5400,
+    "stock": 50,
+    "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80",
+    "description": "Earthquake-resistant 600 EQR grade steel rebars. Available in 5.5mm to 32mm."
+  },
+  {
+    "sku": "TMT-TAT-550",
+    "name": "Tata Tiscon 550D TMT Bar",
+    "category": "Building Materials",
+    "unit": "Quintal",
+    "price": 6200,
+    "stock": 40,
+    "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80",
+    "description": "GreenPro certified super ductile TMT bars for house construction (5.5mm - 32mm)."
+  },
+  {
+    "sku": "TMT-SHY-500",
+    "name": "Shyam Steel 500D TMT Bar",
+    "category": "Building Materials",
+    "unit": "Quintal",
+    "price": 5500,
+    "stock": 45,
+    "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80",
+    "description": "Primary steel high-yield TMT bars with superior bendability and corrosion resistance."
+  },
+  {
+    "sku": "TMT-ELE-QST",
+    "name": "Elegant QST TMT Bar",
+    "category": "Building Materials",
+    "unit": "Quintal",
+    "price": 5100,
+    "stock": 35,
+    "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80",
+    "description": "Quenched & Self-Tempered (QST) construction rods for residential projects."
+  },
+  {
+    "sku": "TMT-DUR-STE",
+    "name": "Durgapur Steel TMT Bar",
+    "category": "Building Materials",
+    "unit": "Quintal",
+    "price": 4950,
+    "stock": 30,
+    "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=80",
+    "description": "Reliable commercial grade structural TMT rebar for columns and roof casting."
+  },
+  {
+    "sku": "WIR-BND-2022",
+    "name": "Binding Wire (Black Annealed 20/22G)",
+    "category": "Hardware & Fasteners",
+    "unit": "kg",
+    "price": 75,
+    "stock": 200,
+    "imageUrl": "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=500&q=80",
+    "description": "Soft and flexible 20 & 22 gauge black annealed tying wire for bar bending."
+  },
+  {
+    "sku": "WIR-GI-COIL",
+    "name": "GI Galvanized Iron Wire",
+    "category": "Hardware & Fasteners",
+    "unit": "kg",
+    "price": 85,
+    "stock": 150,
+    "imageUrl": "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=500&q=80",
+    "description": "Zinc-coated rust-resistant GI wire for construction, fencing, and tying."
+  },
+  {
+    "sku": "FAS-NAIL-RND",
+    "name": "Iron Wire Nails (Round 1\"-4\")",
+    "category": "Hardware & Fasteners",
+    "unit": "kg",
+    "price": 70,
+    "stock": 250,
+    "imageUrl": "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&q=80",
+    "description": "Standard round head iron nails for woodwork, shuttering, and carpentry."
+  },
+  {
+    "sku": "FAS-ROOF-SCR",
+    "name": "Roofing Nails & Wood Screws Set",
+    "category": "Hardware & Fasteners",
+    "unit": "Box",
+    "price": 140,
+    "stock": 80,
+    "imageUrl": "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&q=80",
+    "description": "Corrugated roofing nails with washers, star screws, and PVC royal plugs (Gitti)."
+  },
+  {
+    "sku": "CHM-FIX-LWPL",
+    "name": "Dr. Fixit LW+ Waterproofing Liquid",
+    "category": "Construction Chemicals",
+    "unit": "Litre",
+    "price": 165,
+    "stock": 90,
+    "imageUrl": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=500&q=80",
+    "description": "Integral liquid waterproofing compound for concrete casting and plastering."
+  },
+  {
+    "sku": "CHM-FIX-URP",
+    "name": "Dr. Fixit Pidicrete URP / Sika Latex",
+    "category": "Construction Chemicals",
+    "unit": "kg",
+    "price": 380,
+    "stock": 40,
+    "imageUrl": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=500&q=80",
+    "description": "SBR polymer bonding agent for crack repairs and old-to-new concrete joints."
+  },
+  {
+    "sku": "CHM-WAL-PUTT",
+    "name": "White Cement Wall Putty",
+    "category": "Construction Chemicals",
+    "unit": "Bag (40kg)",
+    "price": 850,
+    "stock": 50,
+    "imageUrl": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500&q=80",
+    "description": "Ultra smooth water-resistant wall putty for interior and exterior base plaster."
+  },
+  {
+    "sku": "TLS-FLR-6060",
+    "name": "Double Charge Vitrified Tiles (2x2 ft)",
+    "category": "Tiles & Sanitary",
+    "unit": "Box",
+    "price": 620,
+    "stock": 70,
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
+    "description": "600x600 mm glossy and satin floor tiles for bedrooms and living spaces."
+  },
+  {
+    "sku": "TLS-FLR-6012",
+    "name": "Large Slab Floor Tiles (2x4 ft)",
+    "category": "Tiles & Sanitary",
+    "unit": "Box",
+    "price": 1250,
+    "stock": 40,
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
+    "description": "600x1200 mm high-gloss seamless tiles for luxury living rooms and halls."
+  },
+  {
+    "sku": "TLS-WAL-3045",
+    "name": "Digital Bathroom & Kitchen Wall Tiles",
+    "category": "Tiles & Sanitary",
+    "unit": "Box",
+    "price": 340,
+    "stock": 85,
+    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&q=80",
+    "description": "300x450 mm (1x1.5 ft) ceramic glazed wall tiles with matching anti-skid mats."
+  },
+  {
+    "sku": "TLS-ADH-TYP1",
+    "name": "Roff Tile Adhesive (Type 1)",
+    "category": "Construction Chemicals",
+    "unit": "Bag (20kg)",
+    "price": 310,
+    "stock": 60,
+    "imageUrl": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=500&q=80",
+    "description": "High strength polymer modified cementitious tile adhesive for floors and walls."
+  },
+  {
+    "sku": "TLS-GRT-JOINT",
+    "name": "Epoxy & Polymer Tile Grout",
+    "category": "Construction Chemicals",
+    "unit": "Pkt (1kg)",
+    "price": 95,
+    "stock": 100,
+    "imageUrl": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500&q=80",
+    "description": "Waterproof joint filler available in White, Ivory, Grey, and Black."
+  },
+  {
+    "sku": "TLS-BLD-BOSC",
+    "name": "Diamond 4\" Tile Cutting Blade",
+    "category": "Hardware & Tools",
+    "unit": "Piece",
+    "price": 220,
+    "stock": 50,
+    "imageUrl": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&q=80",
+    "description": "4-inch turbo diamond rim blade for smooth and chip-free marble and tile cutting."
+  },
+  {
+    "sku": "TLS-FIT-SPAC",
+    "name": "Tile Spacers & Leveling System Clips",
+    "category": "Hardware & Tools",
+    "unit": "Pkt (100 pcs)",
+    "price": 120,
+    "stock": 60,
+    "imageUrl": "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=500&q=80",
+    "description": "Plastic cross spacers (2mm, 3mm, 4mm) and reusable leveling wedges."
+  },
+  {
+    "sku": "TLS-MAL-RUBB",
+    "name": "Rubber Mallet with Wooden Handle",
+    "category": "Hardware & Tools",
+    "unit": "Piece",
+    "price": 170,
+    "stock": 35,
+    "imageUrl": "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&q=80",
+    "description": "Non-marring rubber head hammer for leveling tiles without cracking surfaces."
+  },
+  {
+    "sku": "TOOL-HAM-CLAW",
+    "name": "Steel Claw Hammer (500g / 1kg)",
+    "category": "Hardware & Tools",
+    "unit": "Piece",
+    "price": 280,
+    "stock": 45,
+    "imageUrl": "https://images.unsplash.com/photo-1586864387789-628af9feed72?w=500&q=80",
+    "description": "Drop-forged carbon steel head with curved claw for easy nail pulling."
+  },
+  {
+    "sku": "TOOL-MAS-TROW",
+    "name": "Mason Spring Steel Trowel (Kornik)",
+    "category": "Hardware & Tools",
+    "unit": "Piece",
+    "price": 140,
+    "stock": 60,
+    "imageUrl": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&q=80",
+    "description": "Durable flexible blade with wooden handle for brickwork, plaster, and mortar."
+  },
+  {
+    "sku": "TOOL-TAP-MEAS",
+    "name": "Steel Measuring Tape (3m / 5m / 30m)",
+    "category": "Hardware & Tools",
+    "unit": "Piece",
+    "price": 160,
+    "stock": 75,
+    "imageUrl": "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=500&q=80",
+    "description": "Impact-resistant ABS case with metric and imperial measurement markings."
+  },
+  {
+    "sku": "MAT-TAR-POLY",
+    "name": "Heavy Duty Tarpaulin (Tripal)",
+    "category": "Containers & Covers",
+    "unit": "Piece",
+    "price": 650,
+    "stock": 30,
+    "imageUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&q=80",
+    "description": "120-200 GSM waterproof woven polyethylene sheet for concrete curing and rain protection."
+  },
+  {
+    "sku": "SFT-GLV-PROT",
+    "name": "Safety Hand Gloves & Helmet",
+    "category": "Safety Gear",
+    "unit": "Pair / Pc",
+    "price": 60,
+    "stock": 100,
+    "imageUrl": "https://images.unsplash.com/photo-1584467735871-8e85353a8413?w=500&q=80",
+    "description": "Rubber coated builder gloves for handling cement, along with site safety gear."
+  },
+  {
+    "sku": "CLN-BRM-NATR",
+    "name": "Heavy Duty Coconut & Floor Broom",
+    "category": "Cleaning Supplies",
+    "unit": "Piece",
+    "price": 80,
+    "stock": 80,
+    "imageUrl": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&q=80",
+    "description": "Traditional rigid coconut stick broom and soft floor brooms for construction cleanup."
+  }
+]

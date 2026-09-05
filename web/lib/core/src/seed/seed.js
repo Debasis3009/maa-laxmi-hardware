@@ -1,5 +1,4 @@
-const fs = require('node:fs');
-const path = require('node:path');
+const productsData = require('./products.json');
 
 function seedSampleData(app, ownerUserId) {
   const { catalogService, productService } = app;
@@ -37,22 +36,8 @@ function seedSampleData(app, ownerUserId) {
     address: 'Nakrakonda, Birbhum, West Bengal',
   }, ownerUserId);
 
-  // 4. Load products from products.json
-  const candidates = [
-    path.join(process.cwd(), 'web', 'data', 'products.json'),
-    path.join(process.cwd(), 'data', 'products.json'),
-    path.resolve(__dirname, '../../../../../data/products.json'),
-  ];
-  const jsonPath = candidates.find((p) => fs.existsSync(p));
-
-  if (!jsonPath) {
-    console.warn('products.json not found in candidate paths:', candidates);
-    return;
-  }
-
-  const items = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-
-  for (const item of items) {
+  // 4. Insert catalog products
+  for (const item of productsData) {
     const catId = categoryMap[item.category] || building.id;
     const unitId = getOrCreateUnit(item.unit || 'Piece');
 
