@@ -39,9 +39,9 @@
     "unit": "Bag (50kg)",
     "price": 425,
     "stock": 75,
-    "imageUrl": "/products/CEM-LAF-CON.svg",
+    "imageUrl": "/products/CEM-LAF-CON.png",
     "description": "High performance concrete cement offering rapid setting and high early strength.",
-    "image_url": "/products/CEM-LAF-CON.svg"
+    "image_url": "/products/CEM-LAF-CON.png"
   },
   {
     "sku": "TMT-CAP-600",
@@ -612,8 +612,8 @@
     "unit": "Bag",
     "stock": 40,
     "description": "Refined limestone white cement for gap filling, wall repairs, and texturing.",
-    "imageUrl": "/products/CEM-WHT-BIR-25.svg",
-    "image_url": "/products/CEM-WHT-BIR-25.svg"
+    "imageUrl": "/products/CEM-WHT-BIR-25.png",
+    "image_url": "/products/CEM-WHT-BIR-25.png"
   },
   {
     "sku": "CEM-WHT-JK-25",
