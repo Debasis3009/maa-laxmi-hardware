@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import seedProducts from '@/lib/core/src/seed/products.json';
 import { getApp } from '@/lib/db';
 import StorefrontClient from '@/components/storefront/StorefrontClient';
