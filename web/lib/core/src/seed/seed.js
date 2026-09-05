@@ -4,22 +4,24 @@ function seedSampleData(app, ownerUserId) {
   const { catalogService, productService, db } = app;
 
   function getOrCreateCategory(name, parentId = null) {
-    const existing = db.queryOne('SELECT id FROM categories WHERE name = ?', [name]);
+    const existing = db.queryOne('select id from categories where name = ?', [name]);
     if (existing) return existing.id;
     try {
       const created = catalogService.createCategory({ name, parentId }, ownerUserId);
       return created.id;
-    } catch {
-      const fallback = db.queryOne('SELECT id FROM categories WHERE name = ?', [name]);
+    } catch (err) {
+      const fallback = db.queryOne('select id from categories where name = ?', [name]);
       return fallback ? fallback.id : null;
     }
   }
+
 
   const buildingId = getOrCreateCategory('Building Materials');
   const paintsId = getOrCreateCategory('Paints & Primers');
   const plumbingId = getOrCreateCategory('Pipes & Sanitary');
   const electricalId = getOrCreateCategory('Electricals');
   const toolsId = getOrCreateCategory('Hardware & Tools');
+
 
   const categoryMap = {
     'Building Materials': buildingId,
@@ -29,38 +31,44 @@ function seedSampleData(app, ownerUserId) {
     'Hardware & Tools': toolsId,
   };
 
+
   function getOrCreateUnit(unitName) {
     const raw = (unitName || 'Piece').trim();
-    const existing = db.queryOne('SELECT id FROM units WHERE LOWER(name) = LOWER(?)', [raw]);
+    const existing = db.queryOne('select id from units where lower(name) = lower(?)', [raw]);
     if (existing) return existing.id;
     try {
       const abbr = raw.slice(0, 4);
       const created = catalogService.createUnit(raw, abbr, ownerUserId);
       return created.id;
-    } catch {
-      const fallback = db.queryOne('SELECT id FROM units WHERE LOWER(name) = LOWER(?)', [raw]);
+    } catch (err) {
+      const fallback = db.queryOne('select id from units where lower(name) = lower(?)', [raw]);
       return fallback ? fallback.id : 1;
     }
   }
 
-  let supplier = db.queryOne('SELECT id FROM suppliers WHERE phone = ?', ['9547512088']);
+
+  let supplier = db.queryOne('select id from suppliers where phone = ?', ['9547512088']);
+  if (!supplier) {
     try {
       supplier = catalogService.createSupplier({
         name: 'Maa Laxmi Central Stock Depo',
         phone: '9547512088',
         address: 'Nakrakonda, Birbhum, West Bengal',
       }, ownerUserId);
-    } catch {
-      supplier = db.queryOne('SELECT id FROM suppliers LIMIT 1');
+    } catch (err) {
+      supplier = db.queryOne('select id from suppliers limit 1');
     }
   }
 
+
   for (const item of productsData) {
-    const existingProduct = db.queryOne('SELECT id FROM products WHERE sku = ?', [item.sku]);
+    const existingProduct = db.queryOne('select id from products where sku = ?', [item.sku]);
     if (existingProduct) continue;
+
 
     const catId = categoryMap[item.category] || buildingId;
     const unitId = getOrCreateUnit(item.unit || 'Piece');
+
 
     try {
       productService.createProduct({
@@ -81,5 +89,6 @@ function seedSampleData(app, ownerUserId) {
     }
   }
 }
+
 
 module.exports = { seedSampleData };
