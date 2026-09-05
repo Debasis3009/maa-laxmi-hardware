@@ -1,3 +1,4 @@
+import seedProducts from '@/lib/core/src/seed/products.json';
 import { getApp } from '@/lib/db';
 import StorefrontClient from '@/components/storefront/StorefrontClient';
 import type { Product, CategoryNode, Unit } from '@/lib/types';
@@ -5,7 +6,18 @@ import type { Product, CategoryNode, Unit } from '@/lib/types';
 export default function HomePage() {
   const app = getApp();
 
-  const products = (JSON.parse(JSON.stringify(app.productService.listProducts({ isActive: true, limit: 500 }) || []))) as unknown as Product[];
+  const rawProducts = (JSON.parse(JSON.stringify(app.productService.listProducts({ isActive: true, limit: 500 }) || []))) as unknown as (Product & { imageUrl?: string; image_url?: string })[];
+  const imageMap = new Map<string, string>();
+  for (const item of (seedProducts as any[])) {
+    if (item.sku && (item.imageUrl || item.image_url)) {
+      imageMap.set(item.sku, item.imageUrl || item.image_url);
+    }
+  }
+  const products = rawProducts.map((p) => ({
+    ...p,
+    imageUrl: imageMap.get(p.sku) || (p as any).imageUrl || (p as any).image_url || null,
+    image_url: imageMap.get(p.sku) || (p as any).image_url || (p as any).imageUrl || null,
+  })) as unknown as Product[];
   const categories = (JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }) || []))) as unknown as CategoryNode[];
   const units = (JSON.parse(JSON.stringify(app.catalogService.listUnits() || []))) as unknown as Unit[];
   const settings = (JSON.parse(JSON.stringify(app.settingsService.getAll() || {}))) as Record<string, string>;
