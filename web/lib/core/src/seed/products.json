@@ -39,9 +39,9 @@
     "unit": "Bag (50kg)",
     "price": 425,
     "stock": 75,
-    "imageUrl": "https://admin.nuvoco.com/public/ProductsDetails/Concreto_Cement/Concreto%20(1).png",
+    "imageUrl": "/products/CEM-LAF-CON.svg",
     "description": "High performance concrete cement offering rapid setting and high early strength.",
-    "image_url": "https://admin.nuvoco.com/public/ProductsDetails/Concreto_Cement/Concreto%20(1).png"
+    "image_url": "/products/CEM-LAF-CON.svg"
   },
   {
     "sku": "TMT-CAP-600",
@@ -72,9 +72,9 @@
     "unit": "Quintal",
     "price": 5500,
     "stock": 45,
-    "imageUrl": "https://lntsufin.com/storage/mediafiles/catalog/live/16045-228/original/16045-228_image_0.jpg",
+    "imageUrl": "/products/TMT-SHY-500.svg",
     "description": "Primary steel high-yield TMT bars with superior bendability and corrosion resistance.",
-    "image_url": "https://lntsufin.com/storage/mediafiles/catalog/live/16045-228/original/16045-228_image_0.jpg"
+    "image_url": "/products/TMT-SHY-500.svg"
   },
   {
     "sku": "TMT-ELE-QST",
@@ -83,9 +83,9 @@
     "unit": "Quintal",
     "price": 5100,
     "stock": 35,
-    "imageUrl": "https://www.elegantsteels.com/wp-content/uploads/2022/09/Hero-Banner-01.jpg",
+    "imageUrl": "/products/TMT-ELE-QST.svg",
     "description": "Quenched & Self-Tempered (QST) construction rods for residential projects.",
-    "image_url": "https://www.elegantsteels.com/wp-content/uploads/2022/09/Hero-Banner-01.jpg"
+    "image_url": "/products/TMT-ELE-QST.svg"
   },
   {
     "sku": "TMT-DUR-STE",
@@ -94,9 +94,9 @@
     "unit": "Quintal",
     "price": 4950,
     "stock": 30,
-    "imageUrl": "https://cdn-djijc.nitrocdn.com/cnGswwnkWlMQqnekDdYATqCwiPykyGJy/assets/images/optimized/rev-6f51cac/shreejisteelcorp.com/wp-content/uploads/2025/03/tmd-4-1000x1000.webp",
+    "imageUrl": "/products/TMT-DUR-STE.svg",
     "description": "Reliable commercial grade structural TMT rebar for columns and roof casting.",
-    "image_url": "https://cdn-djijc.nitrocdn.com/cnGswwnkWlMQqnekDdYATqCwiPykyGJy/assets/images/optimized/rev-6f51cac/shreejisteelcorp.com/wp-content/uploads/2025/03/tmd-4-1000x1000.webp"
+    "image_url": "/products/TMT-DUR-STE.svg"
   },
   {
     "sku": "WIR-BND-2022",
@@ -105,9 +105,9 @@
     "unit": "kg",
     "price": 75,
     "stock": 200,
-    "imageUrl": "https://image.made-in-china.com/2f0j00DhFzCYKPbegI/Cheap-Price-Black-Annealed-1kg-Arame-Recozido-Black-Annealed-Binding-Wire.webp",
+    "imageUrl": "/products/WIR-BND-2022.svg",
     "description": "Soft and flexible 20 & 22 gauge black annealed tying wire for bar bending.",
-    "image_url": "https://image.made-in-china.com/2f0j00DhFzCYKPbegI/Cheap-Price-Black-Annealed-1kg-Arame-Recozido-Black-Annealed-Binding-Wire.webp"
+    "image_url": "/products/WIR-BND-2022.svg"
   },
   {
     "sku": "WIR-GI-COIL",
@@ -127,9 +127,9 @@
     "unit": "kg",
     "price": 70,
     "stock": 250,
-    "imageUrl": "https://dipalitraders.in/wp-content/uploads/2026/04/common-round-wire-nail-500x500-1-removebg-preview.png",
+    "imageUrl": "/products/FAS-NAIL-RND.svg",
     "description": "Standard round head iron nails for woodwork, shuttering, and carpentry.",
-    "image_url": "https://dipalitraders.in/wp-content/uploads/2026/04/common-round-wire-nail-500x500-1-removebg-preview.png"
+    "image_url": "/products/FAS-NAIL-RND.svg"
   },
   {
     "sku": "FAS-ROOF-SCR",
@@ -138,9 +138,9 @@
     "unit": "Box",
     "price": 140,
     "stock": 80,
-    "imageUrl": "https://i.pepita.hu/images/product/26632170/set-cuie-zincate-bituminoase-pentru-sindrila-20-si-30-mm-300-buc-cuie-pentru-acoperis-cuie-de-otel-galvanizate-cu-cap-mare-element-de-fixare-cu-tija-striarta-pentru-folie-bituminoasa-accesorii-pentru-tinichigerie-renovare-acoperis-set-cuie-maro-si-argintii_158475083_1200x630.jpg",
+    "imageUrl": "/products/FAS-ROOF-SCR.svg",
     "description": "Corrugated roofing nails with washers, star screws, and PVC royal plugs (Gitti).",
-    "image_url": "https://i.pepita.hu/images/product/26632170/set-cuie-zincate-bituminoase-pentru-sindrila-20-si-30-mm-300-buc-cuie-pentru-acoperis-cuie-de-otel-galvanizate-cu-cap-mare-element-de-fixare-cu-tija-striarta-pentru-folie-bituminoasa-accesorii-pentru-tinichigerie-renovare-acoperis-set-cuie-maro-si-argintii_158475083_1200x630.jpg"
+    "image_url": "/products/FAS-ROOF-SCR.svg"
   },
   {
     "sku": "CHM-FIX-LWPL",
@@ -248,9 +248,9 @@
     "unit": "Pkt (100 pcs)",
     "price": 120,
     "stock": 60,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TLS-FIT-SPAC.svg",
     "description": "Plastic cross spacers (2mm, 3mm, 4mm) and reusable leveling wedges.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TLS-FIT-SPAC.svg"
   },
   {
     "sku": "TLS-MAL-RUBB",
@@ -281,9 +281,9 @@
     "unit": "Piece",
     "price": 140,
     "stock": 60,
-    "imageUrl": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/TOOL-MAS-TROW.svg",
     "description": "Durable flexible blade with wooden handle for brickwork, plaster, and mortar.",
-    "image_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/TOOL-MAS-TROW.svg"
   },
   {
     "sku": "TOOL-TAP-MEAS",
@@ -303,9 +303,9 @@
     "unit": "Piece",
     "price": 650,
     "stock": 30,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/MAT-TAR-POLY.svg",
     "description": "120-200 GSM waterproof woven polyethylene sheet for concrete curing and rain protection.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/MAT-TAR-POLY.svg"
   },
   {
     "sku": "SFT-GLV-PROT",
@@ -314,9 +314,9 @@
     "unit": "Pair / Pc",
     "price": 60,
     "stock": 100,
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
+    "imageUrl": "/products/SFT-GLV-PROT.svg",
     "description": "Rubber coated builder gloves for handling cement, along with site safety gear.",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "image_url": "/products/SFT-GLV-PROT.svg"
   },
   {
     "sku": "CLN-BRM-NATR",
@@ -337,8 +337,8 @@
     "unit": "Bucket",
     "stock": 25,
     "description": "Water-thinnable primer offering excellent opacity and whiteness.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-AP-TRU.svg",
+    "image_url": "/products/PNT-PRM-AP-TRU.svg"
   },
   {
     "sku": "PNT-PRM-BG-LUX",
@@ -348,8 +348,8 @@
     "unit": "Bucket",
     "stock": 20,
     "description": "Economical, water-thinnable interior wall primer with high adhesion.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-BG-LUX.svg",
+    "image_url": "/products/PNT-PRM-BG-LUX.svg"
   },
   {
     "sku": "PNT-PRM-BO-CAL",
@@ -359,8 +359,8 @@
     "unit": "Bucket",
     "stock": 15,
     "description": "Smooth interior primer designed for rich emulsion topcoats.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-BO-CAL.svg",
+    "image_url": "/products/PNT-PRM-BO-CAL.svg"
   },
   {
     "sku": "PNT-PRM-AP-SC",
@@ -370,8 +370,8 @@
     "unit": "Bucket",
     "stock": 20,
     "description": "Penetrating exterior sealer that binds chalky plaster and blocks moisture.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-AP-SC.svg",
+    "image_url": "/products/PNT-PRM-AP-SC.svg"
   },
   {
     "sku": "PNT-PRM-BG-WTC",
@@ -436,8 +436,8 @@
     "unit": "Litre",
     "stock": 25,
     "description": "All-round solvent primer suitable for metal railings and woodwork.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-PRM-SL-SYN.svg",
+    "image_url": "/products/PNT-PRM-SL-SYN.svg"
   },
   {
     "sku": "PNT-EML-AP-TRC",
@@ -447,8 +447,8 @@
     "unit": "Bucket",
     "stock": 20,
     "description": "Smooth matte interior emulsion giving great coverage over distempers.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-EML-AP-TRC.svg",
+    "image_url": "/products/PNT-EML-AP-TRC.svg"
   },
   {
     "sku": "PNT-DST-AP-SYN",
@@ -480,8 +480,8 @@
     "unit": "Bucket",
     "stock": 15,
     "description": "Low-odor, anti-bacterial interior paint with bright white finish.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-EML-JSW-HL.svg",
+    "image_url": "/products/PNT-EML-JSW-HL.svg"
   },
   {
     "sku": "PNT-EXT-AP-APX",
@@ -524,8 +524,8 @@
     "unit": "Bucket",
     "stock": 15,
     "description": "Elastomeric thick waterproofing membrane for roofs and exterior walls.",
-    "imageUrl": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-WPF-DF-DMP.svg",
+    "image_url": "/products/PNT-WPF-DF-DMP.svg"
   },
   {
     "sku": "PNT-WPF-BO-ADR",
@@ -590,8 +590,8 @@
     "unit": "Piece",
     "stock": 30,
     "description": "Fast-setting adhesive cutting clamping time down to 2 hours.",
-    "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ADH-FEV-SPX-1KG.svg",
+    "image_url": "/products/ADH-FEV-SPX-1KG.svg"
   },
   {
     "sku": "ADH-FEV-HTX-1KG",
@@ -601,8 +601,8 @@
     "unit": "Piece",
     "stock": 20,
     "description": "Heat-resistant contact adhesive withstanding up to 170°C for kitchen areas.",
-    "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ADH-FEV-HTX-1KG.svg",
+    "image_url": "/products/ADH-FEV-HTX-1KG.svg"
   },
   {
     "sku": "CEM-WHT-BIR-25",
@@ -612,8 +612,8 @@
     "unit": "Bag",
     "stock": 40,
     "description": "Refined limestone white cement for gap filling, wall repairs, and texturing.",
-    "imageUrl": "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CEM-WHT-BIR-25.svg",
+    "image_url": "/products/CEM-WHT-BIR-25.svg"
   },
   {
     "sku": "CEM-WHT-JK-25",
@@ -634,8 +634,8 @@
     "unit": "Bag",
     "stock": 50,
     "description": "Polymer-modified white cement putty for smoothing interior and exterior walls.",
-    "imageUrl": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PUT-WAL-AP-TRU.svg",
+    "image_url": "/products/PUT-WAL-AP-TRU.svg"
   },
   {
     "sku": "PNT-STN-AP-FT",
@@ -645,8 +645,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Liquid tinting concentrate to tint white cement, distempers, and emulsions.",
-    "imageUrl": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-STN-AP-FT.svg",
+    "image_url": "/products/PNT-STN-AP-FT.svg"
   },
   {
     "sku": "PNT-STN-BG-UNI",
@@ -656,8 +656,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "High-strength tinting concentrate in Yellow Oxide, Red Oxide, Blue, and Green.",
-    "imageUrl": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-STN-BG-UNI.svg",
+    "image_url": "/products/PNT-STN-BG-UNI.svg"
   },
   {
     "sku": "PNT-OXI-RED-1KG",
@@ -667,8 +667,8 @@
     "unit": "Pack",
     "stock": 50,
     "description": "Pure dry pigment powder mixed into cement or limestone mixtures for red flooring.",
-    "imageUrl": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-OXI-RED-1KG.svg",
+    "image_url": "/products/PNT-OXI-RED-1KG.svg"
   },
   {
     "sku": "PNT-OXI-YEL-1KG",
@@ -678,8 +678,8 @@
     "unit": "Pack",
     "stock": 40,
     "description": "Natural yellow oxide color pigment for decorative concrete and cement washes.",
-    "imageUrl": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PNT-OXI-YEL-1KG.svg",
+    "image_url": "/products/PNT-OXI-YEL-1KG.svg"
   },
   {
     "sku": "PLM-PIP-CPVC-075",
@@ -700,8 +700,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Lead-free Class 1 UPVC pipe for heavy-duty domestic drinking water distribution.",
-    "imageUrl": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-PIP-UPVC-100.svg",
+    "image_url": "/products/PLM-PIP-UPVC-100.svg"
   },
   {
     "sku": "PLM-PIP-SWR-110",
@@ -733,8 +733,8 @@
     "unit": "Piece",
     "stock": 150,
     "description": "Heavy duty pressure-rated 90-degree bend for hot and cold CPVC pipe joints.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-FIT-CPVC-ELB90.svg",
+    "image_url": "/products/PLM-FIT-CPVC-ELB90.svg"
   },
   {
     "sku": "PLM-FIT-CPVC-TEE",
@@ -744,8 +744,8 @@
     "unit": "Piece",
     "stock": 120,
     "description": "3-way T-junction fitting to split water lines into separate plumbing fixtures.",
-    "imageUrl": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-FIT-CPVC-TEE.svg",
+    "image_url": "/products/PLM-FIT-CPVC-TEE.svg"
   },
   {
     "sku": "PLM-FIT-CPVC-UNI",
@@ -755,8 +755,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Quick-disconnect threaded union fitting for motor pumps and main pipeline servicing.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-FIT-CPVC-UNI.svg",
+    "image_url": "/products/PLM-FIT-CPVC-UNI.svg"
   },
   {
     "sku": "PLM-FIT-UPVC-RED",
@@ -788,8 +788,8 @@
     "unit": "Piece",
     "stock": 80,
     "description": "Brass-insert female threaded adaptor to mount taps, bib cocks, and shower arms.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-FIT-FTA-BRS.svg",
+    "image_url": "/products/PLM-FIT-FTA-BRS.svg"
   },
   {
     "sku": "PLM-VLV-BL-100",
@@ -821,8 +821,8 @@
     "unit": "Piece",
     "stock": 40,
     "description": "Under-tile wall shutoff control valve with chrome decorative flange and knob.",
-    "imageUrl": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/PLM-VLV-CON-STP.svg",
+    "image_url": "/products/PLM-VLV-CON-STP.svg"
   },
   {
     "sku": "SNT-EWC-ONE-PC",
@@ -832,8 +832,8 @@
     "unit": "Piece",
     "stock": 12,
     "description": "S-Trap floor mounted glazed vitreous china western toilet suite with dual flush fitting.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/SNT-EWC-ONE-PC.svg",
+    "image_url": "/products/SNT-EWC-ONE-PC.svg"
   },
   {
     "sku": "SNT-PAN-ORI-20",
@@ -843,8 +843,8 @@
     "unit": "Piece",
     "stock": 25,
     "description": "High-gloss anti-stain traditional Indian squatting pan with integrated footrests.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/SNT-PAN-ORI-20.svg",
+    "image_url": "/products/SNT-PAN-ORI-20.svg"
   },
   {
     "sku": "SNT-WSH-BSN-18",
@@ -854,8 +854,8 @@
     "unit": "Piece",
     "stock": 20,
     "description": "Compact glazed ceramic wall-mounted wash hand basin with pre-punched single faucet hole.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/SNT-WSH-BSN-18.svg",
+    "image_url": "/products/SNT-WSH-BSN-18.svg"
   },
   {
     "sku": "SNT-CIS-DUAL-FL",
@@ -865,8 +865,8 @@
     "unit": "Piece",
     "stock": 30,
     "description": "Durable ABS plastic dual-flush wall tank with anti-siphon inlet and internal float.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/SNT-CIS-DUAL-FL.svg",
+    "image_url": "/products/SNT-CIS-DUAL-FL.svg"
   },
   {
     "sku": "CPF-TAP-BIB-050",
@@ -887,8 +887,8 @@
     "unit": "Piece",
     "stock": 45,
     "description": "Vertical counter-top washbasin faucet tap with long swivel neck and ceramic disc spindle.",
-    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-TAP-PIL-050.svg",
+    "image_url": "/products/CPF-TAP-PIL-050.svg"
   },
   {
     "sku": "CPF-SHW-JET-SPR",
@@ -898,8 +898,8 @@
     "unit": "Set",
     "stock": 50,
     "description": "High-pressure anti-burst chrome plated hand-held bidet spray with brass inner rod.",
-    "imageUrl": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-SHW-JET-SPR.svg",
+    "image_url": "/products/CPF-SHW-JET-SPR.svg"
   },
   {
     "sku": "CPF-SHW-RAIN-OVR",
@@ -920,8 +920,8 @@
     "unit": "Piece",
     "stock": 30,
     "description": "Odor-proof chrome plated brass water seal trap for designer wall-hung wash basins.",
-    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-TRP-BOT-BRP.svg",
+    "image_url": "/products/CPF-TRP-BOT-BRP.svg"
   },
   {
     "sku": "CPF-JAL-FLR-05",
@@ -931,8 +931,8 @@
     "unit": "Piece",
     "stock": 80,
     "description": "Grade 304 anti-cockroach, anti-foul smell square floor grating for bathrooms.",
-    "imageUrl": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-JAL-FLR-05.svg",
+    "image_url": "/products/CPF-JAL-FLR-05.svg"
   },
   {
     "sku": "CPF-WST-CPL-05",
@@ -942,8 +942,8 @@
     "unit": "Piece",
     "stock": 90,
     "description": "Heavy duty chrome plated brass waste coupling with stainless steel top strainer.",
-    "imageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/CPF-WST-CPL-05.svg",
+    "image_url": "/products/CPF-WST-CPL-05.svg"
   },
   {
     "sku": "ELE-CON-FLX-20",
@@ -953,8 +953,8 @@
     "unit": "Roll",
     "stock": 25,
     "description": "Heavy duty fire-retardant flexible corrugated pipe roll for false ceilings and curved slab wiring.",
-    "imageUrl": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-CON-FLX-20.svg",
+    "image_url": "/products/ELE-CON-FLX-20.svg"
   },
   {
     "sku": "ELE-CON-FLX-25",
@@ -964,8 +964,8 @@
     "unit": "Roll",
     "stock": 20,
     "description": "25mm flexible PVC duct pipe for heavy cable routing, under-floor laying, and wall bend protection.",
-    "imageUrl": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-CON-FLX-25.svg",
+    "image_url": "/products/ELE-CON-FLX-25.svg"
   },
   {
     "sku": "ELE-CON-RGD-20",
@@ -975,8 +975,8 @@
     "unit": "Piece",
     "stock": 120,
     "description": "FRLS (Flame Retardant Low Smoke) rigid electrical conduit pipe for concealed slab and wall chases.",
-    "imageUrl": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-CON-RGD-20.svg",
+    "image_url": "/products/ELE-CON-RGD-20.svg"
   },
   {
     "sku": "ELE-CON-RGD-25",
@@ -986,8 +986,8 @@
     "unit": "Piece",
     "stock": 100,
     "description": "High impact resistance 25mm PVC electrical conduit pipe for main distribution board drops.",
-    "imageUrl": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-CON-RGD-25.svg",
+    "image_url": "/products/ELE-CON-RGD-25.svg"
   },
   {
     "sku": "ELE-JBX-PVC-4WY",
@@ -997,8 +997,8 @@
     "unit": "Piece",
     "stock": 150,
     "description": "Heavy gauge circular PVC conduit junction box with knockouts and cover plate for slab casting.",
-    "imageUrl": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-JBX-PVC-4WY.svg",
+    "image_url": "/products/ELE-JBX-PVC-4WY.svg"
   },
   {
     "sku": "ELE-JBX-PVC-3WY",
@@ -1008,8 +1008,8 @@
     "unit": "Piece",
     "stock": 150,
     "description": "Concealed circular junction box designed for wall wire branch routing.",
-    "imageUrl": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-JBX-PVC-3WY.svg",
+    "image_url": "/products/ELE-JBX-PVC-3WY.svg"
   },
   {
     "sku": "ELE-JBX-MET-OCT",
@@ -1019,8 +1019,8 @@
     "unit": "Piece",
     "stock": 80,
     "description": "Rust-resistant pressed sheet iron/GI 8-sided junction box for concrete slab and structural casting.",
-    "imageUrl": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-JBX-MET-OCT.svg",
+    "image_url": "/products/ELE-JBX-MET-OCT.svg"
   },
   {
     "sku": "ELE-JBX-PLY-WPF",
@@ -1030,8 +1030,8 @@
     "unit": "Piece",
     "stock": 40,
     "description": "Weatherproof exterior surface junction box with rubber gasket for outdoor cables and CCTV joints.",
-    "imageUrl": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-JBX-PLY-WPF.svg",
+    "image_url": "/products/ELE-JBX-PLY-WPF.svg"
   },
   {
     "sku": "ELE-FAN-BOX-GI",
@@ -1041,8 +1041,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Deep galvanized steel fan box with forged reinforced steel hook for roof slab casting.",
-    "imageUrl": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-FAN-BOX-GI.svg",
+    "image_url": "/products/ELE-FAN-BOX-GI.svg"
   },
   {
     "sku": "ELE-CON-LGT-BOX",
@@ -1052,8 +1052,8 @@
     "unit": "Piece",
     "stock": 100,
     "description": "Sheet metal round concealed spotlight box for false ceiling or direct slab casting.",
-    "imageUrl": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-CON-LGT-BOX.svg",
+    "image_url": "/products/ELE-CON-LGT-BOX.svg"
   },
   {
     "sku": "ELE-BOX-MOD-04M",
@@ -1063,8 +1063,8 @@
     "unit": "Piece",
     "stock": 75,
     "description": "Heavy 18-gauge zinc-coated galvanized sheet modular gang box with brass earth terminal.",
-    "imageUrl": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-BOX-MOD-04M.svg",
+    "image_url": "/products/ELE-BOX-MOD-04M.svg"
   },
   {
     "sku": "ELE-BOX-MOD-08M",
@@ -1074,8 +1074,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "8-module horizontal concealed metal switch back-box for bedroom and hall main boards.",
-    "imageUrl": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-BOX-MOD-08M.svg",
+    "image_url": "/products/ELE-BOX-MOD-08M.svg"
   },
   {
     "sku": "ELE-BOX-MOD-12M",
@@ -1085,8 +1085,8 @@
     "unit": "Piece",
     "stock": 45,
     "description": "12-module flush metal back-box for main room switch panels and AC point distribution.",
-    "imageUrl": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-BOX-MOD-12M.svg",
+    "image_url": "/products/ELE-BOX-MOD-12M.svg"
   },
   {
     "sku": "ELE-FIT-PVC-BND",
@@ -1096,7 +1096,7 @@
     "unit": "Piece",
     "stock": 200,
     "description": "Smooth radius PVC conduit sweep bend to prevent cable snags while pulling wire.",
-    "imageUrl": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80",
-    "image_url": "https://images.unsplash.com/photo-1542013936693-884638332954?w=600&auto=format&fit=crop&q=80"
+    "imageUrl": "/products/ELE-FIT-PVC-BND.svg",
+    "image_url": "/products/ELE-FIT-PVC-BND.svg"
   }
 ]
