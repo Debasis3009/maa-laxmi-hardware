@@ -298,5 +298,293 @@
     "stock": 80,
     "imageUrl": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&q=80",
     "description": "Traditional rigid coconut stick broom and soft floor brooms for construction cleanup."
+  },
+  {
+    "sku": "PNT-PRM-AP-TRU",
+    "name": "Asian Paints TruCare Interior Wall Primer (10L)",
+    "category": "Paints & Primers",
+    "price": 1250,
+    "unit": "Bucket",
+    "stock": 25,
+    "description": "Water-thinnable primer offering excellent opacity and whiteness."
+  },
+  {
+    "sku": "PNT-PRM-BG-LUX",
+    "name": "Berger Luxol / Bison Wall Primer (10L)",
+    "category": "Paints & Primers",
+    "price": 1180,
+    "unit": "Bucket",
+    "stock": 20,
+    "description": "Economical, water-thinnable interior wall primer with high adhesion."
+  },
+  {
+    "sku": "PNT-PRM-BO-CAL",
+    "name": "Birla Opus Calista Perfect Choice Primer (10L)",
+    "category": "Paints & Primers",
+    "price": 1220,
+    "unit": "Bucket",
+    "stock": 15,
+    "description": "Smooth interior primer designed for rich emulsion topcoats."
+  },
+  {
+    "sku": "PNT-PRM-AP-SC",
+    "name": "Asian Paints SmartCare Exterior Wall Sealer (10L)",
+    "category": "Paints & Primers",
+    "price": 1650,
+    "unit": "Bucket",
+    "stock": 20,
+    "description": "Penetrating exterior sealer that binds chalky plaster and blocks moisture."
+  },
+  {
+    "sku": "PNT-PRM-BG-WTC",
+    "name": "Berger WeatherCoat Exterior Primer (10L)",
+    "category": "Paints & Primers",
+    "price": 1580,
+    "unit": "Bucket",
+    "stock": 18,
+    "description": "Superior anti-fungal exterior primer designed for tropical weather."
+  },
+  {
+    "sku": "PNT-PRM-BO-STY",
+    "name": "Birla Opus Style Perfect Start Primer (10L)",
+    "category": "Paints & Primers",
+    "price": 1520,
+    "unit": "Bucket",
+    "stock": 12,
+    "description": "High-binding exterior primer that fortifies surface durability."
+  },
+  {
+    "sku": "PNT-PRM-AP-ROX",
+    "name": "Asian Paints Red Oxide Metal Primer (1L)",
+    "category": "Paints & Primers",
+    "price": 195,
+    "unit": "Litre",
+    "stock": 40,
+    "description": "Solvent-based rust-inhibitive primer for iron grills and steel gates."
+  },
+  {
+    "sku": "PNT-PRM-AP-WOD",
+    "name": "Asian Paints Pink Wood Primer (1L)",
+    "category": "Paints & Primers",
+    "price": 210,
+    "unit": "Litre",
+    "stock": 30,
+    "description": "Seals raw wood pores and protects wooden doors and frames."
+  },
+  {
+    "sku": "PNT-PRM-NR-GEN",
+    "name": "Nerolac General Purpose Wood Primer (1L)",
+    "category": "Paints & Primers",
+    "price": 205,
+    "unit": "Litre",
+    "stock": 25,
+    "description": "Moisture-resistant solvent-based primer for soft and hard woods."
+  },
+  {
+    "sku": "PNT-PRM-SL-SYN",
+    "name": "Seelac Synthetic Enamel White Primer (1L)",
+    "category": "Paints & Primers",
+    "price": 190,
+    "unit": "Litre",
+    "stock": 25,
+    "description": "All-round solvent primer suitable for metal railings and woodwork."
+  },
+  {
+    "sku": "PNT-EML-AP-TRC",
+    "name": "Asian Paints Tractor Emulsion (10L)",
+    "category": "Paints & Primers",
+    "price": 1850,
+    "unit": "Bucket",
+    "stock": 20,
+    "description": "Smooth matte interior emulsion giving great coverage over distempers."
+  },
+  {
+    "sku": "PNT-DST-AP-SYN",
+    "name": "Asian Paints Tractor Synthetic Distemper (10kg)",
+    "category": "Paints & Primers",
+    "price": 620,
+    "unit": "Bucket",
+    "stock": 35,
+    "description": "Classic economical, washable interior distemper finish."
+  },
+  {
+    "sku": "PNT-EML-BG-EC",
+    "name": "Berger Easy Clean / Rangoli Acrylic Emulsion (10L)",
+    "category": "Paints & Primers",
+    "price": 1920,
+    "unit": "Bucket",
+    "stock": 15,
+    "description": "Cross-linking polymer emulsion offering stain wipe-ability."
+  },
+  {
+    "sku": "PNT-EML-JSW-HL",
+    "name": "JSW Paints Halo Interior Emulsion (10L)",
+    "category": "Paints & Primers",
+    "price": 1790,
+    "unit": "Bucket",
+    "stock": 15,
+    "description": "Low-odor, anti-bacterial interior paint with bright white finish."
+  },
+  {
+    "sku": "PNT-EXT-AP-APX",
+    "name": "Asian Paints Apex Ultima Exterior Emulsion (10L)",
+    "category": "Paints & Primers",
+    "price": 3450,
+    "unit": "Bucket",
+    "stock": 12,
+    "description": "Advanced exterior protection with anti-dirt and weather-proof shield."
+  },
+  {
+    "sku": "PNT-EXT-AP-ACE",
+    "name": "Asian Paints Ace Exterior Emulsion (10L)",
+    "category": "Paints & Primers",
+    "price": 1680,
+    "unit": "Bucket",
+    "stock": 25,
+    "description": "Water-based exterior wall finish providing color retention."
+  },
+  {
+    "sku": "PNT-EXT-BG-WLL",
+    "name": "Berger WeatherCoat Long Life (10L)",
+    "category": "Paints & Primers",
+    "price": 3350,
+    "unit": "Bucket",
+    "stock": 10,
+    "description": "Heavy-duty PU & silicon-reinforced exterior wall coating."
+  },
+  {
+    "sku": "PNT-WPF-DF-DMP",
+    "name": "Dr. Fixit Damp Proof Waterproof Coating (10L)",
+    "category": "Paints & Primers",
+    "price": 3200,
+    "unit": "Bucket",
+    "stock": 15,
+    "description": "Elastomeric thick waterproofing membrane for roofs and exterior walls."
+  },
+  {
+    "sku": "PNT-WPF-BO-ADR",
+    "name": "Birla Opus AllDry Wall & Roof (10L)",
+    "category": "Paints & Primers",
+    "price": 3100,
+    "unit": "Bucket",
+    "stock": 10,
+    "description": "Crack-bridging, heat-reflective waterproofing barrier."
+  },
+  {
+    "sku": "PNT-ENM-AP-APC",
+    "name": "Asian Paints Apcolite Premium Gloss Enamel (1L)",
+    "category": "Paints & Primers",
+    "price": 310,
+    "unit": "Litre",
+    "stock": 40,
+    "description": "Mirror-like gloss finish for wooden doors and metal gates."
+  },
+  {
+    "sku": "PNT-ENM-BG-LUX",
+    "name": "Berger Luxol High Gloss Enamel (1L)",
+    "category": "Paints & Primers",
+    "price": 295,
+    "unit": "Litre",
+    "stock": 35,
+    "description": "Tough alkyd enamel resisting yellowing and scratches."
+  },
+  {
+    "sku": "ADH-FEV-SH-1KG",
+    "name": "Fevicol SH Synthetic Resin Adhesive (1kg)",
+    "category": "Hardware & Tools",
+    "price": 260,
+    "unit": "Piece",
+    "stock": 50,
+    "description": "Heavy-duty synthetic resin glue for woodworking and laminating plywood."
+  },
+  {
+    "sku": "ADH-FEV-MAR-1KG",
+    "name": "Fevicol Marine Waterproof Adhesive (1kg)",
+    "category": "Hardware & Tools",
+    "price": 320,
+    "unit": "Piece",
+    "stock": 40,
+    "description": "Waterproof adhesive with Aqua Repel Technology for kitchens and bathrooms."
+  },
+  {
+    "sku": "ADH-FEV-SPX-1KG",
+    "name": "Fevicol Speedx Fast-Setting Glue (1kg)",
+    "category": "Hardware & Tools",
+    "price": 290,
+    "unit": "Piece",
+    "stock": 30,
+    "description": "Fast-setting adhesive cutting clamping time down to 2 hours."
+  },
+  {
+    "sku": "ADH-FEV-HTX-1KG",
+    "name": "Fevicol HeatX High Heat Adhesive (1L)",
+    "category": "Hardware & Tools",
+    "price": 460,
+    "unit": "Piece",
+    "stock": 20,
+    "description": "Heat-resistant contact adhesive withstanding up to 170°C for kitchen areas."
+  },
+  {
+    "sku": "CEM-WHT-BIR-25",
+    "name": "Birla White Cement (25kg)",
+    "category": "Building Materials",
+    "price": 540,
+    "unit": "Bag",
+    "stock": 40,
+    "description": "Refined limestone white cement for gap filling, wall repairs, and texturing."
+  },
+  {
+    "sku": "CEM-WHT-JK-25",
+    "name": "JK White Cement (25kg)",
+    "category": "Building Materials",
+    "price": 530,
+    "unit": "Bag",
+    "stock": 40,
+    "description": "Pure white limestone masonry base for floor inlays and decorative coatings."
+  },
+  {
+    "sku": "PUT-WAL-AP-TRU",
+    "name": "Asian Paints TruCare Wall Putty (20kg)",
+    "category": "Building Materials",
+    "price": 720,
+    "unit": "Bag",
+    "stock": 50,
+    "description": "Polymer-modified white cement putty for smoothing interior and exterior walls."
+  },
+  {
+    "sku": "PNT-STN-AP-FT",
+    "name": "Asian Paints Fast Tint / Universal Stainer (100ml)",
+    "category": "Paints & Primers",
+    "price": 65,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "Liquid tinting concentrate to tint white cement, distempers, and emulsions."
+  },
+  {
+    "sku": "PNT-STN-BG-UNI",
+    "name": "Berger Universal Stainer (100ml)",
+    "category": "Paints & Primers",
+    "price": 60,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "High-strength tinting concentrate in Yellow Oxide, Red Oxide, Blue, and Green."
+  },
+  {
+    "sku": "PNT-OXI-RED-1KG",
+    "name": "Dry Oxide Powder Color - Red Oxide (1kg)",
+    "category": "Paints & Primers",
+    "price": 90,
+    "unit": "Pack",
+    "stock": 50,
+    "description": "Pure dry pigment powder mixed into cement or limestone mixtures for red flooring."
+  },
+  {
+    "sku": "PNT-OXI-YEL-1KG",
+    "name": "Dry Oxide Powder Color - Yellow Oxide (1kg)",
+    "category": "Paints & Primers",
+    "price": 110,
+    "unit": "Pack",
+    "stock": 40,
+    "description": "Natural yellow oxide color pigment for decorative concrete and cement washes."
   }
 ]
