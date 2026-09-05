@@ -27,6 +27,7 @@ export default function ProductCard({
 
   const stockStatus = product?.stock?.status || 'IN_STOCK';
   const isOutOfStock = stockStatus === 'OUT_OF_STOCK';
+  const imgUrl = (product as any)?.imageUrl || (product as any)?.image_url;
 
   return (
     <div className="group relative flex h-full flex-col justify-between rounded-xl border border-slate-200 bg-white p-3.5 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md">
@@ -35,6 +36,22 @@ export default function ProductCard({
         onClick={onOpen}
         className="flex flex-1 flex-col text-left focus:outline-none"
       >
+        <div className="relative mb-3 flex h-36 w-full items-center justify-center overflow-hidden rounded-lg bg-slate-100">
+          {imgUrl ? (
+            <img
+              src={imgUrl}
+              alt={product?.name || 'Product'}
+              className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center text-slate-300">
+              <span className="text-3xl">📦</span>
+              <span className="mt-1 text-[10px] font-medium uppercase tracking-wider text-slate-400">Maa Laxmi</span>
+            </div>
+          )}
+        </div>
+
         <div className="mb-2 flex w-full items-start justify-between gap-1">
           <StockBadge status={stockStatus} />
           <span className="font-data text-[10px] sm:text-xs text-slate-400 shrink-0">
