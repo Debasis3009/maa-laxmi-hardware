@@ -802,5 +802,131 @@
     "unit": "Piece",
     "stock": 90,
     "description": "Heavy duty chrome plated brass waste coupling with stainless steel top strainer."
+  },
+  {
+    "sku": "ELE-CON-FLX-20",
+    "name": "PVC Flexible Corrugated Conduit Pipe Roll 20mm (50m)",
+    "category": "Electricals",
+    "price": 480,
+    "unit": "Roll",
+    "stock": 25,
+    "description": "Heavy duty fire-retardant flexible corrugated pipe roll for false ceilings and curved slab wiring."
+  },
+  {
+    "sku": "ELE-CON-FLX-25",
+    "name": "PVC Flexible Corrugated Conduit Pipe Roll 25mm (50m)",
+    "category": "Electricals",
+    "price": 620,
+    "unit": "Roll",
+    "stock": 20,
+    "description": "25mm flexible PVC duct pipe for heavy cable routing, under-floor laying, and wall bend protection."
+  },
+  {
+    "sku": "ELE-CON-RGD-20",
+    "name": "PVC Rigid Conduit Pipe 20mm Heavy Duty / 1.5mm (3m / 10ft)",
+    "category": "Electricals",
+    "price": 75,
+    "unit": "Piece",
+    "stock": 120,
+    "description": "FRLS (Flame Retardant Low Smoke) rigid electrical conduit pipe for concealed slab and wall chases."
+  },
+  {
+    "sku": "ELE-CON-RGD-25",
+    "name": "PVC Rigid Conduit Pipe 25mm Heavy Duty / 2mm (3m / 10ft)",
+    "category": "Electricals",
+    "price": 95,
+    "unit": "Piece",
+    "stock": 100,
+    "description": "High impact resistance 25mm PVC electrical conduit pipe for main distribution board drops."
+  },
+  {
+    "sku": "ELE-JBX-PVC-4WY",
+    "name": "PVC 4-Way Deep Junction Box with Lid 25mm",
+    "category": "Electricals",
+    "price": 32,
+    "unit": "Piece",
+    "stock": 150,
+    "description": "Heavy gauge circular PVC conduit junction box with knockouts and cover plate for slab casting."
+  },
+  {
+    "sku": "ELE-JBX-PVC-3WY",
+    "name": "PVC 3-Way Tee Junction Box 20mm",
+    "category": "Electricals",
+    "price": 26,
+    "unit": "Piece",
+    "stock": 150,
+    "description": "Concealed circular junction box designed for wall wire branch routing."
+  },
+  {
+    "sku": "ELE-JBX-MET-OCT",
+    "name": "GI Metal Octagonal Junction Box 4\" Heavy Galvanized",
+    "category": "Electricals",
+    "price": 48,
+    "unit": "Piece",
+    "stock": 80,
+    "description": "Rust-resistant pressed sheet iron/GI 8-sided junction box for concrete slab and structural casting."
+  },
+  {
+    "sku": "ELE-JBX-PLY-WPF",
+    "name": "Polycarbonate Waterproof Junction Box IP65 (4\" x 4\")",
+    "category": "Electricals",
+    "price": 165,
+    "unit": "Piece",
+    "stock": 40,
+    "description": "Weatherproof exterior surface junction box with rubber gasket for outdoor cables and CCTV joints."
+  },
+  {
+    "sku": "ELE-FAN-BOX-GI",
+    "name": "Heavy GI Ceiling Fan Box with High-Tensile Hanging Rod",
+    "category": "Electricals",
+    "price": 110,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "Deep galvanized steel fan box with forged reinforced steel hook for roof slab casting."
+  },
+  {
+    "sku": "ELE-CON-LGT-BOX",
+    "name": "Concealed Light Box / Spotlight Junction Box 3\"",
+    "category": "Electricals",
+    "price": 38,
+    "unit": "Piece",
+    "stock": 100,
+    "description": "Sheet metal round concealed spotlight box for false ceiling or direct slab casting."
+  },
+  {
+    "sku": "ELE-BOX-MOD-04M",
+    "name": "GI Concealed Modular Switch Box 4 Module (18 Gauge)",
+    "category": "Electricals",
+    "price": 55,
+    "unit": "Piece",
+    "stock": 75,
+    "description": "Heavy 18-gauge zinc-coated galvanized sheet modular gang box with brass earth terminal."
+  },
+  {
+    "sku": "ELE-BOX-MOD-08M",
+    "name": "GI Concealed Modular Switch Box 8 Module (18 Gauge)",
+    "category": "Electricals",
+    "price": 85,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "8-module horizontal concealed metal switch back-box for bedroom and hall main boards."
+  },
+  {
+    "sku": "ELE-BOX-MOD-12M",
+    "name": "GI Concealed Modular Switch Box 12 Module (18 Gauge)",
+    "category": "Electricals",
+    "price": 125,
+    "unit": "Piece",
+    "stock": 45,
+    "description": "12-module flush metal back-box for main room switch panels and AC point distribution."
+  },
+  {
+    "sku": "ELE-FIT-PVC-BND",
+    "name": "PVC Conduit Long Radius Elbow Bend 20mm",
+    "category": "Electricals",
+    "price": 12,
+    "unit": "Piece",
+    "stock": 200,
+    "description": "Smooth radius PVC conduit sweep bend to prevent cable snags while pulling wire."
   }
 ]
