@@ -586,5 +586,221 @@
     "unit": "Pack",
     "stock": 40,
     "description": "Natural yellow oxide color pigment for decorative concrete and cement washes."
+  },
+  {
+    "sku": "PLM-PIP-CPVC-075",
+    "name": "CPVC Hot & Cold Water Pipe 3/4\" (3m / 10ft)",
+    "category": "Pipes & Sanitary",
+    "price": 340,
+    "unit": "Piece",
+    "stock": 50,
+    "description": "SDR 11 chlorinated polyvinyl chloride pipe for hot and cold potable water supply lines."
+  },
+  {
+    "sku": "PLM-PIP-UPVC-100",
+    "name": "UPVC Cold Water Plumbing Pipe 1\" (3m / 10ft)",
+    "category": "Pipes & Sanitary",
+    "price": 280,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "Lead-free Class 1 UPVC pipe for heavy-duty domestic drinking water distribution."
+  },
+  {
+    "sku": "PLM-PIP-SWR-110",
+    "name": "PVC SWR Drainage & Waste Pipe 110mm / 4\" (10ft)",
+    "category": "Pipes & Sanitary",
+    "price": 520,
+    "unit": "Piece",
+    "stock": 40,
+    "description": "Soil, waste, and vent (DWV) rainwater drainage pipe with ring-fit joint."
+  },
+  {
+    "sku": "PLM-PIP-GI-050",
+    "name": "GI Heavy Duty Galvanized Iron Pipe 1/2\" (10ft)",
+    "category": "Pipes & Sanitary",
+    "price": 490,
+    "unit": "Piece",
+    "stock": 25,
+    "description": "Class B threaded hot-dip galvanized iron pipe for durable external main lines."
+  },
+  {
+    "sku": "PLM-FIT-CPVC-ELB90",
+    "name": "CPVC 90° Plain Elbow 3/4\"",
+    "category": "Pipes & Sanitary",
+    "price": 32,
+    "unit": "Piece",
+    "stock": 150,
+    "description": "Heavy duty pressure-rated 90-degree bend for hot and cold CPVC pipe joints."
+  },
+  {
+    "sku": "PLM-FIT-CPVC-TEE",
+    "name": "CPVC Equal Tee 3/4\"",
+    "category": "Pipes & Sanitary",
+    "price": 45,
+    "unit": "Piece",
+    "stock": 120,
+    "description": "3-way T-junction fitting to split water lines into separate plumbing fixtures."
+  },
+  {
+    "sku": "PLM-FIT-CPVC-UNI",
+    "name": "CPVC Union 3/4\"",
+    "category": "Pipes & Sanitary",
+    "price": 110,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "Quick-disconnect threaded union fitting for motor pumps and main pipeline servicing."
+  },
+  {
+    "sku": "PLM-FIT-UPVC-RED",
+    "name": "UPVC Reducing Bush / Reducer 1\" to 3/4\"",
+    "category": "Pipes & Sanitary",
+    "price": 28,
+    "unit": "Piece",
+    "stock": 100,
+    "description": "Precision molded reducer bushing to join pipes of unequal nominal diameters."
+  },
+  {
+    "sku": "PLM-FIT-CPVC-CAP",
+    "name": "CPVC End Cap 3/4\"",
+    "category": "Pipes & Sanitary",
+    "price": 22,
+    "unit": "Piece",
+    "stock": 150,
+    "description": "Solvent weld end closure cap to permanently or temporarily seal pipe terminals."
+  },
+  {
+    "sku": "PLM-FIT-FTA-BRS",
+    "name": "CPVC Brass Female Threaded Adaptor (FTA) 3/4\" x 1/2\"",
+    "category": "Pipes & Sanitary",
+    "price": 135,
+    "unit": "Piece",
+    "stock": 80,
+    "description": "Brass-insert female threaded adaptor to mount taps, bib cocks, and shower arms."
+  },
+  {
+    "sku": "PLM-VLV-BL-100",
+    "name": "UPVC Heavy Duty Ball Valve 1\"",
+    "category": "Pipes & Sanitary",
+    "price": 180,
+    "unit": "Piece",
+    "stock": 45,
+    "description": "Full-bore smooth handle quarter-turn shutoff control valve for rooftop tanks."
+  },
+  {
+    "sku": "PLM-VLV-NRV-075",
+    "name": "Brass Non-Return Valve (Check Valve) 3/4\"",
+    "category": "Pipes & Sanitary",
+    "price": 360,
+    "unit": "Piece",
+    "stock": 30,
+    "description": "Directional spring check valve to stop water backflow into pump suction pipes."
+  },
+  {
+    "sku": "PLM-VLV-CON-STP",
+    "name": "Concealed Stop Cock 1/2\" Brass",
+    "category": "Pipes & Sanitary",
+    "price": 480,
+    "unit": "Piece",
+    "stock": 40,
+    "description": "Under-tile wall shutoff control valve with chrome decorative flange and knob."
+  },
+  {
+    "sku": "SNT-EWC-ONE-PC",
+    "name": "Ceramic One-Piece Western Commode (EWC) with Soft Close Seat",
+    "category": "Pipes & Sanitary",
+    "price": 4950,
+    "unit": "Piece",
+    "stock": 12,
+    "description": "S-Trap floor mounted glazed vitreous china western toilet suite with dual flush fitting."
+  },
+  {
+    "sku": "SNT-PAN-ORI-20",
+    "name": "Orissa Squatting Pan 20\" White Ceramic",
+    "category": "Pipes & Sanitary",
+    "price": 850,
+    "unit": "Piece",
+    "stock": 25,
+    "description": "High-gloss anti-stain traditional Indian squatting pan with integrated footrests."
+  },
+  {
+    "sku": "SNT-WSH-BSN-18",
+    "name": "Wall Hung Ceramic Wash Basin 18\" x 12\"",
+    "category": "Pipes & Sanitary",
+    "price": 950,
+    "unit": "Piece",
+    "stock": 20,
+    "description": "Compact glazed ceramic wall-mounted wash hand basin with pre-punched single faucet hole."
+  },
+  {
+    "sku": "SNT-CIS-DUAL-FL",
+    "name": "Dual-Flush Slim Cistern Tank (White PVC)",
+    "category": "Pipes & Sanitary",
+    "price": 780,
+    "unit": "Piece",
+    "stock": 30,
+    "description": "Durable ABS plastic dual-flush wall tank with anti-siphon inlet and internal float."
+  },
+  {
+    "sku": "CPF-TAP-BIB-050",
+    "name": "Brass Chrome Plated (CP) Bib Cock with Flange 1/2\"",
+    "category": "Pipes & Sanitary",
+    "price": 380,
+    "unit": "Piece",
+    "stock": 60,
+    "description": "Solid forged brass wall tap with high-gloss chrome mirror finish and aerated foam flow."
+  },
+  {
+    "sku": "CPF-TAP-PIL-050",
+    "name": "Brass CP Basin Pillar Cock 1/2\"",
+    "category": "Pipes & Sanitary",
+    "price": 460,
+    "unit": "Piece",
+    "stock": 45,
+    "description": "Vertical counter-top washbasin faucet tap with long swivel neck and ceramic disc spindle."
+  },
+  {
+    "sku": "CPF-SHW-JET-SPR",
+    "name": "Health Faucet Jet Spray with 1m SS Flexible Hose & Hook",
+    "category": "Pipes & Sanitary",
+    "price": 340,
+    "unit": "Set",
+    "stock": 50,
+    "description": "High-pressure anti-burst chrome plated hand-held bidet spray with brass inner rod."
+  },
+  {
+    "sku": "CPF-SHW-RAIN-OVR",
+    "name": "Overhead Rain Shower 6\" with 9\" SS Arm",
+    "category": "Pipes & Sanitary",
+    "price": 520,
+    "unit": "Set",
+    "stock": 35,
+    "description": "Wide shower head with anti-clog silicone nozzles and solid wall mounting shower arm."
+  },
+  {
+    "sku": "CPF-TRP-BOT-BRP",
+    "name": "Brass Bottle Trap 7\" for Wash Basin with Extension Pipe",
+    "category": "Pipes & Sanitary",
+    "price": 590,
+    "unit": "Piece",
+    "stock": 30,
+    "description": "Odor-proof chrome plated brass water seal trap for designer wall-hung wash basins."
+  },
+  {
+    "sku": "CPF-JAL-FLR-05",
+    "name": "Stainless Steel Floor Drain Jali 5\" (Pop-up Odor Trap)",
+    "category": "Pipes & Sanitary",
+    "price": 160,
+    "unit": "Piece",
+    "stock": 80,
+    "description": "Grade 304 anti-cockroach, anti-foul smell square floor grating for bathrooms."
+  },
+  {
+    "sku": "CPF-WST-CPL-05",
+    "name": "Brass Basin Waste Coupling (Half Threaded) 3\"",
+    "category": "Pipes & Sanitary",
+    "price": 140,
+    "unit": "Piece",
+    "stock": 90,
+    "description": "Heavy duty chrome plated brass waste coupling with stainless steel top strainer."
   }
 ]
