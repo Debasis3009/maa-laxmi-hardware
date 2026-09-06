@@ -1019,8 +1019,8 @@
     "unit": "Piece",
     "stock": 80,
     "description": "Rust-resistant pressed sheet iron/GI 8-sided junction box for concrete slab and structural casting.",
-    "imageUrl": "/products/ELE-JBX-MET-OCT.svg",
-    "image_url": "/products/ELE-JBX-MET-OCT.svg"
+    "imageUrl": "/products/ELE-JBX-MET-OCT.jpg",
+    "image_url": "/products/ELE-JBX-MET-OCT.jpg"
   },
   {
     "sku": "ELE-JBX-PLY-WPF",
@@ -1030,8 +1030,8 @@
     "unit": "Piece",
     "stock": 40,
     "description": "Weatherproof exterior surface junction box with rubber gasket for outdoor cables and CCTV joints.",
-    "imageUrl": "/products/ELE-JBX-PLY-WPF.svg",
-    "image_url": "/products/ELE-JBX-PLY-WPF.svg"
+    "imageUrl": "/products/ELE-JBX-PLY-WPF.jpg",
+    "image_url": "/products/ELE-JBX-PLY-WPF.jpg"
   },
   {
     "sku": "ELE-FAN-BOX-GI",
@@ -1041,8 +1041,8 @@
     "unit": "Piece",
     "stock": 60,
     "description": "Deep galvanized steel fan box with forged reinforced steel hook for roof slab casting.",
-    "imageUrl": "/products/ELE-FAN-BOX-GI.svg",
-    "image_url": "/products/ELE-FAN-BOX-GI.svg"
+    "imageUrl": "/products/ELE-FAN-BOX-GI.jpg",
+    "image_url": "/products/ELE-FAN-BOX-GI.jpg"
   },
   {
     "sku": "ELE-CON-LGT-BOX",
