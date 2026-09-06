@@ -72,9 +72,9 @@
     "unit": "Quintal",
     "price": 5500,
     "stock": 45,
-    "imageUrl": "/products/TMT-SHY-500.jpg",
+    "imageUrl": "/products/TMT-SHY-500.jpeg",
     "description": "Primary steel high-yield TMT bars with superior bendability and corrosion resistance.",
-    "image_url": "/products/TMT-SHY-500.jpg"
+    "image_url": "/products/TMT-SHY-500.jpeg"
   },
   {
     "sku": "TMT-ELE-QST",
