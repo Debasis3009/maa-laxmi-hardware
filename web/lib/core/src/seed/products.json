@@ -1052,8 +1052,8 @@
     "unit": "Piece",
     "stock": 100,
     "description": "Sheet metal round concealed spotlight box for false ceiling or direct slab casting.",
-    "imageUrl": "/products/ELE-CON-LGT-BOX.svg",
-    "image_url": "/products/ELE-CON-LGT-BOX.svg"
+    "imageUrl": "/products/ELE-CON-LGT-BOX.jpg",
+    "image_url": "/products/ELE-CON-LGT-BOX.jpg"
   },
   {
     "sku": "ELE-BOX-MOD-04M",
@@ -1063,8 +1063,8 @@
     "unit": "Piece",
     "stock": 75,
     "description": "Heavy 18-gauge zinc-coated galvanized sheet modular gang box with brass earth terminal.",
-    "imageUrl": "/products/ELE-BOX-MOD-04M.svg",
-    "image_url": "/products/ELE-BOX-MOD-04M.svg"
+    "imageUrl": "/products/ELE-BOX-MOD-04M.jpg",
+    "image_url": "/products/ELE-BOX-MOD-04M.jpg"
   },
   {
     "sku": "ELE-BOX-MOD-08M",
