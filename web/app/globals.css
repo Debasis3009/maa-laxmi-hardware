@@ -2,66 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
+:root { --font-display: var(--barlow-condensed); --font-body: var(--source-sans); --font-data: var(--jetbrains-mono); --brand-red:#c62828; --brand-dark:#171717; --brand-amber:#f59e0b; --paper:#f5f3ef; }
+html { scroll-behavior:smooth; }
+body { background:var(--paper); color:#171717; overflow-x:hidden; }
 
-:root {
-  --font-display: var(--barlow-condensed);
-  --font-body: var(--source-sans);
-  --font-data: var(--jetbrains-mono);
-}
+.hero-construction { background:radial-gradient(circle at 78% 30%, rgba(198,40,40,.28), transparent 28%), linear-gradient(125deg,#171717 0%,#252525 55%,#101010 100%); }
+.hero-product-stage { position:relative; perspective:900px; }
+.hero-product-stage:after { content:""; position:absolute; left:8%; right:8%; bottom:22px; height:42px; border-radius:50%; background:rgba(0,0,0,.6); filter:blur(18px); }
+.steel-orb { position:absolute; right:10%; top:6%; width:250px; height:250px; border-radius:50%; background:radial-gradient(circle at 32% 25%,#fff,#bfc5ca 14%,#59616a 40%,#222 73%,#090909); box-shadow:inset -20px -28px 45px rgba(0,0,0,.55),0 30px 70px rgba(0,0,0,.45); transform:rotateX(12deg); }
+.tmt-stack { position:absolute; left:2%; bottom:68px; width:320px; height:210px; transform:rotate(-7deg) rotateX(12deg); }
+.tmt-stack i { position:absolute; left:0; width:320px; height:28px; border-radius:18px; background:linear-gradient(90deg,#4b0b0b,#d33a30 28%,#ff8a70 48%,#8d1714 73%,#2c0808); box-shadow:0 15px 22px rgba(0,0,0,.32); }
+.tmt-stack i:nth-child(1){top:24px}.tmt-stack i:nth-child(2){top:70px}.tmt-stack i:nth-child(3){top:116px}.tmt-stack i:nth-child(4){top:162px}
+.cement-bag { position:absolute; right:12%; bottom:46px; width:180px; height:205px; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(5deg) skewY(-2deg); color:#171717; background:linear-gradient(145deg,#f3efe6,#bdb8ad); clip-path:polygon(7% 0,93% 5%,100% 96%,4% 100%); box-shadow:18px 20px 30px rgba(0,0,0,.38); }
+.cement-bag span { font-size:11px; font-weight:900; letter-spacing:2px; color:#c62828 }.cement-bag strong { font-family:var(--font-display); font-size:30px; line-height:1 }.cement-bag small { margin-top:8px; font-size:9px; font-weight:800; letter-spacing:1.5px }
+.hero-tag { position:absolute; right:1%; top:40%; padding:8px 12px; background:#f59e0b; color:#171717; font-size:10px; font-weight:900; letter-spacing:1.5px; box-shadow:8px 8px 0 #c62828; transform:rotate(-4deg); }
 
-body {
-  background-color: #F7F6F3;
-  color: #23201B;
-  overflow-x: hidden;
-}
-
-/* Fluid Keyframe Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulseSubtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.75; }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-pulse-subtle {
-  animation: pulseSubtle 2.5s infinite ease-in-out;
-}
-
-/* Touch-optimized horizontal scrollbar concealment */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Visible keyboard focus */
-:focus-visible {
-  outline: 2px solid #C6641A;
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+@keyframes fadeInUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes floatProduct { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(-8px) rotate(5deg)} }
+.animate-fade-in-up { animation:fadeInUp .45s cubic-bezier(.16,1,.3,1) forwards; }
+.cement-bag { animation:floatProduct 4s ease-in-out infinite; }
+.product-card { transform:translateZ(0); }
+.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+::selection{background:#c62828;color:white}
+@media(max-width:767px){.hero-construction{background:linear-gradient(145deg,#171717,#252525)} }
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
