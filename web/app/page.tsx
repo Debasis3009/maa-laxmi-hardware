@@ -7,74 +7,50 @@ import type { Product, CategoryNode, Unit } from '@/lib/types';
 
 export default function HomePage() {
   const app = getApp();
-
-  const rawProducts = (JSON.parse(JSON.stringify(app.productService.listProducts({ isActive: true, limit: 500 }) || []))) as unknown as (Product & { imageUrl?: string; image_url?: string })[];
+  const rawProducts = JSON.parse(JSON.stringify(app.productService.listProducts({ isActive: true, limit: 500 }) || [])) as (Product & { imageUrl?: string; image_url?: string })[];
   const imageMap = new Map<string, string>();
-  for (const item of (seedProducts as any[])) {
-    if (item.sku && (item.imageUrl || item.image_url)) {
-      imageMap.set(item.sku, item.imageUrl || item.image_url);
-    }
-  }
-  const products = rawProducts.map((p) => ({
-    ...p,
-    imageUrl: imageMap.get(p.sku) || (p as any).imageUrl || (p as any).image_url || null,
-    image_url: imageMap.get(p.sku) || (p as any).image_url || (p as any).imageUrl || null,
-  })) as unknown as Product[];
-  const categories = (JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }) || []))) as unknown as CategoryNode[];
-  const units = (JSON.parse(JSON.stringify(app.catalogService.listUnits() || []))) as unknown as Unit[];
-  const settings = (JSON.parse(JSON.stringify(app.settingsService.getAll() || {}))) as Record<string, string>;
-
-  const businessName = settings?.business_name || 'Maa Laxmi Hardware';
-  const whatsappNumber = settings?.whatsapp_number || '919932667908';
+  for (const item of seedProducts as any[]) if (item.sku && (item.imageUrl || item.image_url)) imageMap.set(item.sku, item.imageUrl || item.image_url);
+  const products = rawProducts.map((p) => ({ ...p, imageUrl: imageMap.get(p.sku) || p.imageUrl || p.image_url || null, image_url: imageMap.get(p.sku) || p.image_url || p.imageUrl || null })) as Product[];
+  const categories = JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }) || [])) as CategoryNode[];
+  const units = JSON.parse(JSON.stringify(app.catalogService.listUnits() || [])) as Unit[];
+  const settings = JSON.parse(JSON.stringify(app.settingsService.getAll() || {})) as Record<string, any>;
+  const businessName = settings.business_name || 'Maa Laxmi Hardware';
+  const whatsappNumber = settings.whatsapp_number || '919932667908';
 
   return (
     <div className="min-h-screen">
-      {/* Brand Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#083358] via-[#0b487c] to-[#041c33] py-9 sm:py-14 text-white shadow-md">
-        <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="animate-fade-in-up space-y-2.5">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-cyan-500/15 px-3 py-1 text-xs font-semibold text-cyan-200 backdrop-blur-sm shadow-xs">
-              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-              Direct Counter Ready &bull; Fast Delivery
-            </span>
-
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white">
-              {businessName}
-            </h1>
-
-            <p className="font-display text-sm sm:text-base font-bold uppercase tracking-widest text-amber-300">
-              The Best Choice For Your Dream Home
-            </p>
-
-            <p className="max-w-2xl text-xs sm:text-sm text-slate-200 leading-relaxed pt-1">
-              Cement, TMT bars, Asian/Berger paints, sanitary pipes, and electrical supplies. Verified counter stock at Nakrakonda with instant WhatsApp bookings.
-            </p>
-
-            {/* Badges */}
-            <div className="flex flex-wrap items-center gap-2 pt-3 text-xs font-semibold">
-              <span className="flex items-center gap-1 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-white">
-                📍 Nakrakonda Counter
-              </span>
-              <span className="flex items-center gap-1 rounded-full bg-emerald-500 text-white px-3 py-1 shadow-xs">
-                💬 WhatsApp Order Active
-              </span>
-              <span className="flex items-center gap-1 rounded-full bg-amber-400 text-slate-950 px-3 py-1 shadow-xs">
-                ⚡ Ready Stock
-              </span>
+      <section className="hero-construction relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(135deg, transparent 0 55%, rgba(245,158,11,.5) 55% 56%, transparent 56%), linear-gradient(25deg, transparent 0 72%, rgba(198,40,40,.45) 72% 73%, transparent 73%)' }} />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_.95fr] lg:py-24">
+          <div className="animate-fade-in-up">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-300 backdrop-blur-sm">
+              <span className="h-2 w-2 rounded-full bg-amber-400" /> Direct Counter • Ready Stock
             </div>
+            <h1 className="font-display max-w-3xl text-5xl font-extrabold uppercase leading-[.92] tracking-tight text-white sm:text-7xl">Quality materials.<br /><span className="text-amber-400">Stronger projects.</span></h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-white/75 sm:text-lg">{businessName} supplies cement, TMT bars, paints, sanitary, electrical and essential hardware for builders, contractors and homeowners.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#products" className="rounded-xl bg-[#c62828] px-5 py-3 text-sm font-extrabold text-white shadow-[0_10px_30px_rgba(198,40,40,.3)] transition hover:-translate-y-0.5 hover:bg-[#991b1b]">Browse Products</a>
+              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" className="rounded-xl bg-[#15803d] px-5 py-3 text-sm font-extrabold text-white shadow-[0_10px_30px_rgba(21,128,61,.25)] transition hover:-translate-y-0.5 hover:bg-[#166534]">Get a WhatsApp Quote</a>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-5 text-xs font-bold text-white/60"><span>✓ Verified counter stock</span><span>✓ Bulk quotation support</span><span>✓ Local delivery</span></div>
+          </div>
+
+          <div className="hero-product-stage hidden min-h-[390px] lg:block" aria-hidden="true">
+            <div className="steel-orb" />
+            <div className="tmt-stack"><i /><i /><i /><i /></div>
+            <div className="cement-bag"><span>MAA LAXMI</span><strong>CEMENT</strong><small>BUILD STRONG</small></div>
+            <div className="hero-tag">BUILD WITH CONFIDENCE</div>
           </div>
         </div>
       </section>
 
-      {/* Catalog */}
-      <StorefrontClient
-        products={products || []}
-        categories={categories || []}
-        units={units || []}
-        businessName={businessName}
-        whatsappNumber={whatsappNumber}
-      />
+      <section id="about" className="border-b border-black/5 bg-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-black/5 sm:grid-cols-4">
+          {[['01','Trusted local counter','Serving Nakrakonda & nearby projects'],['02','Quality-first','Reliable brands and verified stock'],['03','Bulk orders','Fast quotation for contractors'],['04','WhatsApp support','Enquire before you visit']].map(([n,t,d]) => <div key={n} className="bg-white px-4 py-5 sm:px-6"><span className="font-data text-[10px] font-bold text-[#c62828]">{n}</span><h2 className="mt-1 font-display text-base font-bold uppercase sm:text-lg">{t}</h2><p className="mt-1 text-xs leading-5 text-slate-500">{d}</p></div>)}
+        </div>
+      </section>
+
+      <StorefrontClient products={products} categories={categories} units={units} businessName={businessName} whatsappNumber={whatsappNumber} />
     </div>
   );
 }
