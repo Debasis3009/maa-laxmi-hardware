@@ -7,6 +7,8 @@ const NAV=[
  {href:'/admin',label:'Dashboard',icon:'▦'},
  {href:'/admin/billing',label:'Create Bill',icon:'₹'},
  {href:'/admin/customers',label:'Customers & Ledger',icon:'♙'},
+ {href:'/admin/payments',label:'Payments',icon:'₹'},
+ {href:'/admin/reports',label:'Sales & Reports',icon:'▥'},
  {href:'/admin/products',label:'Products & Inventory',icon:'▤'},
  {href:'/admin/pricing',label:'Bulk Pricing',icon:'₹'},
  {href:'/admin/import',label:'Bulk Import',icon:'↓'},
