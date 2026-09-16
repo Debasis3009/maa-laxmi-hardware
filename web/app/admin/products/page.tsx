@@ -11,26 +11,22 @@ export default function AdminProductsPage() {
   const categories = (JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }) || []))) as unknown as CategoryNode[];
   const units = (JSON.parse(JSON.stringify(app.catalogService.listUnits() || []))) as unknown as Unit[];
 
-  return (
-    <div className="space-y-4">
-      {/* Header and Add Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl bg-white p-4 sm:p-5 border border-slate-200 shadow-xs">
-        <div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold text-slate-900">Products & Inventory</h1>
-          <p className="mt-0.5 text-xs text-slate-500">
-            Swipe table sideways to view all columns. Tap price or stock counts to edit inline.
-          </p>
-        </div>
-        <AddProductModal categories={categories} units={units} />
-      </div>
+  const activeCount = products.filter((p) => p.is_active).length;
+  const inactiveCount = products.length - activeCount;
 
-      {/* Touch-Scrollable Table Container */}
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs">
-        <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
-          <div className="min-w-[680px]">
-            <InventoryTable products={products} />
-          </div>
+  return (
+    <div className="space-y-5">
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#07527f]">Catalogue control</p><h1 className="mt-1 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">Products & Inventory</h1><p className="mt-1 text-sm text-slate-500">Manage products, prices and stock without leaving the admin panel.</p></div>
+          <AddProductModal categories={categories} units={units} />
         </div>
+        <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold"><span className="rounded-full bg-slate-100 px-3 py-1.5 text-slate-600">{products.length} total</span><span className="rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-700">{activeCount} active</span><span className="rounded-full bg-slate-100 px-3 py-1.5 text-slate-500">{inactiveCount} inactive</span></div>
+      </section>
+
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 sm:px-5"><p className="text-xs font-bold uppercase tracking-wider text-slate-500">Inventory table</p><p className="text-[11px] text-slate-400">Swipe horizontally on small screens</p></div>
+        <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}><div className="min-w-[680px]"><InventoryTable products={products} /></div></div>
       </div>
     </div>
   );
