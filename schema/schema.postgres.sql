@@ -19,6 +19,7 @@
 -- ============================================================================
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto; -- for gen_random_uuid()
+CREATE EXTENSION IF NOT EXISTS citext;   -- case-insensitive staff email
 
 -- ----------------------------------------------------------------------------
 -- 1. ROLES & USERS  (staff / admin side — customer accounts are a separate
@@ -314,3 +315,81 @@ SELECT
 FROM inventory i
 JOIN products p ON p.id = i.product_id
 LEFT JOIN product_variants v ON v.id = i.variant_id;
+
+
+-- ----------------------------------------------------------------------------
+-- 9. CUSTOMERS, GST INVOICES & PAYMENTS (Phase 2)
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS customers (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL,
+    phone TEXT,
+    email TEXT,
+    address TEXT,
+    gstin TEXT,
+    state TEXT DEFAULT 'West Bengal',
+    opening_balance NUMERIC(12,2) NOT NULL DEFAULT 0,
+    credit_limit NUMERIC(12,2),
+    notes TEXT,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_customers_phone
+    ON customers(phone) WHERE phone IS NOT NULL AND phone <> '';
+
+CREATE TABLE IF NOT EXISTS invoices (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    invoice_no TEXT NOT NULL UNIQUE,
+    customer_id UUID REFERENCES customers(id),
+    invoice_date DATE NOT NULL,
+    subtotal NUMERIC(12,2) NOT NULL DEFAULT 0,
+    discount NUMERIC(12,2) NOT NULL DEFAULT 0,
+    taxable_amount NUMERIC(12,2) NOT NULL DEFAULT 0,
+    cgst NUMERIC(12,2) NOT NULL DEFAULT 0,
+    sgst NUMERIC(12,2) NOT NULL DEFAULT 0,
+    igst NUMERIC(12,2) NOT NULL DEFAULT 0,
+    round_off NUMERIC(12,2) NOT NULL DEFAULT 0,
+    total NUMERIC(12,2) NOT NULL DEFAULT 0,
+    paid NUMERIC(12,2) NOT NULL DEFAULT 0,
+    due NUMERIC(12,2) NOT NULL DEFAULT 0,
+    payment_status TEXT NOT NULL DEFAULT 'UNPAID'
+        CHECK (payment_status IN ('UNPAID','PARTIAL','PAID')),
+    notes TEXT,
+    created_by UUID REFERENCES users(id),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_invoices_customer ON invoices(customer_id, invoice_date);
+CREATE INDEX IF NOT EXISTS idx_invoices_date ON invoices(invoice_date);
+
+CREATE TABLE IF NOT EXISTS invoice_items (
+    id BIGSERIAL PRIMARY KEY,
+    invoice_id UUID NOT NULL REFERENCES invoices(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES products(id),
+    product_name TEXT NOT NULL,
+    sku TEXT,
+    quantity NUMERIC(14,3) NOT NULL CHECK (quantity > 0),
+    unit_price NUMERIC(12,2) NOT NULL,
+    discount NUMERIC(5,2) NOT NULL DEFAULT 0,
+    gst_rate NUMERIC(5,2) NOT NULL DEFAULT 0,
+    taxable_amount NUMERIC(12,2) NOT NULL,
+    gst_amount NUMERIC(12,2) NOT NULL,
+    line_total NUMERIC(12,2) NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_invoice_items_invoice ON invoice_items(invoice_id);
+CREATE INDEX IF NOT EXISTS idx_invoice_items_product ON invoice_items(product_id);
+
+CREATE TABLE IF NOT EXISTS payments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    invoice_id UUID REFERENCES invoices(id),
+    customer_id UUID REFERENCES customers(id),
+    amount NUMERIC(12,2) NOT NULL CHECK (amount > 0),
+    method TEXT NOT NULL,
+    reference TEXT,
+    notes TEXT,
+    paid_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    created_by UUID REFERENCES users(id),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_payments_customer ON payments(customer_id, paid_at);
+CREATE INDEX IF NOT EXISTS idx_payments_invoice ON payments(invoice_id);
