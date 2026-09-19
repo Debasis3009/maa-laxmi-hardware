@@ -70,6 +70,15 @@ function createUserService(db, auditService) {
     return getUserById(row.id);
   }
 
+  function changePassword(userId, newPassword, actingUserId = null) {
+    if (!newPassword || newPassword.length < 8) throw new AppError('Password must be at least 8 characters', 'WEAK_PASSWORD');
+    const existing = db.queryOne('SELECT id FROM users WHERE id = ?', [userId]);
+    if (!existing) throw new AppError('User not found', 'USER_NOT_FOUND');
+    db.run('UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?', [hashPassword(newPassword), now(), userId]);
+    auditService.log({ userId: actingUserId || userId, action: 'user.password_change', entityType: 'user', entityId: userId });
+    return true;
+  }
+
   function hasPermission(user, permission) {
     if (!user) return false;
     const perms = user.role_permissions || {};
@@ -81,7 +90,7 @@ function createUserService(db, auditService) {
                       FROM users u JOIN roles r ON r.id = u.role_id ORDER BY u.created_at`);
   }
 
-  return { ensureDefaultRoles, getRoleByName, createUser, getUserById, authenticate, hasPermission, listUsers };
+  return { ensureDefaultRoles, getRoleByName, createUser, getUserById, authenticate, changePassword, hasPermission, listUsers };
 }
 
 module.exports = { createUserService, DEFAULT_ROLES };
