@@ -1,4 +1,3 @@
-import 'server-only';
 import { cookies } from 'next/headers';
 import { getApp, getOwnerId } from './db';
 const COOKIE_NAME='mlh_session_role';
