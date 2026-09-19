@@ -23,7 +23,7 @@ const DEFAULT_SETTINGS = {
   business_hours: { mon_sat: '8:00 AM - 8:00 PM', sun: '9:00 AM - 2:00 PM' },
 };
 
-async function createSettingsService(db, auditService) {
+function createSettingsService(db, auditService) {
   async function seedDefaults() {
     for (const [key, value] of Object.entries(DEFAULT_SETTINGS)) {
       const existing = await db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
@@ -47,7 +47,7 @@ async function createSettingsService(db, auditService) {
   }
 
   async function set(key, value, actingUserId = null) {
-    const before = get(key);
+    const before = await get(key);
     const existing = await db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
     if (existing) {
       await db.run(`UPDATE business_settings SET value = ?, updated_by = ?, updated_at = ? WHERE key = ?`,
