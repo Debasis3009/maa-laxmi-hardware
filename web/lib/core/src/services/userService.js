@@ -33,7 +33,7 @@ function createUserService(db, auditService) {
 
   async function getRoleByName(name) {
     const row = await db.queryOne(`SELECT * FROM roles WHERE name = ?`, [name]);
-    return row && { ...row, permissions: JSON.parse(row.permissions) };
+    return row && { ...row, permissions: typeof row.permissions === 'string' ? JSON.parse(row.permissions) : (row.permissions || {}) };
   }
 
   async function createUser({ name, email, phone, password, roleName }, actingUserId = null) {
