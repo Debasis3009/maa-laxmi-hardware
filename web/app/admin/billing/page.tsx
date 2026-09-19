@@ -2,8 +2,8 @@ import { getApp } from '@/lib/db';
 import { requireAdmin } from '@/lib/session';
 import { createBill } from './actions';
 
-export default function BillingPage(){
-  requireAdmin(); const app=getApp(); const customers=app.customerBillingService.listCustomers(); const products=app.customerBillingService.getProducts();
+export default async function BillingPage(){
+  await requireAdmin(); const app=await getApp(); const customers=await app.customerBillingService.listCustomers(); const products=await app.customerBillingService.getProducts();
   return <div className="space-y-5">
     <section className="rounded-2xl bg-[#062f50] p-5 text-white"><p className="text-[10px] font-bold uppercase tracking-[.2em] text-sky-200">Phase 2 · GST Billing</p><h1 className="mt-1 text-2xl font-black">Create Tax Invoice</h1><p className="mt-1 text-sm text-slate-200">GST calculation, payment entry and customer due tracking.</p></section>
     <form action={createBill} className="space-y-5">
