@@ -1,52 +1,58 @@
 import 'server-only';
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
 import crypto from 'node:crypto';
 
 const { createApp } = require('./core/src/app');
 const { seedSampleData } = require('./core/src/seed/seed');
 
 type CoreApp = ReturnType<typeof createApp>;
+type Booted = { app: CoreApp; ownerId: string };
+const g = globalThis as unknown as { __mlhBoot?: Promise<Booted> };
 
-const g = globalThis as unknown as { __mlhApp?: CoreApp; __mlhOwnerId?: string };
-
-function boot(): { app: CoreApp; ownerId: string } {
-  if (g.__mlhApp && g.__mlhOwnerId) {
-    return { app: g.__mlhApp, ownerId: g.__mlhOwnerId };
+async function initializeSchema(app: CoreApp) {
+  const exists = await app.db.queryOne("SELECT to_regclass('public.roles') AS name");
+  if (!exists?.name) {
+    const schemaPath = path.join(process.cwd(), 'schema', 'schema.postgres.sql');
+    const schema = fs.readFileSync(schemaPath, 'utf8');
+    await app.db.raw.query(schema);
+  } else {
+    // Phase-2 tables use idempotent DDL so existing Phase-1 databases upgrade safely.
+    const billingMarker = await app.db.queryOne("SELECT to_regclass('public.customers') AS name");
+    if (!billingMarker?.name) {
+      const schemaPath = path.join(process.cwd(), 'schema', 'schema.postgres.sql');
+      const schema = fs.readFileSync(schemaPath, 'utf8');
+      const phase2 = schema.slice(schema.indexOf('-- 9. CUSTOMERS'));
+      if (phase2) await app.db.raw.query(phase2);
+    }
   }
+}
 
-  const dbDir = process.env.VERCEL ? '/tmp' : path.join(process.cwd(), 'data');
-  const dbFile = path.join(dbDir, 'dev.sqlite');
-  fs.mkdirSync(path.dirname(dbFile), { recursive: true });
-  const app = createApp(process.env.NODE_ENV === 'test' ? ':memory:' : dbFile);
-  app.bootstrap();
+async function boot(): Promise<Booted> {
+  if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required. This application is PostgreSQL-only.');
+  const app = createApp(process.env.DATABASE_URL);
+  await initializeSchema(app);
+  await app.bootstrap();
 
-  let owner = app.userService.listUsers().find((u: { role: string }) => u.role === 'owner');
+  let owner = (await app.userService.listUsers()).find((u: { role: string }) => u.role === 'owner');
   if (!owner) {
-    const created = app.userService.createUser({
+    const created = await app.userService.createUser({
       name: 'Sarat Dey',
       phone: 'Admin',
       password: process.env.ADMIN_BOOTSTRAP_PASSWORD || crypto.randomUUID(),
       roleName: 'owner',
     });
-    owner = { id: created.id } as { id: string; role: string };
+    owner = { id: created.id, role: 'owner' };
   }
 
-  // Ensure catalog is populated if products table has zero items
-  const productCount = app.productService.listProducts({ limit: 1 }).length;
-  if (productCount === 0) {
-    seedSampleData(app, owner.id);
-  }
-
-  g.__mlhApp = app;
-  g.__mlhOwnerId = (owner as { id: string }).id;
-  return { app, ownerId: g.__mlhOwnerId };
+  const productCount = (await app.productService.listProducts({ limit: 1 })).length;
+  if (productCount === 0) await seedSampleData(app, owner.id);
+  return { app, ownerId: owner.id };
 }
 
-export function getApp(): CoreApp {
-  return boot().app;
+function bootOnce(): Promise<Booted> {
+  if (!g.__mlhBoot) g.__mlhBoot = boot().catch((err: unknown) => { g.__mlhBoot = undefined; throw err; });
+  return g.__mlhBoot;
 }
-
-export function getOwnerId(): string {
-  return boot().ownerId;
-}
+export async function getApp(): Promise<CoreApp> { return (await bootOnce()).app; }
+export async function getOwnerId(): Promise<string> { return (await bootOnce()).ownerId; }
