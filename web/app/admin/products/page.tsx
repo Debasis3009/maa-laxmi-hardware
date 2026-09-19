@@ -4,12 +4,12 @@ import InventoryTable from '@/components/admin/InventoryTable';
 import AddProductModal from '@/components/admin/AddProductModal';
 import type { Product, CategoryNode, Unit } from '@/lib/types';
 
-export default function AdminProductsPage() {
-  requireAdmin();
-  const app = getApp();
-  const products = (JSON.parse(JSON.stringify(app.productService.listProducts({ limit: 1000 }) || []))) as unknown as Product[];
-  const categories = (JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }) || []))) as unknown as CategoryNode[];
-  const units = (JSON.parse(JSON.stringify(app.catalogService.listUnits() || []))) as unknown as Unit[];
+export default async function AdminProductsPage() {
+  await requireAdmin();
+  const app = await getApp();
+  const products = (JSON.parse(JSON.stringify(await app.productService.listProducts({ limit: 1000 }) || []))) as unknown as Product[];
+  const categories = (JSON.parse(JSON.stringify(await app.catalogService.listCategoryTree({ activeOnly: true }) || []))) as unknown as CategoryNode[];
+  const units = (JSON.parse(JSON.stringify(await app.catalogService.listUnits() || []))) as unknown as Unit[];
 
   const activeCount = products.filter((p) => p.is_active).length;
   const inactiveCount = products.length - activeCount;
