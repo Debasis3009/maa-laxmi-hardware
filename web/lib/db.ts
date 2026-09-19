@@ -29,7 +29,7 @@ async function initializeSchema(app: CoreApp) {
 
 async function boot(): Promise<Booted> {
   if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required. This application is PostgreSQL-only.');
-  const app = createApp(process.env.DATABASE_URL);
+  const app = await createApp(process.env.DATABASE_URL);
   await initializeSchema(app);
   await app.bootstrap();
 

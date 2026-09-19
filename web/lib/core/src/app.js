@@ -10,17 +10,17 @@ const { createProductService } = require('./services/productService');
 const { createImportService } = require('./services/importService');
 const { createCustomerBillingService } = require('./services/customerBillingService');
 
-function createApp(connectionString = process.env.DATABASE_URL) {
+async function createApp(connectionString = process.env.DATABASE_URL) {
   const db = createPostgresDb(connectionString);
   const auditService = createAuditService(db);
   const userService = createUserService(db, auditService);
   const settingsService = createSettingsService(db, auditService);
   const catalogService = createCatalogService(db, auditService);
-  const inventoryService = createInventoryService(db, auditService);
-  const priceService = createPriceService(db, auditService);
-  const productService = createProductService(db, { auditService, inventoryService, priceService });
-  const importService = createImportService(db, { catalogService, productService });
-  const customerBillingService = createCustomerBillingService(db, auditService);
+  const inventoryService = await createInventoryService(db, auditService);
+  const priceService = await createPriceService(db, auditService);
+  const productService = await createProductService(db, { auditService, inventoryService, priceService });
+  const importService = await createImportService(db, { catalogService, productService });
+  const customerBillingService = await createCustomerBillingService(db, auditService);
 
   async function bootstrap() {
     await userService.ensureDefaultRoles();
