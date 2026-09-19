@@ -24,6 +24,12 @@ const DEFAULT_SETTINGS = {
 };
 
 function createSettingsService(db, auditService) {
+  function decodeValue(value) {
+    if (typeof value !== 'string') return value;
+    const trimmed = value.trim();
+    if (!trimmed) return value;
+    try { return JSON.parse(trimmed); } catch { return value; }
+  }
   async function seedDefaults() {
     for (const [key, value] of Object.entries(DEFAULT_SETTINGS)) {
       const existing = await db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
@@ -36,13 +42,13 @@ function createSettingsService(db, auditService) {
 
   async function get(key) {
     const row = await db.queryOne(`SELECT * FROM business_settings WHERE key = ?`, [key]);
-    return row ? (typeof row.value === 'string' ? JSON.parse(row.value) : row.value) : undefined;
+    return row ? decodeValue(row.value) : undefined;
   }
 
   async function getAll() {
     const rows = await db.query(`SELECT * FROM business_settings`);
     const out = {};
-    for (const r of rows) out[r.key] = typeof r.value === 'string' ? JSON.parse(r.value) : r.value;
+    for (const r of rows) out[r.key] = decodeValue(r.value);
     return out;
   }
 
