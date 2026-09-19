@@ -1,5 +1,5 @@
 'use strict';
-const { createDb } = require('./db/sqlite-adapter');
+const { createPostgresDb } = require('./db/postgres-adapter');
 const { createAuditService } = require('./services/auditService');
 const { createUserService } = require('./services/userService');
 const { createSettingsService } = require('./services/settingsService');
@@ -10,8 +10,8 @@ const { createProductService } = require('./services/productService');
 const { createImportService } = require('./services/importService');
 const { createCustomerBillingService } = require('./services/customerBillingService');
 
-function createApp(dbFile = ':memory:') {
-  const db = createDb(dbFile);
+function createApp(connectionString = process.env.DATABASE_URL) {
+  const db = createPostgresDb(connectionString);
   const auditService = createAuditService(db);
   const userService = createUserService(db, auditService);
   const settingsService = createSettingsService(db, auditService);
@@ -22,10 +22,10 @@ function createApp(dbFile = ':memory:') {
   const importService = createImportService(db, { catalogService, productService });
   const customerBillingService = createCustomerBillingService(db, auditService);
 
-  function bootstrap() {
-    userService.ensureDefaultRoles();
-    settingsService.seedDefaults();
-    catalogService.seedStandardUnits();
+  async function bootstrap() {
+    await userService.ensureDefaultRoles();
+    await settingsService.seedDefaults();
+    await catalogService.seedStandardUnits();
   }
 
   return {
