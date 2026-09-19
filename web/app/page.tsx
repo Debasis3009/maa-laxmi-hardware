@@ -5,15 +5,15 @@ import { getApp } from '@/lib/db';
 import StorefrontClient from '@/components/storefront/StorefrontClient';
 import type { Product, CategoryNode, Unit } from '@/lib/types';
 
-export default function HomePage() {
-  const app = getApp();
-  const rawProducts = JSON.parse(JSON.stringify(app.productService.listProducts({ isActive: true, limit: 500 }) || [])) as (Product & { imageUrl?: string; image_url?: string })[];
+export default async function HomePage() {
+  const app = await getApp();
+  const rawProducts = JSON.parse(JSON.stringify(await app.productService.listProducts({ isActive: true, limit: 500 }) || [])) as (Product & { imageUrl?: string; image_url?: string })[];
   const imageMap = new Map<string, string>();
   for (const item of seedProducts as any[]) if (item.sku && (item.imageUrl || item.image_url)) imageMap.set(item.sku, item.imageUrl || item.image_url);
   const products = rawProducts.map((p) => ({ ...p, imageUrl: imageMap.get(p.sku) || p.imageUrl || p.image_url || null, image_url: imageMap.get(p.sku) || p.image_url || p.imageUrl || null })) as Product[];
-  const categories = JSON.parse(JSON.stringify(app.catalogService.listCategoryTree({ activeOnly: true }) || [])) as CategoryNode[];
-  const units = JSON.parse(JSON.stringify(app.catalogService.listUnits() || [])) as Unit[];
-  const settings = JSON.parse(JSON.stringify(app.settingsService.getAll() || {})) as Record<string, any>;
+  const categories = JSON.parse(JSON.stringify(await app.catalogService.listCategoryTree({ activeOnly: true }) || [])) as CategoryNode[];
+  const units = JSON.parse(JSON.stringify(await app.catalogService.listUnits() || [])) as Unit[];
+  const settings = JSON.parse(JSON.stringify(await app.settingsService.getAll() || {})) as Record<string, any>;
   const businessName = settings.business_name || 'Maa Laxmi Hardware';
   const whatsappNumber = settings.whatsapp_number || '919932667908';
 
