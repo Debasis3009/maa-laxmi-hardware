@@ -3,10 +3,10 @@ import { getApp } from '@/lib/db';
 import { requireAdmin } from '@/lib/session';
 
 const money=(v:any)=>`₹${Number(v||0).toFixed(2)}`;
-export default function ReportsPage({searchParams}:{searchParams?:{q?:string;status?:string;from?:string;to?:string}}){
- requireAdmin(); const svc=getApp().customerBillingService;
+export default async function ReportsPage({searchParams}:{searchParams?:{q?:string;status?:string;from?:string;to?:string}}){
+ await requireAdmin(); const svc=await getApp().customerBillingService;
  const q=String(searchParams?.q||''),status=String(searchParams?.status||''),from=String(searchParams?.from||''),to=String(searchParams?.to||'');
- const today=svc.salesSummary('day'); const month=svc.salesSummary('month'); const invoices=svc.searchInvoices({q,status,from,to,limit:200}); const outstanding=svc.outstandingReport(); const stockSales=svc.stockVsSalesReport();
+ const today=await svc.salesSummary('day'); const month=await svc.salesSummary('month'); const invoices=await svc.searchInvoices({q,status,from,to,limit:200}); const outstanding=await svc.outstandingReport(); const stockSales=await svc.stockVsSalesReport();
  return <div className="space-y-5">
   <section className="rounded-2xl bg-[#062f50] p-5 text-white"><p className="text-[10px] font-bold uppercase tracking-[.2em] text-sky-200">Phase 2 · Sales intelligence</p><h1 className="mt-1 text-2xl font-black">Sales & Reports</h1><p className="mt-1 text-sm text-slate-200">Sales history, collections, dues and stock movement in one place.</p></section>
   <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[['Today Sales',today.sales],['Cash',today.cash],['UPI',today.upi],['Credit / Due',today.due]].map(([l,v])=><div key={String(l)} className="rounded-2xl border bg-white p-4 shadow-sm"><p className="text-xs font-bold uppercase text-slate-500">{l}</p><p className="mt-2 text-2xl font-black text-[#07527f]">{money(v)}</p></div>)}</section>
