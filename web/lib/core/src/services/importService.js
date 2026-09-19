@@ -7,7 +7,7 @@ const { uuid, now } = require('../util');
 // care whether the rows came from CSV or Excel.
 const REQUIRED_COLUMNS = ['name', 'sku', 'category', 'unit', 'purchase_price', 'mrp', 'selling_price'];
 
-function parseCsv(text) {
+async function parseCsv(text) {
   const lines = text.trim().split(/\r?\n/);
   const headers = lines[0].split(',').map((h) => h.trim());
   return lines.slice(1).filter(Boolean).map((line) => {
@@ -18,16 +18,16 @@ function parseCsv(text) {
   });
 }
 
-function createImportService(db, { catalogService, productService }) {
+async function createImportService(db, { catalogService, productService }) {
   /**
    * Validate rows against catalog reality (does the category/unit exist?)
    * and basic data rules, WITHOUT writing anything to the DB.
    * Returns { valid: [...], invalid: [{row, errors}], duplicates: [...] }
    */
-  function validateRows(rows) {
+  async function validateRows(rows) {
     const categories = new Map(catalogService.listCategoryTree().flatMap(flattenCat).map((c) => [c.name.toLowerCase(), c]));
     const units = new Map(catalogService.listUnits().map((u) => [u.name.toLowerCase(), u]));
-    const existingSkus = new Set(db.query(`SELECT sku FROM products`).map((r) => r.sku));
+    const existingSkus = new Set(await db.query(`SELECT sku FROM products`).map((r) => r.sku));
     const seenInFile = new Set();
 
     const valid = [];
@@ -59,15 +59,15 @@ function createImportService(db, { catalogService, productService }) {
     return { totalRows: rows.length, valid, invalid, duplicates };
   }
 
-  function flattenCat(node) {
+  async function flattenCat(node) {
     return [node, ...(node.children || []).flatMap(flattenCat)];
   }
 
   /** Persist an import_batches record (traceability) and, if requested, apply the valid rows. */
-  function runImport({ fileName, rows, apply = false, actingUserId = null }) {
+  async function runImport({ fileName, rows, apply = false, actingUserId = null }) {
     const { totalRows, valid, invalid } = validateRows(rows);
     const batchId = uuid();
-    db.run(
+    await db.run(
       `INSERT INTO import_batches (id, file_name, imported_by, total_rows, valid_rows, invalid_rows, status, error_report, created_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [batchId, fileName, actingUserId, totalRows, valid.length, invalid.length,
