@@ -2,9 +2,9 @@
 const { uuid, now, AppError } = require('../util');
 
 async function createProductService(db, { auditService, inventoryService, priceService }) {
-  async function _parseProduct(row) {
+  function _parseProduct(row) {
     if (!row) return null;
-    return { ...row, tags: JSON.parse(row.tags || '[]'), specifications: JSON.parse(row.specifications || '{}') };
+    return { ...row, tags: typeof row.tags === 'string' ? JSON.parse(row.tags || '[]') : (row.tags || []), specifications: typeof row.specifications === 'string' ? JSON.parse(row.specifications || '{}') : (row.specifications || {}) };
   }
 
   /**
@@ -62,8 +62,8 @@ async function createProductService(db, { auditService, inventoryService, priceS
     const row = await db.queryOne(`SELECT * FROM products WHERE id = ? AND deleted_at IS NULL`, [id]);
     if (!row) return null;
     const product = _parseProduct(row);
-    product.variants = listVariants(id);
-    product.stock = inventoryService.getStockStatus(id);
+    product.variants = await listVariants(id);
+    product.stock = await inventoryService.getStockStatus(id);
     return product;
   }
 
@@ -79,12 +79,12 @@ async function createProductService(db, { auditService, inventoryService, priceS
       `SELECT * FROM products WHERE ${clauses.join(' AND ')} ORDER BY updated_at DESC LIMIT ? OFFSET ?`,
       params
     );
-    return rows.map((r) => {
+    return await Promise.all(rows.map(async (r) => {
       const p = _parseProduct(r);
-      p.variants = listVariants(p.id);
-      p.stock = inventoryService.getStockStatus(p.id);
+      p.variants = await listVariants(p.id);
+      p.stock = await inventoryService.getStockStatus(p.id);
       return p;
-    });
+    }));
   }
 
   async function updateProduct(id, changes, actingUserId = null) {
@@ -194,8 +194,8 @@ async function createProductService(db, { auditService, inventoryService, priceS
   }
 
   async function listVariants(productId) {
-    return await db.query(`SELECT * FROM product_variants WHERE product_id = ? ORDER BY created_at`, [productId])
-      .map((v) => ({ ...v, attributes: (typeof v.attributes === 'string' ? JSON.parse(v.attributes) : v.attributes), stock: inventoryService.getStockStatus(productId, v.id) }));
+    const rows = await db.query(`SELECT * FROM product_variants WHERE product_id = ? ORDER BY created_at`, [productId]);
+    return await Promise.all(rows.map(async (v) => ({ ...v, attributes: (typeof v.attributes === 'string' ? JSON.parse(v.attributes) : (v.attributes || {})), stock: await inventoryService.getStockStatus(productId, v.id) })));
   }
 
   return {

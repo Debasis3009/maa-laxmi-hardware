@@ -39,7 +39,7 @@ async function createInventoryService(db, auditService) {
       throw new AppError('Quantity must be non-zero', 'INVALID_QUANTITY');
     }
     return await db.transaction(async () => {
-      const invRow = _getOrCreateInventoryRow(productId, variantId);
+      const invRow = await _getOrCreateInventoryRow(productId, variantId);
       let signedChange;
       if (INBOUND_TYPES.has(type)) signedChange = Math.abs(quantity);
       else if (OUTBOUND_TYPES.has(type)) signedChange = -Math.abs(quantity);
@@ -76,7 +76,7 @@ async function createInventoryService(db, auditService) {
   }
 
   async function reserveStock(productId, variantId, quantity) {
-    const invRow = _getOrCreateInventoryRow(productId, variantId);
+    const invRow = await _getOrCreateInventoryRow(productId, variantId);
     const available = invRow.quantity_on_hand - invRow.reserved_quantity;
     if (quantity > available) {
       throw new AppError(`Only ${available} units are currently available.`, 'INSUFFICIENT_STOCK', { available });
@@ -100,7 +100,7 @@ async function createInventoryService(db, auditService) {
        FROM inventory i
        JOIN products p ON p.id = i.product_id
        LEFT JOIN product_variants v ON v.id = i.variant_id
-       WHERE i.product_id = ? AND (i.variant_id IS ?)`,
+       WHERE i.product_id = ? AND (i.variant_id IS NOT DISTINCT FROM ?)`,
       [productId, variantId || null]
     );
     if (!row) return { quantity_on_hand: 0, reserved_quantity: 0, available_quantity: 0, status: 'OUT_OF_STOCK' };
@@ -161,9 +161,9 @@ async function createInventoryService(db, auditService) {
    * still never a direct overwrite of the inventory row.
    */
   async function adjustStockTo({ productId, variantId = null, newQuantity, reason, performedBy = null }) {
-    const current = getStockStatus(productId, variantId).quantity_on_hand;
+    const current = (await getStockStatus(productId, variantId)).quantity_on_hand;
     const delta = newQuantity - current;
-    if (delta === 0) return getStockStatus(productId, variantId);
+    if (delta === 0) return await getStockStatus(productId, variantId);
     return recordStockTransaction({
       productId, variantId, type: 'adjustment', quantity: delta,
       reason: reason || 'Inline admin stock edit', performedBy,

@@ -42,7 +42,7 @@ function createSettingsService(db, auditService) {
   async function getAll() {
     const rows = await db.query(`SELECT * FROM business_settings`);
     const out = {};
-    for (const r of rows) out[r.key] = JSON.parse(r.value);
+    for (const r of rows) out[r.key] = typeof r.value === 'string' ? JSON.parse(r.value) : r.value;
     return out;
   }
 
