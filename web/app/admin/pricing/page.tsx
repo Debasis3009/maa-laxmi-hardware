@@ -5,11 +5,11 @@ import type { CategoryNode, Brand } from '@/lib/types';
 
 function flatten(nodes: CategoryNode[]): CategoryNode[] { return nodes.flatMap((n) => [n, ...flatten(n.children || [])]); }
 
-export default function AdminPricingPage() {
-  requireAdmin();
-  const app = getApp();
-  const categories = flatten(app.catalogService.listCategoryTree() as unknown as CategoryNode[]);
-  const brands = app.catalogService.listBrands() as unknown as Brand[];
+export default async function AdminPricingPage() {
+  await requireAdmin();
+  const app = await getApp();
+  const categories = flatten(await app.catalogService.listCategoryTree() as unknown as CategoryNode[]);
+  const brands = await app.catalogService.listBrands() as unknown as Brand[];
 
   return (
     <div className="space-y-5">
