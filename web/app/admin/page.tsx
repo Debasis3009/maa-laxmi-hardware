@@ -9,13 +9,13 @@ const cards = [
   { key: 'activity', label: 'Recent activity', tone: 'border-slate-200 bg-slate-50 text-slate-700', href: '/admin/stock-log' },
 ];
 
-export default function AdminDashboardPage() {
-  requireAdmin();
-  const app = getApp();
-  const lowStock = app.inventoryService.listLowStock();
-  const outOfStock = app.inventoryService.listOutOfStock();
-  const recentAudit = app.auditService.recent(8);
-  const productCount = app.productService.listProducts({ limit: 10000 }).length;
+export default async function AdminDashboardPage() {
+  await requireAdmin();
+  const app = await getApp();
+  const lowStock = await app.inventoryService.listLowStock();
+  const outOfStock = await app.inventoryService.listOutOfStock();
+  const recentAudit = await app.auditService.recent(8);
+  const productCount = await app.productService.listProducts({ limit: 10000 }).length;
   const values: Record<string, number> = { products: productCount, low: lowStock.length, out: outOfStock.length, activity: recentAudit.length };
 
   return (
