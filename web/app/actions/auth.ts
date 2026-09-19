@@ -66,16 +66,24 @@ export async function loginWithCredentials(formData: FormData): Promise<{ error?
     if ((role === 'ADMIN' && !isOwner) || (role === 'WORKER' && isOwner)) return { error: 'Invalid User ID or Password.' };
   } catch { return { error: 'Invalid User ID or Password.' }; }
 
+  // Credentials are valid. Store only the verified role for five minutes;
+  // generate/send the OTP only after the user explicitly chooses a channel.
+  cookies().set(OTP_COOKIE, encodePending(role, '', 'EMAIL'), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 300 });
+  return { otpRequired: true };
+}
+
+export async function requestLoginOtp(channel: OtpChannel): Promise<{ error?: string; sent?: boolean }> {
+  if (!['WHATSAPP','EMAIL'].includes(channel)) return { error: 'Invalid verification method.' };
+  const current = decodePending(cookies().get(OTP_COOKIE)?.value);
+  if (!current || current.expires < Date.now()) return { error: 'Login verification expired. Please enter your credentials again.' };
   const otp = String(randomInt(100000, 1000000));
-  cookies().set(OTP_COOKIE, encodePending(role, otp, 'WHATSAPP'), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 300 });
-  const webhook = process.env.WHATSAPP_OTP_WEBHOOK_URL;
-  if (webhook) {
-    try {
-      const r = await fetch(webhook, { method: 'POST', headers: { 'content-type': 'application/json', ...(process.env.WHATSAPP_OTP_WEBHOOK_TOKEN ? { authorization: `Bearer ${process.env.WHATSAPP_OTP_WEBHOOK_TOKEN}` } : {}) }, body: JSON.stringify({ to: VERIFY_PHONE, code: otp, message: `MAA LAXMI HARDWARE verification code: ${otp}. Valid for 5 minutes.` }), cache: 'no-store' });
-      if (!r.ok) return { error: 'Could not send WhatsApp verification code. Please try again.' };
-    } catch { return { error: 'Could not send WhatsApp verification code. Please try again.' }; }
+  try {
+    cookies().set(OTP_COOKIE, encodePending(current.role, otp, channel), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 300 });
+    if (channel === 'EMAIL') await sendEmailOtp(otp, 'sign in'); else await sendWhatsAppOtp(otp, 'sign in');
+    return { sent: true };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Could not send verification code.' };
   }
-  return { otpRequired: true, ...(!webhook && process.env.NODE_ENV !== 'production' ? { devCode: otp } : {}) };
 }
 
 export async function requestAdminPasswordReset(channel: OtpChannel = 'WHATSAPP'): Promise<{ error?: string; otpRequired?: boolean; devCode?: string }> {
