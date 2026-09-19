@@ -38,7 +38,7 @@ async function createInventoryService(db, auditService) {
     if (quantity === 0 || quantity === undefined || quantity === null) {
       throw new AppError('Quantity must be non-zero', 'INVALID_QUANTITY');
     }
-    return db.transaction(() => {
+    return await db.transaction(async () => {
       const invRow = _getOrCreateInventoryRow(productId, variantId);
       let signedChange;
       if (INBOUND_TYPES.has(type)) signedChange = Math.abs(quantity);
