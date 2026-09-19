@@ -114,7 +114,7 @@ export async function resetAdminPassword(formData: FormData): Promise<{ error?: 
 export async function verifyLoginOtp(code: string): Promise<{ error?: string; role?: Role }> {
   const pending = decodePending(cookies().get(OTP_COOKIE)?.value);
   if (!pending || pending.expires < Date.now()) return { error: 'Verification code expired. Please sign in again.' };
-  if (String(code).trim() !== pending.otp) return { error: 'Incorrect verification code.' };
+  if (!validOtp(pending, code)) return { error: 'Incorrect verification code.' };
   cookies().set(COOKIE_NAME, pending.role, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 60 * 5 });
   cookies().set(OTP_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
   return { role: pending.role };
