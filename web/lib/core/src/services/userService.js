@@ -19,71 +19,71 @@ const DEFAULT_ROLES = [
 ];
 
 function createUserService(db, auditService) {
-  function ensureDefaultRoles() {
+  async function ensureDefaultRoles() {
     for (const r of DEFAULT_ROLES) {
-      const existing = db.queryOne(`SELECT id FROM roles WHERE name = ?`, [r.name]);
+      const existing = await db.queryOne(`SELECT id FROM roles WHERE name = ?`, [r.name]);
       if (!existing) {
-        db.run(
+        await db.run(
           `INSERT INTO roles (name, description, permissions, is_system_role, created_at) VALUES (?, ?, ?, ?, ?)`,
-          [r.name, r.description, JSON.stringify(r.permissions), r.is_system_role ? 1 : 0, now()]
+          [r.name, r.description, JSON.stringify(r.permissions), r.is_system_role, now()]
         );
       }
     }
   }
 
-  function getRoleByName(name) {
-    const row = db.queryOne(`SELECT * FROM roles WHERE name = ?`, [name]);
+  async function getRoleByName(name) {
+    const row = await db.queryOne(`SELECT * FROM roles WHERE name = ?`, [name]);
     return row && { ...row, permissions: JSON.parse(row.permissions) };
   }
 
-  function createUser({ name, email, phone, password, roleName }, actingUserId = null) {
-    const role = getRoleByName(roleName);
+  async function createUser({ name, email, phone, password, roleName }, actingUserId = null) {
+    const role = await getRoleByName(roleName);
     if (!role) throw new AppError(`Unknown role: ${roleName}`, 'ROLE_NOT_FOUND');
     const id = uuid();
     const ts = now();
-    db.run(
+    await db.run(
       `INSERT INTO users (id, name, email, phone, password_hash, role_id, is_active, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, ?, true, ?, ?)`,
       [id, name, email || null, phone || null, hashPassword(password), role.id, ts, ts]
     );
-    auditService.log({ userId: actingUserId, action: 'user.create', entityType: 'user', entityId: id,
+    await auditService.log({ userId: actingUserId, action: 'user.create', entityType: 'user', entityId: id,
       after: { name, email, phone, role: roleName } });
-    return getUserById(id);
+    return await getUserById(id);
   }
 
-  function getUserById(id) {
-    const row = db.queryOne(`SELECT u.*, r.name as role_name, r.permissions as role_permissions
+  async function getUserById(id) {
+    const row = await db.queryOne(`SELECT u.*, r.name as role_name, r.permissions as role_permissions
                               FROM users u JOIN roles r ON r.id = u.role_id WHERE u.id = ?`, [id]);
     if (!row) return null;
     const { password_hash, ...safe } = row;
-    return { ...safe, role_permissions: JSON.parse(safe.role_permissions) };
+    return { ...safe, role_permissions: typeof safe.role_permissions === 'string' ? JSON.parse(safe.role_permissions) : (safe.role_permissions || {}) };
   }
 
-  function getOwner() {
-    const row = db.queryOne(`SELECT u.*, r.name as role_name, r.permissions as role_permissions
+  async function getOwner() {
+    const row = await db.queryOne(`SELECT u.*, r.name as role_name, r.permissions as role_permissions
                               FROM users u JOIN roles r ON r.id = u.role_id WHERE r.name = 'owner' AND u.is_active = 1 LIMIT 1`);
     if (!row) return null;
     const { password_hash, ...safe } = row;
-    return { ...safe, role_permissions: JSON.parse(safe.role_permissions) };
+    return { ...safe, role_permissions: typeof safe.role_permissions === 'string' ? JSON.parse(safe.role_permissions) : (safe.role_permissions || {}) };
   }
 
-  function authenticate(emailOrPhone, password) {
-    const row = db.queryOne(
+  async function authenticate(emailOrPhone, password) {
+    const row = await db.queryOne(
       `SELECT * FROM users WHERE (email = ? OR phone = ?) AND is_active = 1`,
       [emailOrPhone, emailOrPhone]
     );
     if (!row) throw new AppError('Invalid credentials', 'AUTH_FAILED');
     if (!verifyPassword(password, row.password_hash)) throw new AppError('Invalid credentials', 'AUTH_FAILED');
-    db.run(`UPDATE users SET last_login_at = ? WHERE id = ?`, [now(), row.id]);
-    return getUserById(row.id);
+    await db.run(`UPDATE users SET last_login_at = ? WHERE id = ?`, [now(), row.id]);
+    return await getUserById(row.id);
   }
 
-  function changePassword(userId, newPassword, actingUserId = null) {
+  async function changePassword(userId, newPassword, actingUserId = null) {
     if (!newPassword || newPassword.length < 8) throw new AppError('Password must be at least 8 characters', 'WEAK_PASSWORD');
-    const existing = db.queryOne('SELECT id FROM users WHERE id = ?', [userId]);
+    const existing = await db.queryOne('SELECT id FROM users WHERE id = ?', [userId]);
     if (!existing) throw new AppError('User not found', 'USER_NOT_FOUND');
-    db.run('UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?', [hashPassword(newPassword), now(), userId]);
-    auditService.log({ userId: actingUserId || userId, action: 'user.password_change', entityType: 'user', entityId: userId });
+    await db.run('UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?', [hashPassword(newPassword), now(), userId]);
+    await auditService.log({ userId: actingUserId || userId, action: 'user.password_change', entityType: 'user', entityId: userId });
     return true;
   }
 
@@ -93,8 +93,8 @@ function createUserService(db, auditService) {
     return !!(perms['*'] || perms[permission]);
   }
 
-  function listUsers() {
-    return db.query(`SELECT u.id, u.name, u.email, u.phone, u.is_active, r.name as role
+  async function listUsers() {
+    return await db.query(`SELECT u.id, u.name, u.email, u.phone, u.is_active, r.name as role
                       FROM users u JOIN roles r ON r.id = u.role_id ORDER BY u.created_at`);
   }
 
