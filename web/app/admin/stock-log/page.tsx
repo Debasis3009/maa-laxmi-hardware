@@ -4,10 +4,10 @@ import type { StockTransactionRow } from '@/lib/types';
 
 const TYPE_TONE: Record<string, string> = { sale: 'text-rose-700', damaged: 'text-rose-700', supplier_return: 'text-rose-700', purchase: 'text-emerald-700', customer_return: 'text-emerald-700', opening: 'text-slate-500', adjustment: 'text-amber-700', correction: 'text-amber-700' };
 
-export default function AdminStockLogPage() {
-  requireAdmin();
-  const app = getApp();
-  const rows = app.inventoryService.listRecentTransactions(200) as unknown as StockTransactionRow[];
+export default async function AdminStockLogPage() {
+  await requireAdmin();
+  const app = await getApp();
+  const rows = await app.inventoryService.listRecentTransactions(200) as unknown as StockTransactionRow[];
 
   return (
     <div className="space-y-5">
