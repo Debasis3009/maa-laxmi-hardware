@@ -15,9 +15,10 @@ export const metadata: Metadata = {
   description: 'Cement, TMT bars, paints, sanitary, electrical and construction supplies from Maa Laxmi Hardware, Nakrakonda.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const settings = getApp().settingsService.getAll();
-  const { role } = getSession();
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const app = await getApp();
+  const settings = await app.settingsService.getAll();
+  const { role } = await getSession();
   const phone = settings.phone_numbers?.[0] || '9547512088';
 
   return (

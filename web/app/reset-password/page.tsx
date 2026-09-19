@@ -3,7 +3,7 @@ import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { requestAdminPasswordReset, verifyAdminResetOtp, resetAdminPassword } from '@/app/actions/auth';
 
-export default async function ResetPasswordPage(){
+export default function ResetPasswordPage(){
  const [step,setStep]=useState<'start'|'otp'|'password'|'done'>('start');
  const [error,setError]=useState<string|null>(null); const [devCode,setDevCode]=useState(''); const [pending,startTransition]=useTransition();
  function request(channel:'WHATSAPP'|'EMAIL'){setError(null);startTransition(async()=>{const r=await requestAdminPasswordReset(channel);if(r.error)setError(r.error);else if(r.otpRequired){setDevCode(r.devCode||'');setStep('otp')}})}

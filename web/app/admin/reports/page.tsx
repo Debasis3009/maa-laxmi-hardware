@@ -4,7 +4,7 @@ import { requireAdmin } from '@/lib/session';
 
 const money=(v:any)=>`₹${Number(v||0).toFixed(2)}`;
 export default async function ReportsPage({searchParams}:{searchParams?:{q?:string;status?:string;from?:string;to?:string}}){
- await requireAdmin(); const svc=await getApp().customerBillingService;
+ await requireAdmin(); const app=await getApp();const svc=app.customerBillingService;
  const q=String(searchParams?.q||''),status=String(searchParams?.status||''),from=String(searchParams?.from||''),to=String(searchParams?.to||'');
  const today=await svc.salesSummary('day'); const month=await svc.salesSummary('month'); const invoices=await svc.searchInvoices({q,status,from,to,limit:200}); const outstanding=await svc.outstandingReport(); const stockSales=await svc.stockVsSalesReport();
  return <div className="space-y-5">

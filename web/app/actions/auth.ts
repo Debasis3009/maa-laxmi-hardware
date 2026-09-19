@@ -61,7 +61,8 @@ export async function loginWithCredentials(formData: FormData): Promise<{ error?
   if (!['ADMIN', 'WORKER'].includes(role)) return { error: 'Please select a valid role.' };
 
   try {
-    const user = await getApp().await userService.authenticate(username, password);
+    const app = await getApp();
+    const user = await app.userService.authenticate(username, password);
     const isOwner = user.role_name === 'owner';
     if ((role === 'ADMIN' && !isOwner) || (role === 'WORKER' && isOwner)) return { error: 'Invalid User ID or Password.' };
   } catch { return { error: 'Invalid User ID or Password.' }; }
