@@ -4,17 +4,17 @@ import { requireAdmin } from '@/lib/session';
 
 async function addCustomer(formData: FormData) {
   'use server';
-  const app=getApp(); requireAdmin();
+  const app=await getApp(); await requireAdmin();
   app.customerBillingService.createCustomer({
     name:String(formData.get('name')||''),phone:String(formData.get('phone')||''),email:String(formData.get('email')||''),
     address:String(formData.get('address')||''),gstin:String(formData.get('gstin')||''),state:String(formData.get('state')||'West Bengal'),
     openingBalance:Number(formData.get('openingBalance')||0),creditLimit:String(formData.get('creditLimit')||''),notes:String(formData.get('notes')||'')
-  },getOwnerId());
+  },await getOwnerId());
   revalidatePath('/admin/customers'); revalidatePath('/admin');
 }
 
-export default function CustomersPage(){
-  requireAdmin(); const customers=getApp().customerBillingService.listCustomers();
+export default async function CustomersPage(){
+  await requireAdmin(); const customers=await getApp().await customerBillingService.listCustomers();
   return <div className="space-y-5">
     <section className="rounded-2xl bg-[#062f50] p-5 text-white"><p className="text-[10px] font-bold uppercase tracking-[.2em] text-sky-200">Phase 2 · Customer Management</p><h1 className="mt-1 text-2xl font-black">Customers & Ledger</h1><p className="mt-1 text-sm text-slate-200">Customer profiles, GST details and outstanding dues.</p></section>
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><h2 className="font-bold">Add customer</h2><form action={addCustomer} className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
