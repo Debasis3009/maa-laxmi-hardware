@@ -20,18 +20,8 @@ async function createApp(connectionString = process.env.DATABASE_URL) {
   const priceService = await createPriceService(db, auditService);
   const productService = await createProductService(db, { auditService, inventoryService, priceService });
   const importService = await createImportService(db, { catalogService, productService });
-  const customerBillingService = await createCustomerBillingService(db, auditService);
-
-  async function bootstrap() {
-    await userService.ensureDefaultRoles();
-    await settingsService.seedDefaults();
-    await catalogService.seedStandardUnits();
-  }
-
-  return {
-    db, auditService, userService, settingsService, catalogService,
-    inventoryService, priceService, productService, importService,
-    customerBillingService, bootstrap,
-  };
+  const customerBillingService = await createCustomerBillingService(db, auditService, inventoryService);
+  async function bootstrap(){await userService.ensureDefaultRoles();await settingsService.seedDefaults();await catalogService.seedStandardUnits();}
+  return {db,auditService,userService,settingsService,catalogService,inventoryService,priceService,productService,importService,customerBillingService,bootstrap};
 }
-module.exports = { createApp };
+module.exports={createApp};
