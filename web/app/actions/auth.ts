@@ -6,6 +6,7 @@ import { getApp } from '@/lib/db';
 
 const COOKIE_NAME = 'mlh_session_role';
 const OTP_COOKIE = 'mlh_pending_otp';
+const RESET_COOKIE = 'mlh_reset_verified';
 const VERIFY_PHONE = process.env.AUTH_WHATSAPP_NUMBER || '919932667908';
 type Role = 'ADMIN' | 'WORKER';
 
@@ -39,6 +40,41 @@ export async function loginWithCredentials(formData: FormData): Promise<{ error?
     } catch { return { error: 'Could not send WhatsApp verification code. Please try again.' }; }
   }
   return { otpRequired: true, ...(!webhook && process.env.NODE_ENV !== 'production' ? { devCode: otp } : {}) };
+}
+
+export async function requestAdminPasswordReset(): Promise<{ error?: string; otpRequired?: boolean; devCode?: string }> {
+  const otp = String(randomInt(100000, 1000000));
+  cookies().set(OTP_COOKIE, encodePending('ADMIN', otp), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 300 });
+  const webhook = process.env.WHATSAPP_OTP_WEBHOOK_URL;
+  if (!webhook) return process.env.NODE_ENV === 'production' ? { error: 'WhatsApp verification is not configured yet.' } : { otpRequired: true, devCode: otp };
+  try {
+    const r = await fetch(webhook, { method: 'POST', headers: { 'content-type': 'application/json', ...(process.env.WHATSAPP_OTP_WEBHOOK_TOKEN ? { authorization: `Bearer ${process.env.WHATSAPP_OTP_WEBHOOK_TOKEN}` } : {}) }, body: JSON.stringify({ to: VERIFY_PHONE, code: otp, message: `MAA LAXMI HARDWARE password reset code: ${otp}. Valid for 5 minutes.` }), cache: 'no-store' });
+    if (!r.ok) return { error: 'Could not send WhatsApp verification code. Please try again.' };
+  } catch { return { error: 'Could not send WhatsApp verification code. Please try again.' }; }
+  return { otpRequired: true };
+}
+
+export async function verifyAdminResetOtp(code: string): Promise<{ error?: string; verified?: boolean }> {
+  const pending = decodePending(cookies().get(OTP_COOKIE)?.value);
+  if (!pending || pending.role !== 'ADMIN' || pending.expires < Date.now()) return { error: 'Verification code expired. Please start again.' };
+  if (String(code).trim() !== pending.otp) return { error: 'Incorrect verification code.' };
+  cookies().set(RESET_COOKIE, 'yes', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', path: '/', maxAge: 300 });
+  cookies().set(OTP_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
+  return { verified: true };
+}
+
+export async function resetAdminPassword(formData: FormData): Promise<{ error?: string; saved?: boolean }> {
+  if (cookies().get(RESET_COOKIE)?.value !== 'yes') return { error: 'WhatsApp verification is required.' };
+  const password = String(formData.get('password') || '');
+  const confirm = String(formData.get('confirm') || '');
+  if (password.length < 8) return { error: 'Password must contain at least 8 characters.' };
+  if (password !== confirm) return { error: 'Passwords do not match.' };
+  const app = getApp();
+  const owner = app.userService.getOwner();
+  if (!owner) return { error: 'Administrator account is unavailable.' };
+  app.userService.changePassword(owner.id, password, owner.id);
+  cookies().set(RESET_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
+  return { saved: true };
 }
 
 export async function verifyLoginOtp(code: string): Promise<{ error?: string; role?: Role }> {
