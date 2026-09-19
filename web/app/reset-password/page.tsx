@@ -1,0 +1,19 @@
+'use client';
+import { useState, useTransition } from 'react';
+import Link from 'next/link';
+import { requestAdminPasswordReset, verifyAdminResetOtp, resetAdminPassword } from '@/app/actions/auth';
+
+export default function ResetPasswordPage(){
+ const [step,setStep]=useState<'start'|'otp'|'password'|'done'>('start');
+ const [error,setError]=useState<string|null>(null); const [devCode,setDevCode]=useState(''); const [pending,startTransition]=useTransition();
+ function request(){setError(null);startTransition(async()=>{const r=await requestAdminPasswordReset();if(r.error)setError(r.error);else if(r.otpRequired){setDevCode(r.devCode||'');setStep('otp')}})}
+ function verify(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setError(null);const fd=new FormData(e.currentTarget);startTransition(async()=>{const r=await verifyAdminResetOtp(String(fd.get('code')||''));if(r.error)setError(r.error);else setStep('password')})}
+ function save(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setError(null);const fd=new FormData(e.currentTarget);startTransition(async()=>{const r=await resetAdminPassword(fd);if(r.error)setError(r.error);else setStep('done')})}
+ return <div className="mx-auto max-w-sm px-4 py-16"><div className="rounded-2xl border bg-white p-6 shadow-sm"><p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#07527f]">MAA LAXMI HARDWARE</p><h1 className="mt-1 text-2xl font-black">Admin Password Reset</h1><p className="mt-1 text-xs text-slate-500">Verify the registered WhatsApp number before creating a new password.</p>
+ {error&&<div className="mt-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs font-semibold text-rose-700">{error}</div>}
+ {step==='start'&&<div className="mt-5 space-y-4"><div className="rounded-xl bg-sky-50 p-3 text-xs text-sky-900">A verification code will be sent to the registered WhatsApp number ending in <b>7908</b>.</div><button onClick={request} disabled={pending} className="w-full rounded-xl bg-[#07527f] py-3 text-sm font-bold text-white disabled:opacity-50">{pending?'Sending...':'Send WhatsApp Verification Code'}</button><Link href="/login" className="block text-center text-xs font-bold text-slate-500">Back to login</Link></div>}
+ {step==='otp'&&<form onSubmit={verify} className="mt-5 space-y-4">{devCode&&<div className="rounded-xl bg-amber-50 p-3 text-xs text-amber-900">Development code: <b>{devCode}</b></div>}<label className="block text-xs font-bold uppercase text-slate-600">Verification code<input name="code" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} required autoComplete="one-time-code" className="mt-2 w-full rounded-xl border p-3 text-center text-xl font-bold tracking-[.35em]" /></label><button disabled={pending} className="w-full rounded-xl bg-[#07527f] py-3 text-sm font-bold text-white">Verify Code</button></form>}
+ {step==='password'&&<form onSubmit={save} className="mt-5 space-y-4"><label className="block text-xs font-bold uppercase text-slate-600">New password<input type="password" name="password" minLength={8} required autoComplete="new-password" className="mt-2 w-full rounded-xl border p-3 text-sm font-normal normal-case" /></label><label className="block text-xs font-bold uppercase text-slate-600">Confirm password<input type="password" name="confirm" minLength={8} required autoComplete="new-password" className="mt-2 w-full rounded-xl border p-3 text-sm font-normal normal-case" /></label><button disabled={pending} className="w-full rounded-xl bg-[#07527f] py-3 text-sm font-bold text-white">Create New Password</button></form>}
+ {step==='done'&&<div className="mt-5 space-y-4"><div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs font-semibold text-emerald-700">New Admin password saved securely.</div><Link href="/login" className="block rounded-xl bg-[#07527f] py-3 text-center text-sm font-bold text-white">Sign In</Link></div>}
+ </div></div>
+}
