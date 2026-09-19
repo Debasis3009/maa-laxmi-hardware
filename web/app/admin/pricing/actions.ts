@@ -14,15 +14,15 @@ export interface BulkPriceChange {
 }
 
 export async function previewBulkPrice(filter: BulkPriceFilter, change: BulkPriceChange) {
-  requireAdmin();
-  const app = getApp();
-  return app.priceService.previewBulkUpdate(filter, change);
+  await requireAdmin();
+  const app = await getApp();
+  return await app.priceService.previewBulkUpdate(filter, change);
 }
 
 export async function applyBulkPrice(filter: BulkPriceFilter, change: BulkPriceChange, reason: string) {
-  const admin = requireAdmin();
-  const app = getApp();
-  const result = app.priceService.applyBulkUpdate(filter, change, { reason, changedBy: admin.id });
+  const admin = await requireAdmin();
+  const app = await getApp();
+  const result = await app.priceService.applyBulkUpdate(filter, change, { reason, changedBy: admin.id });
   revalidatePath('/admin/products');
   revalidatePath('/admin/stock-log');
   revalidatePath('/');
