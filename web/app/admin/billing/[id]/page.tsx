@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { getApp } from '@/lib/db';
 import { requireAdmin } from '@/lib/session';
 import PrintButton from '@/components/admin/PrintButton';
-export default function InvoicePage({params}:{params:{id:string}}){
-  requireAdmin(); const invoice=getApp().customerBillingService.getInvoice(params.id); if(!invoice) return <div className="rounded-2xl bg-white p-8 text-center">Invoice not found.</div>;
+export default async function InvoicePage({params}:{params:{id:string}}){
+  await requireAdmin(); const invoice=await getApp().await customerBillingService.getInvoice(params.id); if(!invoice) return <div className="rounded-2xl bg-white p-8 text-center">Invoice not found.</div>;
   return <div className="mx-auto max-w-4xl space-y-4"><div className="flex items-center justify-between"><Link href="/admin/billing" className="text-sm font-bold text-[#07527f]">← New bill</Link><PrintButton/></div>
     <article className="rounded-2xl border bg-white p-6 shadow-sm print:border-0 print:shadow-none sm:p-8"><header className="flex flex-col justify-between gap-4 border-b pb-5 sm:flex-row"><div><p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#07527f]">MAA LAXMI HARDWARE</p><h1 className="mt-1 text-2xl font-black">Tax Invoice</h1><p className="text-xs text-slate-500">Invoice No: <b>{invoice.invoice_no}</b></p></div><div className="text-left text-sm sm:text-right"><p>{invoice.invoice_date}</p><p className="mt-1 font-bold">{invoice.payment_status}</p></div></header>
     <section className="grid gap-4 border-b py-5 sm:grid-cols-2"><div><p className="text-[10px] font-bold uppercase text-slate-400">Bill To</p><p className="mt-1 font-bold">{invoice.customer_name||'Walk-in Customer'}</p><p className="text-sm text-slate-600">{invoice.customer_address||''}</p><p className="text-sm">{invoice.customer_phone||''}</p></div><div className="sm:text-right"><p className="text-[10px] font-bold uppercase text-slate-400">GSTIN</p><p className="mt-1 font-mono text-sm">{invoice.customer_gstin||'—'}</p></div></section>
