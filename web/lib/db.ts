@@ -1,6 +1,7 @@
 import 'server-only';
 import path from 'node:path';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 
 const { createApp } = require('./core/src/app');
 const { seedSampleData } = require('./core/src/seed/seed');
@@ -24,8 +25,8 @@ function boot(): { app: CoreApp; ownerId: string } {
   if (!owner) {
     const created = app.userService.createUser({
       name: 'Sarat Dey',
-      phone: '9547512088',
-      password: 'ChangeMe123!',
+      phone: 'Admin',
+      password: process.env.ADMIN_BOOTSTRAP_PASSWORD || crypto.randomUUID(),
       roleName: 'owner',
     });
     owner = { id: created.id } as { id: string; role: string };
