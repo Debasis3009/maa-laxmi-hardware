@@ -59,6 +59,14 @@ function createUserService(db, auditService) {
     return { ...safe, role_permissions: JSON.parse(safe.role_permissions) };
   }
 
+  function getOwner() {
+    const row = db.queryOne(`SELECT u.*, r.name as role_name, r.permissions as role_permissions
+                              FROM users u JOIN roles r ON r.id = u.role_id WHERE r.name = 'owner' AND u.is_active = 1 LIMIT 1`);
+    if (!row) return null;
+    const { password_hash, ...safe } = row;
+    return { ...safe, role_permissions: JSON.parse(safe.role_permissions) };
+  }
+
   function authenticate(emailOrPhone, password) {
     const row = db.queryOne(
       `SELECT * FROM users WHERE (email = ? OR phone = ?) AND is_active = 1`,
@@ -90,7 +98,7 @@ function createUserService(db, auditService) {
                       FROM users u JOIN roles r ON r.id = u.role_id ORDER BY u.created_at`);
   }
 
-  return { ensureDefaultRoles, getRoleByName, createUser, getUserById, authenticate, changePassword, hasPermission, listUsers };
+  return { ensureDefaultRoles, getRoleByName, createUser, getUserById, getOwner, authenticate, changePassword, hasPermission, listUsers };
 }
 
 module.exports = { createUserService, DEFAULT_ROLES };
