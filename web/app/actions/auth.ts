@@ -61,7 +61,7 @@ export async function loginWithCredentials(formData: FormData): Promise<{ error?
   if (!['ADMIN', 'WORKER'].includes(role)) return { error: 'Please select a valid role.' };
 
   try {
-    const user = getApp().userService.authenticate(username, password);
+    const user = await getApp().await userService.authenticate(username, password);
     const isOwner = user.role_name === 'owner';
     if ((role === 'ADMIN' && !isOwner) || (role === 'WORKER' && isOwner)) return { error: 'Invalid User ID or Password.' };
   } catch { return { error: 'Invalid User ID or Password.' }; }
@@ -111,10 +111,10 @@ export async function resetAdminPassword(formData: FormData): Promise<{ error?: 
   const confirm = String(formData.get('confirm') || '');
   if (password.length < 8) return { error: 'Password must contain at least 8 characters.' };
   if (password !== confirm) return { error: 'Passwords do not match.' };
-  const app = getApp();
-  const owner = app.userService.getOwner();
+  const app = await getApp();
+  const owner = await app.userService.getOwner();
   if (!owner) return { error: 'Administrator account is unavailable.' };
-  app.userService.changePassword(owner.id, password, owner.id);
+  await app.userService.changePassword(owner.id, password, owner.id);
   cookies().set(RESET_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
   return { saved: true };
 }
