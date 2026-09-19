@@ -23,40 +23,40 @@ const DEFAULT_SETTINGS = {
   business_hours: { mon_sat: '8:00 AM - 8:00 PM', sun: '9:00 AM - 2:00 PM' },
 };
 
-function createSettingsService(db, auditService) {
-  function seedDefaults() {
+async function createSettingsService(db, auditService) {
+  async function seedDefaults() {
     for (const [key, value] of Object.entries(DEFAULT_SETTINGS)) {
-      const existing = db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
+      const existing = await db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
       if (!existing) {
-        db.run(`INSERT INTO business_settings (key, value, updated_at) VALUES (?, ?, ?)`,
+        await db.run(`INSERT INTO business_settings (key, value, updated_at) VALUES (?, ?, ?)`,
           [key, JSON.stringify(value), now()]);
       }
     }
   }
 
-  function get(key) {
-    const row = db.queryOne(`SELECT * FROM business_settings WHERE key = ?`, [key]);
-    return row ? JSON.parse(row.value) : undefined;
+  async function get(key) {
+    const row = await db.queryOne(`SELECT * FROM business_settings WHERE key = ?`, [key]);
+    return row ? (typeof row.value === 'string' ? JSON.parse(row.value) : row.value) : undefined;
   }
 
-  function getAll() {
-    const rows = db.query(`SELECT * FROM business_settings`);
+  async function getAll() {
+    const rows = await db.query(`SELECT * FROM business_settings`);
     const out = {};
     for (const r of rows) out[r.key] = JSON.parse(r.value);
     return out;
   }
 
-  function set(key, value, actingUserId = null) {
+  async function set(key, value, actingUserId = null) {
     const before = get(key);
-    const existing = db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
+    const existing = await db.queryOne(`SELECT key FROM business_settings WHERE key = ?`, [key]);
     if (existing) {
-      db.run(`UPDATE business_settings SET value = ?, updated_by = ?, updated_at = ? WHERE key = ?`,
+      await db.run(`UPDATE business_settings SET value = ?, updated_by = ?, updated_at = ? WHERE key = ?`,
         [JSON.stringify(value), actingUserId, now(), key]);
     } else {
-      db.run(`INSERT INTO business_settings (key, value, updated_by, updated_at) VALUES (?, ?, ?, ?)`,
+      await db.run(`INSERT INTO business_settings (key, value, updated_by, updated_at) VALUES (?, ?, ?, ?)`,
         [key, JSON.stringify(value), actingUserId, now()]);
     }
-    auditService.log({ userId: actingUserId, action: 'settings.update', entityType: 'business_settings',
+    await auditService.log({ userId: actingUserId, action: 'settings.update', entityType: 'business_settings',
       entityId: key, before, after: value });
     return value;
   }
