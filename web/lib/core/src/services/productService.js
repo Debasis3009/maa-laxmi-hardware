@@ -1,8 +1,8 @@
 'use strict';
 const { uuid, now, AppError } = require('../util');
 
-function createProductService(db, { auditService, inventoryService, priceService }) {
-  function _parseProduct(row) {
+async function createProductService(db, { auditService, inventoryService, priceService }) {
+  async function _parseProduct(row) {
     if (!row) return null;
     return { ...row, tags: JSON.parse(row.tags || '[]'), specifications: JSON.parse(row.specifications || '{}') };
   }
@@ -11,18 +11,18 @@ function createProductService(db, { auditService, inventoryService, priceService
    * Create a product. If `openingStock` is provided, it is recorded as a
    * proper 'opening' stock transaction — never written directly.
    */
-  function createProduct(data, actingUserId = null) {
+  async function createProduct(data, actingUserId = null) {
     if (!data.sku) throw new AppError('SKU is required', 'VALIDATION_ERROR');
     if (!data.name) throw new AppError('Product name is required', 'VALIDATION_ERROR');
     if (!data.categoryId) throw new AppError('Category is required', 'VALIDATION_ERROR');
     if (!data.unitId) throw new AppError('Unit is required', 'VALIDATION_ERROR');
 
-    const existing = db.queryOne(`SELECT id FROM products WHERE sku = ?`, [data.sku]);
+    const existing = await db.queryOne(`SELECT id FROM products WHERE sku = ?`, [data.sku]);
     if (existing) throw new AppError(`SKU ${data.sku} already exists`, 'DUPLICATE_SKU');
 
     const id = uuid();
     const ts = now();
-    db.run(
+    await db.run(
       `INSERT INTO products (
          id, sku, barcode, name, brand_id, category_id, product_type, short_description, full_description,
          unit_id, purchase_price, mrp, retail_price, wholesale_price, dealer_price, selling_price,
@@ -54,12 +54,12 @@ function createProductService(db, { auditService, inventoryService, priceService
     }
 
     const product = getProductById(id);
-    auditService.log({ userId: actingUserId, action: 'product.create', entityType: 'product', entityId: id, after: product });
+    await auditService.log({ userId: actingUserId, action: 'product.create', entityType: 'product', entityId: id, after: product });
     return product;
   }
 
-  function getProductById(id) {
-    const row = db.queryOne(`SELECT * FROM products WHERE id = ? AND deleted_at IS NULL`, [id]);
+  async function getProductById(id) {
+    const row = await db.queryOne(`SELECT * FROM products WHERE id = ? AND deleted_at IS NULL`, [id]);
     if (!row) return null;
     const product = _parseProduct(row);
     product.variants = listVariants(id);
@@ -67,15 +67,15 @@ function createProductService(db, { auditService, inventoryService, priceService
     return product;
   }
 
-  function listProducts({ categoryId, brandId, isActive, search, limit = 100, offset = 0 } = {}) {
+  async function listProducts({ categoryId, brandId, isActive, search, limit = 100, offset = 0 } = {}) {
     const clauses = ['deleted_at IS NULL'];
     const params = [];
     if (categoryId) { clauses.push('category_id = ?'); params.push(categoryId); }
     if (brandId) { clauses.push('brand_id = ?'); params.push(brandId); }
-    if (isActive !== undefined) { clauses.push('is_active = ?'); params.push(isActive ? 1 : 0); }
+    if (isActive !== undefined) { clauses.push('is_active = ?'); params.push(!!isActive); }
     if (search) { clauses.push('(name LIKE ? OR sku LIKE ? OR barcode LIKE ?)'); params.push(`%${search}%`, `%${search}%`, `%${search}%`); }
     params.push(limit, offset);
-    const rows = db.query(
+    const rows = await db.query(
       `SELECT * FROM products WHERE ${clauses.join(' AND ')} ORDER BY updated_at DESC LIMIT ? OFFSET ?`,
       params
     );
@@ -87,7 +87,7 @@ function createProductService(db, { auditService, inventoryService, priceService
     });
   }
 
-  function updateProduct(id, changes, actingUserId = null) {
+  async function updateProduct(id, changes, actingUserId = null) {
     const before = getProductById(id);
     if (!before) throw new AppError('Product not found', 'NOT_FOUND');
 
@@ -130,22 +130,22 @@ function createProductService(db, { auditService, inventoryService, priceService
     if (setClauses.length) {
       setClauses.push('updated_at = ?');
       params.push(now(), id);
-      db.run(`UPDATE products SET ${setClauses.join(', ')} WHERE id = ?`, params);
+      await db.run(`UPDATE products SET ${setClauses.join(', ')} WHERE id = ?`, params);
     }
 
     const after = getProductById(id);
-    auditService.log({ userId: actingUserId, action: 'product.update', entityType: 'product', entityId: id, before, after });
+    await auditService.log({ userId: actingUserId, action: 'product.update', entityType: 'product', entityId: id, before, after });
     return after;
   }
 
-  function softDeleteProduct(id, actingUserId = null) {
+  async function softDeleteProduct(id, actingUserId = null) {
     const before = getProductById(id);
     if (!before) throw new AppError('Product not found', 'NOT_FOUND');
-    db.run(`UPDATE products SET deleted_at = ?, is_active = 0 WHERE id = ?`, [now(), id]);
-    auditService.log({ userId: actingUserId, action: 'product.delete', entityType: 'product', entityId: id, before });
+    await db.run(`UPDATE products SET deleted_at = ?, is_active = false WHERE id = ?`, [now(), id]);
+    await auditService.log({ userId: actingUserId, action: 'product.delete', entityType: 'product', entityId: id, before });
   }
 
-  function duplicateProduct(id, overrides = {}, actingUserId = null) {
+  async function duplicateProduct(id, overrides = {}, actingUserId = null) {
     const original = getProductById(id);
     if (!original) throw new AppError('Product not found', 'NOT_FOUND');
     const newSku = overrides.sku || `${original.sku}-COPY-${Date.now().toString().slice(-5)}`;
@@ -164,15 +164,15 @@ function createProductService(db, { auditService, inventoryService, priceService
   }
 
   // ---- Variants -----------------------------------------------------------
-  function addVariant(productId, data, actingUserId = null) {
+  async function addVariant(productId, data, actingUserId = null) {
     const product = getProductById(productId);
     if (!product) throw new AppError('Product not found', 'NOT_FOUND');
-    const existing = db.queryOne(`SELECT id FROM product_variants WHERE sku = ?`, [data.sku]);
+    const existing = await db.queryOne(`SELECT id FROM product_variants WHERE sku = ?`, [data.sku]);
     if (existing) throw new AppError(`Variant SKU ${data.sku} already exists`, 'DUPLICATE_SKU');
 
     const id = uuid();
     const ts = now();
-    db.run(
+    await db.run(
       `INSERT INTO product_variants (id, product_id, sku, barcode, name, attributes, unit_id,
          purchase_price, mrp, selling_price, weight, min_stock, max_stock, reorder_level, created_at, updated_at)
        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
@@ -180,7 +180,7 @@ function createProductService(db, { auditService, inventoryService, priceService
        data.unitId, data.purchasePrice || 0, data.mrp || 0, data.sellingPrice || 0, data.weight || null,
        data.minStock || 0, data.maxStock || null, data.reorderLevel || 0, ts, ts]
     );
-    db.run(`UPDATE products SET has_variants = 1, updated_at = ? WHERE id = ?`, [ts, productId]);
+    await db.run(`UPDATE products SET has_variants = 1, updated_at = ? WHERE id = ?`, [ts, productId]);
 
     if (data.openingStock) {
       inventoryService.recordStockTransaction({
@@ -188,14 +188,14 @@ function createProductService(db, { auditService, inventoryService, priceService
         reason: 'Initial stock on variant creation', performedBy: actingUserId,
       });
     }
-    const variant = db.queryOne(`SELECT * FROM product_variants WHERE id = ?`, [id]);
-    auditService.log({ userId: actingUserId, action: 'variant.create', entityType: 'product_variant', entityId: id, after: variant });
+    const variant = await db.queryOne(`SELECT * FROM product_variants WHERE id = ?`, [id]);
+    await auditService.log({ userId: actingUserId, action: 'variant.create', entityType: 'product_variant', entityId: id, after: variant });
     return { ...variant, attributes: JSON.parse(variant.attributes), stock: inventoryService.getStockStatus(productId, id) };
   }
 
-  function listVariants(productId) {
-    return db.query(`SELECT * FROM product_variants WHERE product_id = ? ORDER BY created_at`, [productId])
-      .map((v) => ({ ...v, attributes: JSON.parse(v.attributes), stock: inventoryService.getStockStatus(productId, v.id) }));
+  async function listVariants(productId) {
+    return await db.query(`SELECT * FROM product_variants WHERE product_id = ? ORDER BY created_at`, [productId])
+      .map((v) => ({ ...v, attributes: (typeof v.attributes === 'string' ? JSON.parse(v.attributes) : v.attributes), stock: inventoryService.getStockStatus(productId, v.id) }));
   }
 
   return {
