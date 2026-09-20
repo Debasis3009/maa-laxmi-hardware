@@ -53,7 +53,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
       });
     }
 
-    const product = getProductById(id);
+    const product = await getProductById(id);
     await auditService.log({ userId: actingUserId, action: 'product.create', entityType: 'product', entityId: id, after: product });
     return product;
   }
@@ -79,16 +79,18 @@ async function createProductService(db, { auditService, inventoryService, priceS
       `SELECT * FROM products WHERE ${clauses.join(' AND ')} ORDER BY updated_at DESC LIMIT ? OFFSET ?`,
       params
     );
-    return await Promise.all(rows.map(async (r) => {
+    const products = [];
+    for (const r of rows) {
       const p = _parseProduct(r);
       p.variants = await listVariants(p.id);
       p.stock = await inventoryService.getStockStatus(p.id);
-      return p;
-    }));
+      products.push(p);
+    }
+    return products;
   }
 
   async function updateProduct(id, changes, actingUserId = null) {
-    const before = getProductById(id);
+    const before = await getProductById(id);
     if (!before) throw new AppError('Product not found', 'NOT_FOUND');
 
     // Price fields are routed through priceService so every change is
@@ -133,7 +135,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
       await db.run(`UPDATE products SET ${setClauses.join(', ')} WHERE id = ?`, params);
     }
 
-    const after = getProductById(id);
+    const after = await getProductById(id);
     await auditService.log({ userId: actingUserId, action: 'product.update', entityType: 'product', entityId: id, before, after });
     return after;
   }
@@ -146,7 +148,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
   }
 
   async function duplicateProduct(id, overrides = {}, actingUserId = null) {
-    const original = getProductById(id);
+    const original = await getProductById(id);
     if (!original) throw new AppError('Product not found', 'NOT_FOUND');
     const newSku = overrides.sku || `${original.sku}-COPY-${Date.now().toString().slice(-5)}`;
     return createProduct({
@@ -165,7 +167,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
 
   // ---- Variants -----------------------------------------------------------
   async function addVariant(productId, data, actingUserId = null) {
-    const product = getProductById(productId);
+    const product = await getProductById(productId);
     if (!product) throw new AppError('Product not found', 'NOT_FOUND');
     const existing = await db.queryOne(`SELECT id FROM product_variants WHERE sku = ?`, [data.sku]);
     if (existing) throw new AppError(`Variant SKU ${data.sku} already exists`, 'DUPLICATE_SKU');
