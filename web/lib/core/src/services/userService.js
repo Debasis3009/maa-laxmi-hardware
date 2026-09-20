@@ -61,7 +61,7 @@ function createUserService(db, auditService) {
 
   async function getOwner() {
     const row = await db.queryOne(`SELECT u.*, r.name as role_name, r.permissions as role_permissions
-                              FROM users u JOIN roles r ON r.id = u.role_id WHERE r.name = 'owner' AND u.is_active = 1 LIMIT 1`);
+                              FROM users u JOIN roles r ON r.id = u.role_id WHERE r.name = 'owner' AND u.is_active = true LIMIT 1`);
     if (!row) return null;
     const { password_hash, ...safe } = row;
     return { ...safe, role_permissions: typeof safe.role_permissions === 'string' ? JSON.parse(safe.role_permissions) : (safe.role_permissions || {}) };
@@ -69,7 +69,7 @@ function createUserService(db, auditService) {
 
   async function authenticate(emailOrPhone, password) {
     const row = await db.queryOne(
-      `SELECT * FROM users WHERE (email = ? OR phone = ?) AND is_active = 1`,
+      `SELECT * FROM users WHERE (email = ? OR phone = ?) AND is_active = true`,
       [emailOrPhone, emailOrPhone]
     );
     if (!row) throw new AppError('Invalid credentials', 'AUTH_FAILED');
