@@ -9,7 +9,7 @@ const OUTBOUND_TYPES = new Set(['sale', 'supplier_return', 'damaged']);
 async function createInventoryService(db, auditService) {
   async function _getOrCreateInventoryRow(productId, variantId) {
     let row = await db.queryOne(
-      `SELECT * FROM inventory WHERE product_id = ? AND (variant_id IS ? )`,
+      `SELECT * FROM inventory WHERE product_id = ? AND (variant_id IS NOT DISTINCT FROM ?)`,
       [productId, variantId || null]
     );
     if (!row) {
