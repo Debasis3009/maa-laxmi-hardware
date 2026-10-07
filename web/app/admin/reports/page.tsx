@@ -4,9 +4,9 @@ import PrintButton from '@/components/admin/PrintButton';
 import { requireAdmin } from '@/lib/session';
 
 const money=(v:any)=>`₹${Number(v||0).toFixed(2)}`;
-export default async function ReportsPage({searchParams}:{searchParams?:{q?:string;status?:string;from?:string;to?:string}}){
- await requireAdmin(); const app=await getApp();const svc=app.customerBillingService;
- const q=String(searchParams?.q||''),status=String(searchParams?.status||''),from=String(searchParams?.from||''),to=String(searchParams?.to||'');
+export default async function ReportsPage({searchParams}:{searchParams?:Promise<{q?:string;status?:string;from?:string;to?:string}>}){
+ const filters=await searchParams;await requireAdmin(); const app=await getApp();const svc=app.customerBillingService;
+ const q=String(filters?.q||''),status=String(filters?.status||''),from=String(filters?.from||''),to=String(filters?.to||'');
  const periods=await svc.periodSales(from,to);
  const today=await svc.salesSummary('day'); const month=await svc.salesSummary('month'); const invoices=await svc.searchInvoices({q,status,from,to,limit:200}); const outstanding=await svc.outstandingReport(); const stockSales=await svc.stockVsSalesReport();
  return <div className="space-y-5">

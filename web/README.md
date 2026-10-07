@@ -1,132 +1,36 @@
-# Maa Laxmi Hardware — Phase 2: Next.js Storefront + Admin Dashboard
+# MAA LAXMI HARDWARE private billing
 
-Built directly on the Phase 1 database schema and service layer — nothing
-here bypasses it. Every mutation in the Admin UI calls the same
-`priceService` / `inventoryService` / `productService` / `importService`
-functions that Phase 1's verification script exercised, so price history,
-the stock ledger, and audit logging all keep working exactly as before.
+A Next.js application backed by PostgreSQL for the shop's owner. Production runs on Vercel with Vercel Authentication enabled for **All Deployments**. Owner credentials and a single-use email OTP protect the application session as well.
 
-## ⚠️ Same sandbox limitation as Phase 1, please read first
+## Billing and collections
 
-This container still has **no internet access**, so I could not run
-`npm install` here — meaning I could not start the actual Next.js dev
-server or do a full `next build` in this conversation. What I could and did
-verify here:
+- Choose an existing customer or enter a new/walk-in customer's details. Every invoice retains the original customer type, name, phone, address, state, WhatsApp number and optional GSTIN, even after a customer profile changes.
+- Search products, enter quantities and rates, apply discounts and GST, receive full or partial payment, and print or save the invoice as PDF. Seller GSTIN is optional.
+- Receive subsequent payments on either customer type's invoice. Customer collections settle opening balances and the oldest invoices, retain excess as advance, and apply advance to later invoices.
+- View running customer ledgers, invoice search/history, daily and monthly sales and collections, outstanding dues and stock versus sales.
+- Maintain products, prices and stock through the existing service and audit layers. Invoice issuance and payments use transactions, row locks and submission keys to protect against duplicate submissions and inconsistent balances.
 
-1. **The database wiring is real and tested.** Every Server Action
-   (`app/admin/*/actions.ts`) is a thin wrapper that calls straight into
-   the Phase 1 services. I wrote a standalone script that calls those exact
-   same service functions with the same arguments the actions use — inline
-   price edit, inline stock edit (via `adjustStockTo`, still ledger-based,
-   never a direct overwrite), threshold edit, active toggle, archive,
-   bulk price preview + apply, CSV validate + import, and the dashboard/
-   stock-log queries. **All 13 checks pass.**
-2. **Every `.ts`/`.tsx` file was syntax/reference-checked** with the
-   TypeScript compiler (no bundler, since `next`/`tailwindcss`/`@types/*`
-   aren't installable offline here). This catches typos, broken imports,
-   and wrong prop/argument names — none were found. The only TS errors
-   that came back were all attributable to missing type packages that
-   `npm install` provides (`@types/node`, `@types/react`, `tailwindcss`,
-   `next`'s bundled types) — not real code defects.
-3. **What I could not do here**: actually render a page, click a button in
-   a browser, or run `next build`/`next dev`. Please run `npm install &&
-   npm run dev` on your machine (or CI) as the first real end-to-end check,
-   and treat that as the actual acceptance test.
+## Run and verify
 
-Also: still no poster images were attached to this conversation, so no
-uploaded branding assets are used — the design tokens below were chosen
-from your written brief (orange/gold/green/charcoal, no clutter, sharp
-corners, no generic SaaS look).
-
-## What's mocked (by design, called out so nothing is mistaken for finished)
-
-- **Auth**: `lib/session.ts` is a cookie-based role switch (ADMIN/CUSTOMER),
-  not password/OTP login. It reads a real owner user row from the Phase 1
-  `users` table, so replacing it with real credential checking later is a
-  contained change — every permission check already goes through
-  `requireAdmin()`.
-- **Cart / bulk quote**: in-memory React state (`StorefrontClient.tsx`),
-  cleared on page reload. It builds a WhatsApp message from the cart
-  contents rather than writing to a `quotations` table — that table doesn't
-  exist yet (it's a later phase in your original spec). This is clearly a
-  bridge, not the full quotation system.
-- **Search**: client-side filtering over the loaded catalog (fine at hundreds
-  of SKUs). At larger catalogs this becomes a server action hitting a real
-  `WHERE name LIKE / SKU LIKE` query — the same query `productService.
-  listProducts({ search })` already supports server-side.
-- **DB adapter**: defaults to the Phase 1 SQLite harness via `DB_ADAPTER=
-  sqlite` so `npm run dev` works with zero setup. Flipping to Postgres for
-  production means implementing `lib/core/src/db/postgres-adapter.js`
-  against the same three-method interface as `sqlite-adapter.js` — no
-  service file changes.
-
-## How to run for real (on a machine with internet)
+Use Node.js 24 and install from the lockfile:
 
 ```bash
 cd web
-npm install
-cp .env.example .env.local
-npm run dev
-# open http://localhost:3000        (storefront)
-# open http://localhost:3000/login  (switch to Admin, then /admin)
+npm ci
+npm run build
+npm start
 ```
 
-First run seeds an owner user (phone 9547512088) and the same `(SAMPLE)`
-catalog from Phase 1 into `data/dev.sqlite`. Delete that file to reset.
+Configure `DATABASE_URL` and `DB_ADAPTER=postgres` on the server. Email verification requires `AUTH_OTP_SECRET`, `RESEND_API_KEY`, `AUTH_EMAIL_FROM` and `AUTH_OTP_EMAIL`. Use the existing owner account; never put database credentials or email API keys in client variables.
 
-## Folder structure
+Apply `migrations/private_billing.sql` once to the existing PostgreSQL database before deploying. This additive migration enables RLS on public tables and revokes browser API access. The app connects through the server database connection. Existing records are preserved.
 
-```
-web/
-  app/
-    layout.tsx, page.tsx        <- root layout + storefront home
-    login/page.tsx              <- mock ADMIN/CUSTOMER session switch
-    admin/
-      layout.tsx                <- RBAC gate + nav (redirects to /login if not admin)
-      page.tsx                  <- dashboard: low/out-of-stock, recent activity
-      products/page.tsx + actions.ts   <- inventory CRUD table + its Server Actions
-      pricing/page.tsx + actions.ts    <- bulk price tool + its Server Actions
-      import/page.tsx + actions.ts     <- CSV importer + its Server Actions
-      stock-log/page.tsx        <- immutable stock ledger view
-  components/
-    storefront/  <- SearchBar, CategoryChips, ProductCard, ProductModal, CartDrawer, StockBadge
-    admin/       <- InventoryTable, DeleteConfirmDialog, BulkPriceModal, CsvImportDropzone
-  lib/
-    db.ts        <- server-only singleton wiring Next.js to the Phase 1 core
-    session.ts   <- mock RBAC session
-    whatsapp.ts  <- WhatsApp message builders
-    types.ts     <- TS types describing what the Phase 1 services return
-    core/        <- Phase 1 schema + services, vendored UNMODIFIED except one
-                    real bug fix (see below), so this stays one source of truth
-  tailwind.config.ts, next.config.js, package.json, .env.example
-```
+`npm run build:verified` runs 14 billing scenarios against the configured PostgreSQL database inside a transaction, checks that all fixtures were rolled back, and builds production assets with type checking. It requires an existing owner and product categories. Vercel runs this command for production builds. `npm run build` compiles without requiring a database connection.
 
-## One real bug found and fixed while wiring Phase 2
+`/api/health` performs a fresh PostgreSQL query and checks that the billing schema is ready. It is covered by deployment protection. Browser validation covers owner credentials and email OTP, both customer types, partial collections and settlement, invoice history, ledgers, mobile billing and A4 printing.
 
-The Phase 1 SQLite adapter re-ran `CREATE TABLE` on every `createDb()` call.
-That was invisible in Phase 1 because the verification script only ever
-used an in-memory database (fresh every run). Phase 2 needs a real
-file-backed dev database that survives server restarts — running the schema
-twice against an existing file throws "table already exists". Fixed in
-`lib/core/src/db/sqlite-adapter.js` to check for an already-initialized database
-first. Re-ran the full Phase 1 test suite afterward — still 21/21 passing —
-plus a new check that a file-backed DB survives being closed and reopened.
+## Private operation
 
-## Suggested next phase
+Keep Vercel Authentication configured for **All Deployments**. Do not add public domain exceptions or enable unauthenticated sharing. Production database and email settings belong only to the production environment; preview deployments need their own isolated configuration.
 
-**Phase 3: real checkout + order management + quotations** — turn the cart
-into an actual order (new `orders`/`order_items` tables), replace the
-WhatsApp-only bulk quote with a stored `quotations` table + PDF generation,
-and wire delivery/pickup selection to the `business_settings.delivery`
-config that's already sitting there unused by the UI. Also a good time to
-add real authentication once you're ready to move off the mock session.
-
-### Private billing release
-
-Billing now supports explicit existing and new/walk-in customers, complete invoice snapshots, product rates/discounts/GST, partial collections, customer advances, printable invoices and running ledgers, and daily/monthly sales and collection reports in Asia/Kolkata time.
-
-Apply `migrations/private_billing.sql` once to the existing PostgreSQL database before deploying this release. It is additive and makes all public-schema tables server-only through RLS and revoked browser API grants. This application uses the server database connection; no anon/service key belongs in the browser. Keep Vercel Authentication configured for **All Deployments** and do not add public exceptions.
-
-`npm run build:verified` runs 14 service scenarios inside a PostgreSQL transaction, confirms all fixtures were rolled back, and then builds Next.js. It requires the existing production DATABASE_URL, owner and catalog. `npm run build` validates compilation without connecting to the database. `/api/health` performs a fresh PostgreSQL connection check through the app.
-
-Invoices and receipts use submission keys to prevent duplicates. Stock changes, invoice issuance, collections, and advance allocation use database transactions and row locks. Login requires credentials plus a single-use, attempt-limited OTP; session cookies contain an opaque token checked against PostgreSQL. Signing out or changing the password revokes sessions.
+Sessions are opaque tokens checked against PostgreSQL. OTPs expire after five minutes, are single-use and attempt-limited, and have a server resend interval. Signing out or changing an owner's password revokes sessions. The application never displays the saved password.

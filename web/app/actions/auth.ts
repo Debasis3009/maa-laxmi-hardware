@@ -18,10 +18,10 @@ function sign(value: string) { return createHmac('sha256', OTP_SECRET).update(va
 async function createChallenge(userId: string, purpose: string) {
   const app=await getApp();
   const row=await app.db.queryOne('INSERT INTO auth_otp_challenges(user_id,channel,destination,otp_hash,expires_at,purpose) VALUES(?,?,?,?,?,?) RETURNING id',[userId,'email',VERIFY_EMAIL,'',new Date(Date.now()+300000).toISOString(),purpose]);
-  cookies().set(OTP_COOKIE,row.id,{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax',path:'/',maxAge:300});
+  (await cookies()).set(OTP_COOKIE,row.id,{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax',path:'/',maxAge:300});
 }
 async function consumeChallenge(code: string, purpose: string) {
-  const id=cookies().get(OTP_COOKIE)?.value;
+  const id=(await cookies()).get(OTP_COOKIE)?.value;
   if(!id||!/^[-a-f0-9]{36}$/.test(id)||!OTP_SECRET) return {error:'Verification expired. Please start again.'};
   const app=await getApp();
   return app.db.transaction(async()=>{
@@ -31,7 +31,7 @@ async function consumeChallenge(code: string, purpose: string) {
     await app.db.run('UPDATE auth_otp_challenges SET attempts=attempts+1 WHERE id=?',[id]);
     if(!/^[0-9]{6}$/.test(code)||hash.length!==c.otp_hash.length||!timingSafeEqual(Buffer.from(hash),Buffer.from(c.otp_hash)))return {error:'Incorrect verification code.'};
     await app.db.run('UPDATE auth_otp_challenges SET consumed_at=now() WHERE id=?',[id]);
-    cookies().set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});
+    (await cookies()).set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});
     return {userId:c.user_id};
   });
 }
@@ -66,7 +66,7 @@ export async function loginWithCredentials(formData: FormData): Promise<{error?:
 }
 export async function requestLoginOtp(channel: OtpChannel):Promise<{error?:string;sent?:boolean}>{
  if(!['EMAIL','WHATSAPP'].includes(channel)||!OTP_SECRET)return {error:'Verification is unavailable.'};
- const id=cookies().get(OTP_COOKIE)?.value;
+ const id=(await cookies()).get(OTP_COOKIE)?.value;
  if(!id||!/^[-a-f0-9]{36}$/.test(id))return {error:'Verification expired. Please start again.'};
  const app=await getApp();
  return app.db.transaction(async()=>{
@@ -84,7 +84,7 @@ export async function requestLoginOtp(channel: OtpChannel):Promise<{error?:strin
 export async function requestAdminPasswordReset(channel:OtpChannel='EMAIL'):Promise<{error?:string;otpRequired?:boolean}>{
  const app=await getApp(),owner=await app.userService.getOwner();if(!owner)return {error:'Administrator unavailable.'};
  // Keep the last challenge to enforce the same resend interval.
- const id=cookies().get(OTP_COOKIE)?.value;
+ const id=(await cookies()).get(OTP_COOKIE)?.value;
  const current=id&&/^[-a-f0-9]{36}$/.test(id)?await app.db.queryOne("SELECT id FROM auth_otp_challenges WHERE id=? AND purpose='reset' AND consumed_at IS NULL AND expires_at>now()",[id]):null;
  if(!current)await createChallenge(owner.id,'reset');const r=await requestLoginOtp(channel);return r.error?{error:r.error}:{otpRequired:true};
 }
@@ -92,17 +92,17 @@ export async function verifyAdminResetOtp(code:string):Promise<{error?:string;ve
  const r=await consumeChallenge(code,'reset');if(r.error)return {error:r.error};await createSession(r.userId,'reset');return {verified:true};
 }
 export async function resetAdminPassword(formData:FormData):Promise<{error?:string;saved?:boolean}>{
- const token=cookies().get(RESET_COOKIE)?.value;if(!token)return {error:'Email verification is required.'};
+ const token=(await cookies()).get(RESET_COOKIE)?.value;if(!token)return {error:'Email verification is required.'};
  const password=String(formData.get('password')||'');if(password.length<8||password!==String(formData.get('confirm')||''))return {error:'Both passwords must match and contain at least 8 characters.'};
  const app=await getApp();return app.db.transaction(async()=>{
   const session=await app.db.queryOne("SELECT * FROM auth_sessions WHERE session_token_hash=? AND purpose='reset' AND revoked_at IS NULL AND expires_at>now() FOR UPDATE",[tokenHash(token)]);
   if(!session)return {error:'Verification expired. Please start again.'};
   await app.userService.changePassword(session.user_id,password,session.user_id);
   await app.db.run('UPDATE auth_sessions SET revoked_at=now() WHERE user_id=?',[session.user_id]);
-  cookies().set(RESET_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});return {saved:true};
+  (await cookies()).set(RESET_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});return {saved:true};
  });
 }
 export async function verifyLoginOtp(code:string):Promise<{error?:string;role?:Role}>{
  const r=await consumeChallenge(code,'login');if(r.error)return {error:r.error};await createSession(r.userId);return {role:'ADMIN'};
 }
-export async function logoutAdmin():Promise<void>{await endSession();cookies().set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});}
+export async function logoutAdmin():Promise<void>{await endSession();(await cookies()).set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});}
