@@ -1,5 +1,6 @@
 'use strict';
 const { Pool } = require('pg');
+const {randomBytes}=require('node:crypto');
 const { AsyncLocalStorage } = require('node:async_hooks');
 const txStore = new AsyncLocalStorage();
 
@@ -29,7 +30,12 @@ function createPostgresDb(connectionString = process.env.DATABASE_URL) {
     async queryOne(sql, params = []) { return (await executor().query(normalizeSql(sql), params)).rows[0]; },
     async run(sql, params = []) { const r=await executor().query(normalizeSql(sql), params); return {changes:r.rowCount||0,rows:r.rows}; },
     async transaction(fn) {
-      if (txStore.getStore()) return await fn();
+      if (txStore.getStore()) {
+        const client=txStore.getStore(),name='mlh_'+randomBytes(8).toString('hex');
+        await client.query('SAVEPOINT '+name);
+        try{const result=await fn();await client.query('RELEASE SAVEPOINT '+name);return result;}
+        catch(err){await client.query('ROLLBACK TO SAVEPOINT '+name);await client.query('RELEASE SAVEPOINT '+name);throw err;}
+      }
       const client=await pool.connect();
       try {
         await client.query('BEGIN');

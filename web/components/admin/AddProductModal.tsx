@@ -69,6 +69,7 @@ export default function AddProductModal({
                 />
               </div>
 
+              <div className="grid grid-cols-2 gap-3"><label className="text-sm font-bold">GST %<input name="gstRate" type="number" min="0" max="100" step="0.01" defaultValue="18" className="mt-1 w-full rounded-lg border p-2.5"/></label><label className="text-sm font-bold">HSN code<input name="hsnCode" className="mt-1 w-full rounded-lg border p-2.5"/></label></div>
               <div className="grid grid-cols-2 gap-2.5">
                 <div>
                   <label className="block font-bold text-slate-700">Category</label>

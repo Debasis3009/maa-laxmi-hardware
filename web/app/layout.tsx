@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import { Barlow_Condensed, Source_Sans_3, JetBrains_Mono } from 'next/font/google';
 import Link from 'next/link';

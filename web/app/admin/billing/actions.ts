@@ -1,16 +1,19 @@
 'use server';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { getApp, getOwnerId } from '@/lib/db';
-import { requireAdmin } from '@/lib/session';
-export async function createBill(formData: FormData) {
- await requireAdmin(); const app=await getApp(); const items:any[]=[];
- const ids=formData.getAll('productId'),qty=formData.getAll('qty'),price=formData.getAll('price'),discount=formData.getAll('discount'),gst=formData.getAll('gst');
- for(let i=0;i<ids.length;i++){const productId=String(ids[i]||'');if(!productId)continue;const product=await app.customerBillingService.getProduct(productId);if(!product)throw new Error('Product not found.');items.push({productId,productName:product.name,sku:product.sku,hsnCode:product.hsn_code,quantity:Number(qty[i]||1),unitPrice:Number(price[i]||product.selling_price),discount:Number(discount[i]||0),gstRate:Number(gst[i]||product.gst_rate||0)});}
- const customerId=String(formData.get('customerId')||'')||null;
- const billingPhone=String(formData.get('billingPhone')||'').trim(),billingName=String(formData.get('billingName')||'').trim(),billingWhatsapp=String(formData.get('billingWhatsapp')||'').trim(),billingAddress=String(formData.get('billingAddress')||'').trim(),billingState=String(formData.get('billingState')||'West Bengal').trim(),sellerGstin=String(formData.get('sellerGstin')||'').trim(),customerGstin=String(formData.get('customerGstin')||'').trim();
- if(!customerId&&!billingName)throw new Error('Customer name is required.');
- const rawNotes=String(formData.get('notes')||'').trim();const meta=rawNotes;
- const invoice=await app.customerBillingService.createInvoice({customerId,walkInName:customerId?null:billingName,walkInPhone:customerId?null:billingPhone,walkInWhatsapp:customerId?null:billingWhatsapp,walkInAddress:customerId?null:billingAddress,walkInState:customerId?null:billingState,walkInGstin:customerId?null:customerGstin,sellerGstin,invoiceDate:String(formData.get('invoiceDate')||''),items,paid:Number(formData.get('paid')||0),paymentMethod:String(formData.get('paymentMethod')||'CASH'),paymentReference:String(formData.get('paymentReference')||''),notes:meta},await getOwnerId());
- revalidatePath('/admin');revalidatePath('/admin/billing');revalidatePath('/admin/customers');redirect(`/admin/billing/${invoice.id}`);
+import {revalidatePath} from 'next/cache';
+import {redirect} from 'next/navigation';
+import {getApp} from '@/lib/db';
+import {requireAdmin} from '@/lib/session';
+export async function createBill(_state:{error?:string},formData:FormData):Promise<{error?:string}>{
+ let id:string;
+ try{
+  const admin=await requireAdmin(),app=await getApp();const items=[];
+  const ids=formData.getAll('productId'),qty=formData.getAll('qty'),price=formData.getAll('price'),discount=formData.getAll('discount'),gst=formData.getAll('gst');
+  if(!ids.length||ids.some(x=>!String(x)))throw new Error('Choose a product for every invoice line.');
+  for(let i=0;i<ids.length;i++)items.push({productId:String(ids[i]),quantity:Number(qty[i]),unitPrice:Number(price[i]),discount:Number(discount[i]),gstRate:Number(gst[i])});
+  const mode=String(formData.get('customerMode'));if(!['existing','new'].includes(mode))throw new Error('Choose a customer type.');const customerId=mode==='existing'?String(formData.get('customerId')||''):null;if(mode==='existing'&&!customerId)throw new Error('Choose an existing customer.');
+  const s=(name:string)=>String(formData.get(name)||'').trim();
+  const invoice=await app.customerBillingService.createInvoice({customerId,walkInName:s('billingName'),walkInPhone:s('billingPhone'),walkInWhatsapp:s('billingWhatsapp'),walkInAddress:s('billingAddress'),walkInState:s('billingState'),walkInGstin:s('customerGstin'),sellerGstin:s('sellerGstin'),invoiceDate:s('invoiceDate'),items,paid:Number(formData.get('paid')||0),paymentMethod:s('paymentMethod'),paymentReference:s('paymentReference'),notes:s('notes'),requestKey:s('requestKey'),useAdvance:formData.has('useAdvance')},admin.id);id=invoice.id;
+ }catch(e){return {error:e instanceof Error?e.message:'Could not create invoice. Please try again.'};}
+ for(const path of ['/admin','/admin/billing','/admin/customers','/admin/payments','/admin/reports','/admin/products','/admin/stock-log','/'])revalidatePath(path);
+ redirect(`/admin/billing/${id}`);
 }

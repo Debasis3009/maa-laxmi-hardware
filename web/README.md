@@ -120,3 +120,13 @@ WhatsApp-only bulk quote with a stored `quotations` table + PDF generation,
 and wire delivery/pickup selection to the `business_settings.delivery`
 config that's already sitting there unused by the UI. Also a good time to
 add real authentication once you're ready to move off the mock session.
+
+### Private billing release
+
+Billing now supports explicit existing and new/walk-in customers, complete invoice snapshots, product rates/discounts/GST, partial collections, customer advances, printable invoices and running ledgers, and daily/monthly sales and collection reports in Asia/Kolkata time.
+
+Apply `migrations/private_billing.sql` once to the existing PostgreSQL database before deploying this release. It is additive and makes all public-schema tables server-only through RLS and revoked browser API grants. This application uses the server database connection; no anon/service key belongs in the browser. Keep Vercel Authentication configured for **All Deployments** and do not add public exceptions.
+
+`npm run build:verified` runs 14 service scenarios inside a PostgreSQL transaction, confirms all fixtures were rolled back, and then builds Next.js. It requires the existing production DATABASE_URL, owner and catalog. `npm run build` validates compilation without connecting to the database. `/api/health` performs a fresh PostgreSQL connection check through the app.
+
+Invoices and receipts use submission keys to prevent duplicates. Stock changes, invoice issuance, collections, and advance allocation use database transactions and row locks. Login requires credentials plus a single-use, attempt-limited OTP; session cookies contain an opaque token checked against PostgreSQL. Signing out or changing the password revokes sessions.

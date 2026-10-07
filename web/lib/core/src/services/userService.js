@@ -83,6 +83,7 @@ function createUserService(db, auditService) {
     const existing = await db.queryOne('SELECT id FROM users WHERE id = ?', [userId]);
     if (!existing) throw new AppError('User not found', 'USER_NOT_FOUND');
     await db.run('UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?', [hashPassword(newPassword), now(), userId]);
+    await db.run('UPDATE auth_sessions SET revoked_at=now() WHERE user_id=?', [userId]);
     await auditService.log({ userId: actingUserId || userId, action: 'user.password_change', entityType: 'user', entityId: userId });
     return true;
   }

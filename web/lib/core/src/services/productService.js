@@ -12,6 +12,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
    * proper 'opening' stock transaction — never written directly.
    */
   async function createProduct(data, actingUserId = null) {
+    return db.transaction(async()=>{
     if (!data.sku) throw new AppError('SKU is required', 'VALIDATION_ERROR');
     if (!data.name) throw new AppError('Product name is required', 'VALIDATION_ERROR');
     if (!data.categoryId) throw new AppError('Category is required', 'VALIDATION_ERROR');
@@ -47,7 +48,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
     );
 
     if (data.openingStock) {
-      inventoryService.recordStockTransaction({
+      await inventoryService.recordStockTransaction({
         productId: id, type: 'opening', quantity: data.openingStock,
         reason: 'Initial stock on product creation', performedBy: actingUserId,
       });
@@ -56,6 +57,7 @@ async function createProductService(db, { auditService, inventoryService, priceS
     const product = await getProductById(id);
     await auditService.log({ userId: actingUserId, action: 'product.create', entityType: 'product', entityId: id, after: product });
     return product;
+    });
   }
 
   async function getProductById(id) {

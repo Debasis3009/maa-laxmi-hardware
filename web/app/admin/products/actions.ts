@@ -21,6 +21,9 @@ export async function createProductAction(formData: FormData) {
   const description = (formData.get('description') as string)?.trim() || null;
 
   if (!name) throw new Error('Product name is required.');
+  const rate=Number(formData.get('gstRate')??18);
+  if(!Number.isFinite(rate)||rate<0||rate>100)throw new Error('GST must be between 0 and 100.');
+  if([purchasePrice,sellingPrice,mrp,openingStock,minStock].some(v=>!Number.isFinite(v)||v<0))throw new Error('Prices and stock must be non-negative.');
 
   const suppliers = await app.catalogService.listSuppliers();
   const brands = await app.catalogService.listBrands();
@@ -37,7 +40,8 @@ export async function createProductAction(formData: FormData) {
       purchasePrice,
       sellingPrice,
       mrp,
-      gstRate: 18,
+      gstRate: Number(formData.get('gstRate')??18),
+      hsnCode: String(formData.get('hsnCode')||'').trim()||null,
       minStock,
       reorderLevel: minStock * 2,
       supplierId: supplierId || undefined,

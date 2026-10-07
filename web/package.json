@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify:billing": "node scripts/verify-billing.cjs",
+    "build:verified": "npm run verify:billing && next build"
   },
   "dependencies": {
     "@types/pg": "^8.23.1",

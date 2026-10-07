@@ -27,3 +27,13 @@ body { background:var(--paper); color:#171717; overflow-x:hidden; }
 ::selection{background:#c62828;color:white}
 @media(max-width:767px){.hero-construction{background:linear-gradient(145deg,#171717,#252525)} }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+@media print {
+ body > div, body > header, body > footer, aside, nav, .print\:hidden {display:none!important;}
+ main {margin:0!important;padding:0!important;max-width:none!important;}
+ body {background:white!important;color:black!important;}
+ table {break-inside:auto;} tr {break-inside:avoid;}
+ @page {size:A4;margin:14mm;}
+}
+
+@media print { .bg-\[\#062f50\] {background:white!important;color:black!important;} }

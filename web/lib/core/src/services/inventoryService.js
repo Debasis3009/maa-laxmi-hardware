@@ -35,20 +35,21 @@ async function createInventoryService(db, auditService) {
    */
   async function recordStockTransaction({ productId, variantId = null, type, quantity, reason = null,
                                      referenceType = null, referenceId = null, performedBy = null }) {
-    if (quantity === 0 || quantity === undefined || quantity === null) {
+    if (!Number.isFinite(Number(quantity)) || Number(quantity) === 0) {
       throw new AppError('Quantity must be non-zero', 'INVALID_QUANTITY');
     }
     return await db.transaction(async () => {
+      await db.queryOne('SELECT id FROM products WHERE id = ? FOR UPDATE', [productId]);
       const invRow = await _getOrCreateInventoryRow(productId, variantId);
       let signedChange;
       if (INBOUND_TYPES.has(type)) signedChange = Math.abs(quantity);
       else if (OUTBOUND_TYPES.has(type)) signedChange = -Math.abs(quantity);
-      else signedChange = quantity; // adjustment / correction / transfer: caller controls sign
+      else signedChange = Number(quantity); // adjustment / correction / transfer: caller controls sign
 
-      const previousStock = invRow.quantity_on_hand;
+      const previousStock = Number(invRow.quantity_on_hand);
       const newStock = previousStock + signedChange;
 
-      if (newStock < 0 && !['adjustment', 'correction'].includes(type)) {
+      if (newStock < Number(invRow.reserved_quantity) && !['adjustment', 'correction'].includes(type)) {
         throw new AppError(
           `Stock transaction would drive stock negative (current ${previousStock}, change ${signedChange}).`,
           'INSUFFICIENT_STOCK'
@@ -161,12 +162,15 @@ async function createInventoryService(db, auditService) {
    * still never a direct overwrite of the inventory row.
    */
   async function adjustStockTo({ productId, variantId = null, newQuantity, reason, performedBy = null }) {
-    const current = (await getStockStatus(productId, variantId)).quantity_on_hand;
+    return db.transaction(async()=>{
+    await db.queryOne('SELECT id FROM products WHERE id=? FOR UPDATE',[productId]);
+    const current = Number((await getStockStatus(productId, variantId)).quantity_on_hand);
     const delta = newQuantity - current;
     if (delta === 0) return await getStockStatus(productId, variantId);
     return recordStockTransaction({
       productId, variantId, type: 'adjustment', quantity: delta,
       reason: reason || 'Inline admin stock edit', performedBy,
+    });
     });
   }
 

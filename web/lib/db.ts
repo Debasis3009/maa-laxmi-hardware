@@ -10,21 +10,8 @@ type Booted = { app: CoreApp; ownerId: string };
 const g = globalThis as unknown as { __mlhBoot?: Promise<Booted> };
 
 async function initializeSchema(app: CoreApp) {
-  const exists = await app.db.queryOne("SELECT to_regclass('public.roles') AS name");
-  if (!exists?.name) {
-    const schemaPath = path.join(process.cwd(), 'schema', 'schema.postgres.sql');
-    const schema = fs.readFileSync(schemaPath, 'utf8');
-    await app.db.raw.query(schema);
-  } else {
-    // Phase-2 tables use idempotent DDL so existing Phase-1 databases upgrade safely.
-    const billingMarker = await app.db.queryOne("SELECT to_regclass('public.customers') AS name");
-    if (!billingMarker?.name) {
-      const schemaPath = path.join(process.cwd(), 'schema', 'schema.postgres.sql');
-      const schema = fs.readFileSync(schemaPath, 'utf8');
-      const phase2 = schema.slice(schema.indexOf('-- 9. CUSTOMERS'));
-      if (phase2) await app.db.raw.query(phase2);
-    }
-  }
+ const marker=await app.db.queryOne("SELECT column_name FROM information_schema.columns WHERE table_schema='public' AND table_name='invoices' AND column_name='billing_customer_type'");
+ if(!marker)throw new Error('Billing database upgrade is required. Apply migrations/private_billing.sql before deployment.');
 }
 
 async function boot(): Promise<Booted> {

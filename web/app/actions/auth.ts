@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 import { randomInt, createHmac, timingSafeEqual } from 'node:crypto';
 import { getApp } from '@/lib/db';
+import {createSession,tokenHash,logoutAdmin as endSession} from '@/lib/session';
 
 const COOKIE_NAME = 'mlh_session_role';
 const OTP_COOKIE = 'mlh_pending_otp';
@@ -14,23 +15,25 @@ type OtpChannel = 'WHATSAPP' | 'EMAIL';
 type Role = 'ADMIN' | 'WORKER';
 
 function sign(value: string) { return createHmac('sha256', OTP_SECRET).update(value).digest('base64url'); }
-function encodePending(role: Role, otp: string, channel: OtpChannel) {
-  if (!OTP_SECRET) throw new Error('OTP security secret is not configured.');
-  const payload = Buffer.from(JSON.stringify({ role, channel, otpHash: sign(otp), expires: Date.now() + 5 * 60 * 1000 })).toString('base64url');
-  return payload + '.' + sign(payload);
+async function createChallenge(userId: string, purpose: string) {
+  const app=await getApp();
+  const row=await app.db.queryOne('INSERT INTO auth_otp_challenges(user_id,channel,destination,otp_hash,expires_at,purpose) VALUES(?,?,?,?,?,?) RETURNING id',[userId,'email',VERIFY_EMAIL,'',new Date(Date.now()+300000).toISOString(),purpose]);
+  cookies().set(OTP_COOKIE,row.id,{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax',path:'/',maxAge:300});
 }
-function decodePending(value?: string) {
-  try {
-    if (!OTP_SECRET || !value) return null;
-    const [payload, signature] = value.split('.');
-    const expected = sign(payload);
-    if (!signature || signature.length !== expected.length || !timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
-    return JSON.parse(Buffer.from(payload, 'base64url').toString()) as { role: Role; channel: OtpChannel; otpHash: string; expires: number };
-  } catch { return null; }
-}
-function validOtp(pending: { otpHash: string }, code: string) {
-  const actual = sign(String(code).trim());
-  return actual.length === pending.otpHash.length && timingSafeEqual(Buffer.from(actual), Buffer.from(pending.otpHash));
+async function consumeChallenge(code: string, purpose: string) {
+  const id=cookies().get(OTP_COOKIE)?.value;
+  if(!id||!/^[-a-f0-9]{36}$/.test(id)||!OTP_SECRET) return {error:'Verification expired. Please start again.'};
+  const app=await getApp();
+  return app.db.transaction(async()=>{
+    const c=await app.db.queryOne('SELECT * FROM auth_otp_challenges WHERE id=? FOR UPDATE',[id]);
+    if(!c||c.purpose!==purpose||c.consumed_at||new Date(c.expires_at).getTime()<Date.now()||c.attempts>=c.max_attempts||!c.otp_hash)return {error:'Verification expired. Please start again.'};
+    const hash=sign(code.trim());
+    await app.db.run('UPDATE auth_otp_challenges SET attempts=attempts+1 WHERE id=?',[id]);
+    if(!/^[0-9]{6}$/.test(code)||hash.length!==c.otp_hash.length||!timingSafeEqual(Buffer.from(hash),Buffer.from(c.otp_hash)))return {error:'Incorrect verification code.'};
+    await app.db.run('UPDATE auth_otp_challenges SET consumed_at=now() WHERE id=?',[id]);
+    cookies().set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});
+    return {userId:c.user_id};
+  });
 }
 async function sendWhatsAppOtp(otp: string, purpose: string) {
   const phoneNumberId = process.env.META_WHATSAPP_PHONE_NUMBER_ID;
@@ -54,82 +57,52 @@ async function sendEmailOtp(otp: string, purpose: string) {
   if(!r.ok) throw new Error('Could not send email verification code.');
 }
 
-export async function loginWithCredentials(formData: FormData): Promise<{ error?: string; otpRequired?: boolean; devCode?: string }> {
-  const role = String(formData.get('role') || 'ADMIN').toUpperCase() as Role;
-  const username = String(formData.get('username') || '').trim();
-  const password = String(formData.get('password') || '');
-  if (!['ADMIN', 'WORKER'].includes(role)) return { error: 'Please select a valid role.' };
-
-  try {
-    const app = await getApp();
-    const user = await app.userService.authenticate(username, password);
-    const isOwner = user.role_name === 'owner';
-    if ((role === 'ADMIN' && !isOwner) || (role === 'WORKER' && isOwner)) return { error: 'Invalid User ID or Password.' };
-  } catch { return { error: 'Invalid User ID or Password.' }; }
-
-  // Credentials are valid. Store only the verified role for five minutes;
-  // generate/send the OTP only after the user explicitly chooses a channel.
-  cookies().set(OTP_COOKIE, encodePending(role, '', 'EMAIL'), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 300 });
-  return { otpRequired: true };
+export async function loginWithCredentials(formData: FormData): Promise<{error?:string;otpRequired?:boolean}> {
+ try {
+  const app=await getApp();const user=await app.userService.authenticate(String(formData.get('username')||'').trim(),String(formData.get('password')||''));
+  if(user.role_name!=='owner')return {error:'Owner access is required.'};
+  await createChallenge(user.id,'login');return {otpRequired:true};
+ }catch{return {error:'Invalid User ID or Password.'};}
 }
-
-export async function requestLoginOtp(channel: OtpChannel): Promise<{ error?: string; sent?: boolean }> {
-  if (!['WHATSAPP','EMAIL'].includes(channel)) return { error: 'Invalid verification method.' };
-  const current = decodePending(cookies().get(OTP_COOKIE)?.value);
-  if (!current || current.expires < Date.now()) return { error: 'Login verification expired. Please enter your credentials again.' };
-  const otp = String(randomInt(100000, 1000000));
-  try {
-    cookies().set(OTP_COOKIE, encodePending(current.role, otp, channel), { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 300 });
-    if (channel === 'EMAIL') await sendEmailOtp(otp, 'sign in'); else await sendWhatsAppOtp(otp, 'sign in');
-    return { sent: true };
-  } catch (e) {
-    return { error: e instanceof Error ? e.message : 'Could not send verification code.' };
-  }
-}
-
-export async function requestAdminPasswordReset(channel: OtpChannel = 'WHATSAPP'): Promise<{ error?: string; otpRequired?: boolean; devCode?: string }> {
-  if (!['WHATSAPP','EMAIL'].includes(channel)) return { error:'Invalid verification method.' };
+export async function requestLoginOtp(channel: OtpChannel):Promise<{error?:string;sent?:boolean}>{
+ if(!['EMAIL','WHATSAPP'].includes(channel)||!OTP_SECRET)return {error:'Verification is unavailable.'};
+ const id=cookies().get(OTP_COOKIE)?.value;
+ if(!id||!/^[-a-f0-9]{36}$/.test(id))return {error:'Verification expired. Please start again.'};
+ const app=await getApp();
+ return app.db.transaction(async()=>{
+  const c=await app.db.queryOne('SELECT * FROM auth_otp_challenges WHERE id=? FOR UPDATE',[id]);
+  if(!c||c.consumed_at||new Date(c.expires_at).getTime()<Date.now()||c.attempts>=c.max_attempts)return {error:'Verification expired. Please start again.'};
+  await app.db.queryOne('SELECT pg_advisory_xact_lock(hashtext(?))',[`mlh-otp-${c.user_id}`]);
+  const recent=await app.db.queryOne("SELECT id FROM auth_otp_challenges WHERE user_id=? AND sent_at>now()-interval '60 seconds' LIMIT 1",[c.user_id]);
+  if(recent)return {error:'Please wait one minute before resending.'};
   const otp=String(randomInt(100000,1000000));
-  try {
-    cookies().set(OTP_COOKIE,encodePending('ADMIN',otp,channel),{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'strict',path:'/',maxAge:300});
-    if(channel==='EMAIL') await sendEmailOtp(otp,'password reset'); else await sendWhatsAppOtp(otp,'password reset');
-    return {otpRequired:true};
-  } catch(e){ cookies().set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0}); return {error:e instanceof Error?e.message:'Could not send verification code.'}; }
+  try {if(channel==='EMAIL')await sendEmailOtp(otp,c.purpose==='reset'?'password reset':'sign in');else await sendWhatsAppOtp(otp,'sign in');}
+  catch(e){return {error:e instanceof Error?e.message:'Could not send code.'};}
+  await app.db.run('UPDATE auth_otp_challenges SET otp_hash=?,channel=?,sent_at=now() WHERE id=?',[sign(otp),channel.toLowerCase(),id]);return {sent:true};
+ });
 }
-
-export async function verifyAdminResetOtp(code: string): Promise<{ error?: string; verified?: boolean }> {
-  const pending = decodePending(cookies().get(OTP_COOKIE)?.value);
-  if (!pending || pending.role !== 'ADMIN' || pending.expires < Date.now()) return { error: 'Verification code expired. Please start again.' };
-  if (!validOtp(pending, code)) return { error: 'Incorrect verification code.' };
-  cookies().set(RESET_COOKIE, 'yes', { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', path: '/', maxAge: 300 });
-  cookies().set(OTP_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
-  return { verified: true };
+export async function requestAdminPasswordReset(channel:OtpChannel='EMAIL'):Promise<{error?:string;otpRequired?:boolean}>{
+ const app=await getApp(),owner=await app.userService.getOwner();if(!owner)return {error:'Administrator unavailable.'};
+ // Keep the last challenge to enforce the same resend interval.
+ const id=cookies().get(OTP_COOKIE)?.value;
+ const current=id&&/^[-a-f0-9]{36}$/.test(id)?await app.db.queryOne("SELECT id FROM auth_otp_challenges WHERE id=? AND purpose='reset' AND consumed_at IS NULL AND expires_at>now()",[id]):null;
+ if(!current)await createChallenge(owner.id,'reset');const r=await requestLoginOtp(channel);return r.error?{error:r.error}:{otpRequired:true};
 }
-
-export async function resetAdminPassword(formData: FormData): Promise<{ error?: string; saved?: boolean }> {
-  if (cookies().get(RESET_COOKIE)?.value !== 'yes') return { error: 'WhatsApp verification is required.' };
-  const password = String(formData.get('password') || '');
-  const confirm = String(formData.get('confirm') || '');
-  if (password.length < 8) return { error: 'Password must contain at least 8 characters.' };
-  if (password !== confirm) return { error: 'Passwords do not match.' };
-  const app = await getApp();
-  const owner = await app.userService.getOwner();
-  if (!owner) return { error: 'Administrator account is unavailable.' };
-  await app.userService.changePassword(owner.id, password, owner.id);
-  cookies().set(RESET_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
-  return { saved: true };
+export async function verifyAdminResetOtp(code:string):Promise<{error?:string;verified?:boolean}>{
+ const r=await consumeChallenge(code,'reset');if(r.error)return {error:r.error};await createSession(r.userId,'reset');return {verified:true};
 }
-
-export async function verifyLoginOtp(code: string): Promise<{ error?: string; role?: Role }> {
-  const pending = decodePending(cookies().get(OTP_COOKIE)?.value);
-  if (!pending || pending.expires < Date.now()) return { error: 'Verification code expired. Please sign in again.' };
-  if (!validOtp(pending, code)) return { error: 'Incorrect verification code.' };
-  cookies().set(COOKIE_NAME, pending.role, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: 60 * 5 });
-  cookies().set(OTP_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
-  return { role: pending.role };
+export async function resetAdminPassword(formData:FormData):Promise<{error?:string;saved?:boolean}>{
+ const token=cookies().get(RESET_COOKIE)?.value;if(!token)return {error:'Email verification is required.'};
+ const password=String(formData.get('password')||'');if(password.length<8||password!==String(formData.get('confirm')||''))return {error:'Both passwords must match and contain at least 8 characters.'};
+ const app=await getApp();return app.db.transaction(async()=>{
+  const session=await app.db.queryOne("SELECT * FROM auth_sessions WHERE session_token_hash=? AND purpose='reset' AND revoked_at IS NULL AND expires_at>now() FOR UPDATE",[tokenHash(token)]);
+  if(!session)return {error:'Verification expired. Please start again.'};
+  await app.userService.changePassword(session.user_id,password,session.user_id);
+  await app.db.run('UPDATE auth_sessions SET revoked_at=now() WHERE user_id=?',[session.user_id]);
+  cookies().set(RESET_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});return {saved:true};
+ });
 }
-
-export async function logoutAdmin(): Promise<void> {
-  cookies().set(COOKIE_NAME, 'CUSTOMER', { httpOnly: true, sameSite: 'lax', path: '/', maxAge: 0 });
-  cookies().set(OTP_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
+export async function verifyLoginOtp(code:string):Promise<{error?:string;role?:Role}>{
+ const r=await consumeChallenge(code,'login');if(r.error)return {error:r.error};await createSession(r.userId);return {role:'ADMIN'};
 }
+export async function logoutAdmin():Promise<void>{await endSession();cookies().set(OTP_COOKIE,'',{httpOnly:true,path:'/',maxAge:0});}
